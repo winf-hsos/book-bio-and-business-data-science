@@ -66,13 +66,13 @@ df <- as_tibble(df)
 df
 ```
 
-Das manuelle Erzeugen eine Tibble geht auf 2 unterschiedliche Wege. Zum einen mit der `tibble` Funktion, die Paare aus Spaltenname und zugehörige Werte als Vektor erwartet (s. oben):
+Das manuelle Erzeugen eines Tibble geht auf zwei unterschiedliche Wege. Zum einen mit der `tibble` Funktion, die Paare aus Spaltenname und zugehörigen Werten als Vektor erwartet (s. oben):
 
 ```{r}
 tbl <- tibble(id = c (1, 2, 3), name = c("Mark", "John", "Eve"))
 ```
 
-Eine andere Möglichkeite ist die zeilenweise Erstellung mit `tribble`:
+Eine andere Möglichkeit ist die zeilenweise Erstellung mit `tribble`:
 
 ```{r}
 #| code-link: true
