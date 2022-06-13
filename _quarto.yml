@@ -1,7 +1,7 @@
 project:
   type: book
 number-depth: 2
-toc-depth: 2
+toc-depth: 3
 book:
   title: "Bio & Business Data Science"
   author: "Nicolas Meseth"
@@ -39,4 +39,7 @@ format:
     documentclass: scrreprt
 
 editor: visual
+
+execute:
+  cache: true
 

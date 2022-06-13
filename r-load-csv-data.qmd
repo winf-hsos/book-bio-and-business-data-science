@@ -1,18 +1,49 @@
+```{r}
+#| include: false
+library(tidyverse)
+```
 # CSV-Daten laden mit R
 
 Im ersten Schritt jeder Datenanalyse müssen wir unserem Computer den Datensatz zur Verfügung stellen. Wir sprechen dabei auch vom *Laden* des Datesatzes. Dabei sagen wir dem Computer, wo die Daten zu finden sind und dass er sie für den schnelleren Zugriff in seinen Arbeitsspeicher holen soll. 
 
-Daten liegen in den meisten Fällen in Form von Dateien vor. In manchen Fällen sind sie auch in einer Datenbank gespeichert. Im Fall einer Datei kann ein Datensatz innerhalb einer Datei in unterschiedlichen *Formaten* gespeichert werden. Ein gängiges Format ist das CSV-Format.
+Daten liegen in den meisten Fällen in Form von Dateien vor. In manchen Fällen sind sie auch in einer Datenbank gespeichert. Im Fall einer Datei kann ein Datensatz in unterschiedlichen *Formaten* darin gespeichert werden. Ein gängiges Format ist das CSV-Format.
 
 ## Das CSV-Format
 
-CSV steht für *Comma Separated Values* und es beschreibt ein Format, um *strukturierte Daten* in einer Textdatei abzuspeichern. Ihr erkennt eine Textdatei im CSV-Format an der Endung `.csv`.
+### Strukturierte Daten
 
-Das CSV-Format ist das am weitesten verbreitete Format für den Austausch von strukturierten Daten. Fast jede Software, die Daten verwaltet oder analysiert, bietet Schnittstellen für CSV-Dateien an. Es gibt gute Gründe, warum sich das Format als universelle Lösung eignet:
+CSV steht für *Comma Separated Values* und beschreibt ein Format, um *strukturierte Daten* in einer Textdatei abzuspeichern. Ihr erkennt eine Textdatei im CSV-Format an der Endung `.csv`.
 
-- Die Verwendung von einfachen Textdateien erlaubt die Speicherung und Verarbeitung auf unterschiedlichen Umgebungen wie Windows, Mac OS oder Linux.
-- Das Format ist sehr einfach zu verstehen und daher auch für Menschen lesbar.
-- Es ist ein offenes Format, d. h. es gibt keine Firma, die daran die Rechte besitzt und es kann daher von jeder Software verwendet werden. Es gab lange nicht einmal eine offizielle Spezifikation des Formats. Mittlerweile gibt es eine Spezifikation als offizieller [MIME Type](https://tools.ietf.org/html/rfc4180).
+Das CSV-Format ist das wohl verbreitetste Format für die Speicherung und den Austausch von strukturierten Daten. Fast jede Software, die Daten verwaltet oder analysiert, bietet Schnittstellen für CSV-Dateien an. Dafür gibt es gute Gründe:
 
+- Die Verwendung von einfachen Textdateien erlaubt die Speicherung und Verarbeitung auf unterschiedlichen Umgebungen wie Windows, macOS oder Linux.
+- Das Format ist einfach zu verstehen und auch für Menschen lesbar.
+- CSV ist ein offenes Format, d. h. es gibt keine Organisation, die daran die Rechte besitzt und es kann daher von jeder Software verwendet werden. Es gab lange nicht einmal eine offizielle Spezifikation des Formats. Mittlerweile gibt es eine Spezifikation als offizieller [MIME Type](https://tools.ietf.org/html/rfc4180).
+
+### Kopfzeile und Trennzeichen
+
+Das CSV-Format speichert strukturierte Daten in einer tabellarischen Form, ähnlich wie in Spreadsheets. Jede Zeile stellt eine Beobachtung (Englisch: *observation* oder *case*) oder Datensatz (Englisch: *record*) dar, und jeder Datensatz hat verschiedene Attribute (oder Spalten), deren Werte durch ein Komma voneinander getrennt sind. Das Komma als Trennzeichen ist keineswegs verbindlich. Generell kann jedes Symbol verwendet werden. Häufige Alternativen sind das Semikolon, Leerzeichen oder ein Tabstop. Letzteres wird oft mit der eigenen Endung `.tsv` für *Tab Separated Values* gespeichert.
+
+Unten ihr einen Ausschnitt aus dem [Covid19-Datensatz von Our World in Data](https://ourworldindata.org/coronavirus), wie man ihn in einem einfachen Texteditor wie [Notepad++](https://notepad-plus-plus.org/downloads/) anzeigen lassen kann. Man erkennt schnell, dass sich die erste Zeile von den anderen unterscheidet: Sie beinhaltet die Spaltennamen, die hintereinander durch das Trennzeichen (hier: Komma) getrennt aufgelistet werden. Man nennt die erste Zeile auch *Kopfzeile* (Englisch: *Header*). Die Kopfzeile ist nicht verpflichtend. Es gibt auch CSV-Dateien ohne Kopfzeile. In diesem Fall muss die Benennung der Spalten später manuell erfolgen. 
+
+Nach der Kopfzeile stellt jede weitere Zeile die Spaltenwerte eines Datensatzes (oder Beobachtung) dar. Diese werden stets in der gleichen Reihenfolge wie in der Kopfzeile durch das Trennzeichen (hier: Komma) voneinander getrennt aufgelistet. Diese Regel ist wichtig, da sonst die Zuordnung von Werten zu Spaltennamen unmöglich wäre.
+
+Es muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtung nicht vorhanden sein, so wird einfach nach dem Komma nichts eingetragen und es folgen zwei Kommata nacheinander.
+
+```txt
+iso_code,continent,location,date,total_cases,new_cases, ...
+DEU,Europe,Germany,2020-01-27,1.0,1.0, ...
+DEU,Europe,Germany,2020-01-28,4.0,3.0
+DEU,Europe,Germany,2020-01-29,4.0,0.0
+DEU,Europe,Germany,2020-01-30,4.0,0.0
+...
+```
 
 ## Die Funktion `read_csv`
+
+Die Funktion `read_csv` aus dem `readr` Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien.
+
+```{r}
+covid <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
+
+```
