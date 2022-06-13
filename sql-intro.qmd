@@ -16,4 +16,4 @@ Wegen der weiten Verbreitung von SQL ermöglichen auch andere Werkzeuge, Daten m
 
 ## Weiterlesen {.unnumbered}
 
-- Mein Blogbeitrag [What is SQL - and what can we do with it?](https://nicolasmeseth.medium.com/what-is-sql-and-what-can-it-do-a2ad0204e47) auf Medium
+-   Mein Blogbeitrag [What is SQL - and what can we do with it?](https://nicolasmeseth.medium.com/what-is-sql-and-what-can-it-do-a2ad0204e47) auf Medium

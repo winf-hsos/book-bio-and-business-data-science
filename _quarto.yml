@@ -1,23 +1,25 @@
 project:
   type: book
-
+number-depth: 2
+toc-depth: 2
 book:
-  title: "Data Science for Business"
+  title: "Bio & Business Data Science"
   author: "Nicolas Meseth"
   sharing: [twitter, facebook, linkedin]
-  number-depth: 1
-  toc-depth: 3
+  toc-depth: 1
   chapters:
     - index.qmd
-    - part: case-binary-adding-machine.qmd
-      chapters:
-        - logic-gates.qmd
+    #- part: case-binary-adding-machine.qmd
+    #  chapters:
+    #    - logic-gates.qmd
+    - part: case-covid.qmd
+      chapters: 
+        - tidyverse.qmd
+        - r-load-csv-data.qmd
+        - trends.qmd
     - part: case-twitter-a.qmd
       chapters: 
         - sql-intro.qmd
-    - part: case-covid.qmd
-      chapters: 
-        - trends.qmd
     - part: case-rewe.qmd
       chapters: 
         - proportions.qmd
@@ -32,6 +34,7 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    code-link: true
   pdf:
     documentclass: scrreprt
 

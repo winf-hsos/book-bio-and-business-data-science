@@ -1,4 +1,4 @@
-# Fall 1: Tweets
+# Fall: Tweets
 
 ## Lernziele
 

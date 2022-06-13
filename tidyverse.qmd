@@ -1,0 +1,91 @@
+# Das Tidyverse
+
+```{r}
+#| include: false
+library(tidyverse)
+
+tweets <- readRDS(url("https://github.com/winf-hsos/big-data-analytics-code/raw/main/data/tweets_ampel.rds"))
+n <- tweets %>% count()
+cols <- tweets %>% ncol()
+```
+
+## Ein Metapaket
+
+## Tibbles
+
+In Kapitel **X** haben wir den Dataframe als Datenstruktur in R kennengelernt. Mit einem Dataframe können wir tabellarische Daten, wie wir sie aus Spreadsheet-Programmen wie Microsoft Excel oder Google Sheets kennen, in R abbilden. Das Tidyverse bringt eine verbesserte Version des klassischen Dataframes mit, das *Tibble*.
+
+Der Name Tibble leitet sich vermutlich aus dem Begriff ***Ti**dy Ta**ble*** ab. Ein Tibble bringt die folgenden Verbesserungen im Vergleich zu einem klassischen Dataframe mit sich:
+
+-   Kürzere und prägnantere Ausgabe auf der Konsole.
+-   Keine Veränderung von Spaltennamen im Vergleich zur Quelle.
+-   Keine Umwandlung von Zeichenketten in Faktoren als Standard.
+-   Ein Tibble erzeugt keine Namen für Zeilen (`rownames`)
+
+### Ausgabe auf der Konsole
+
+Eine nützliche Verbesserung ist die sinnvollere Ausgabe eines Tibbles auf der Konsole. Das Beispiel unten gibt das Tibble `tweets`, das wir im nächsten Kapitel laden werden, auf der Konsole aus:
+
+```{r}
+tweets
+```
+
+Wäre `tweets` ein normaler Dateframe bekämen wir eine sehr lange Ausgabe aller `r n` Zeilen und `r cols` Spalten. Ein Tibble zeigt uns nur die ersten 10 Zeilen als Beispiele, mit jeweils so vielen Spalten wie sinnvoll in die Ausgabe passen. Die Information, dass es noch weitere Zeilen und Spalten gibt (und wieviele), folgt darunter.
+
+### Tibbles sind auch Dataframes
+
+Jedes Tibble ist gleichzeitig ein klassischer Dataframe. Es besitzt aber zusätzlich die Klassen `tbl` und `tbl_df`, die für die zusätzlichen Funktionen und das veränderte Verhalten sorgen.
+
+Zur Illustration erstellen wir manuell einen Dataframe und einen Tibble und lassen uns danach mit `class` die R-Klassen ausgeben, die beide Objekte besitzen:
+
+```{r}
+df <- data.frame(id = c(1, 2, 3), name = c("Mark", "John", "Eve"))
+
+class(df)
+```
+
+Und nun das Tibble:
+
+```{r}
+tbl <- tibble(id = c (1, 2, 3), name = c("Mark", "John", "Eve"))
+
+class(tbl)
+```
+
+Dadurch, dass ein Tibble auch gleichzeitig ein klassischer Dataframe ist, können wir alle Funktionen darauf anwenden, die auch mit Dataframes funktionieren. Schließlich *ist* ein Tibble ja ein Dataframe.
+
+```{r}
+colnames(tbl)
+```
+
+Wir können jederzeit aus einem Dataframe ein Tibble erzeugen:
+
+```{r}
+df <- as_tibble(df)
+
+df
+```
+
+Das manuelle Erzeugen eine Tibble geht auf 2 unterschiedliche Wege. Zum einen mit der `tibble` Funktion, die Paare aus Spaltenname und zugehörige Werte als Vektor erwartet (s. oben):
+
+```{r}
+tbl <- tibble(id = c (1, 2, 3), name = c("Mark", "John", "Eve"))
+```
+
+Eine andere Möglichkeite ist die zeilenweise Erstellung mit `tribble`:
+
+```{r}
+#| code-link: true
+
+tbl <- tribble(
+  ~id, ~name,
+    1, "Mark",
+    2, "John",
+    3, "Eve"
+)
+```
+
+## Mehr lesen {.unnumbered}
+
+-   [Link zur offziellen Webseite des Tidyverse](https://www.tidyverse.org/)
+-   [Link zur Dokumentation des Tibble-Pakets](https://tibble.tidyverse.org/)

@@ -1,4 +1,4 @@
-# Fall 2: Covid 
+# Fall: Covid
 
 ## Lernziele {#sec-case-covid}
 
