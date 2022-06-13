@@ -1,0 +1,17 @@
+# Fall 2 : REWE
+
+## Lernziele
+
+- Wie stellen wir Größenverhältnisse (Proportionen) effektiv dar?
+
+## Daten
+
+## Datensatz
+
+Der Datensatz besteht aus einem Snapshot aus dem März 2018 aller im [REWE Online-Shop](https://shop.rewe.de/) angebotenen Produkte.
+
+::: callout-note
+## Was ist ein Snapshot?
+
+Ein **Snapshot** ist der Stand eines Datensatzes zu einem bestimmten Zeitpunkt in der Vergangenheit. In diesem Fall wurden die Daten an einem besitmmten Tag aus dem [REWE Online-Shop](https://shop.rewe.de/) abgegriffen und gespeichert. Die Daten auf der Webseite können sich seitdem verändert haben. Der Datensatz reflektiert diese Änderungen nicht, er bleibt auf dem Stand der Erstellung.
+:::

@@ -1,0 +1,3 @@
+# Lange und breite Daten
+
+Wie bereits in Abschnitt [Fall 2: Covid](#sec-case-covid) gesehen, können Daten in unterschiedlicher Form vorliegen.

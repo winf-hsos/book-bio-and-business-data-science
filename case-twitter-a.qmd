@@ -1,0 +1,8 @@
+# Fall 1: Tweets
+
+## Lernziele
+
+-   Was ist **SQL** und wofür können wir es verwenden?
+-   Wie können wir mit SQL Daten abfragen?
+
+## Datensatz

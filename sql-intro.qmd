@@ -1,0 +1,19 @@
+# Was ist SQL?
+
+## Begriff und Ursprung
+
+Die Abkürzung ***SQL*** steht für ***S**tructured* ***Q**uery* ***L**anguage* und hat seine Wurzeln bei den relationalen Datenbanken. Relationale Datenbanken wurden in den 1970er-Jahren entwickelt und als kommerzielle Produkte eingeführt. Sie werden vorrangig für die Verwaltung von strukturierten, operativen Geschäftsdaten verwendet. Bis heute sind relationale Datenbanken weitverbreitet, wir finden sie zum Beispiel in großen Informationssystemen wie dem ERP-System der Firma SAP.
+
+Die *Abfragesprache* SQL wurde entwickelt, um möglichst einfach Informationen aus relationalen Datenbanken extrahieren zu können. Mit SQL lassen sich Daten aber nicht nur extrahieren, sondern auch erzeugen, verändern oder löschen. In unserem Kontext geht es um die *Analyse*x von Daten und wir betrachten deshalb nur die Möglichkeiten zur Abfrage von Daten. Der SQL-Befehl `select` mit seinen Facetten steht dabei im Mittelpunkt
+
+## Standardisierung und Dialekte
+
+Weil es viele unterschiedliche kommerzielle Hersteller relationaler Datenbanken gibt (z. B. [Oracle](https://www.oracle.com/database/), SAP, Microsoft, Teradata) und daneben viele Open Source Produkte (z. B. MySQL, PostgreSQL) wurde SQL 1986 standardisiert (s. ANSI X3.135 und ISO 9075-1987). Trotz der Standardisierung, in der die grundlegende Syntax und der Funktionsumfang festgelegt wurden, gibt es heute unterschiedliche Dialekte von SQL. Diese unterscheiden sich in Details wie ob eine spezifische erweiterte Funktion existiert oder nicht. Durch die Standardisierung gilt aber: Wenn man SQL in einem Dialekt beherrscht, dann ist es ohne Probleme möglich auch andere Dialekte zu verwenden.
+
+SQL ist somit unverzichtbar, wenn wir Daten aus relationalen Datenbanken abfragen oder exportieren wollen. Da viele Informationssysteme in Unternehmen auf relationalen Datenbanken basieren, spielt SQL gerade im betriebswirtschaftlichen Kontext eine große Rolle.
+
+Wegen der weiten Verbreitung von SQL ermöglichen auch andere Werkzeuge, Daten mit dieser Sprache zu analysieren. Ein Beispiel ist Apache Spark, ein Open-Source Werkzeug für die Verarbeitung und Analyse großer Datenmengen (Big Data). Hier gibt es eine eigene Schnittstelle (API) für SQL, die den Namen Spark SQL trägt. Wir verwenden Spark SQL in meinen Kursen in der Databricks Cloud-Umgebung. Klickt auf den Link unten, um direkt mit SQL zu beginnen.
+
+## Weiterlesen {.unnumbered}
+
+- Mein Blogbeitrag [What is SQL - and what can we do with it?](https://nicolasmeseth.medium.com/what-is-sql-and-what-can-it-do-a2ad0204e47) auf Medium

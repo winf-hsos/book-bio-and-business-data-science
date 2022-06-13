@@ -1,0 +1,7 @@
+# Fall 2: Covid 
+
+## Lernziele {#sec-case-covid}
+
+-   Wie verdeutlichen wir Trends und Entwicklungen über die Zeit?
+
+## Datensatz

@@ -1,0 +1,198 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science for Business",
+    "section": "",
+    "text": "To learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "select * \nfrom food_facts\nwhere product_name like 'Koch%'"
+  },
+  {
+    "objectID": "project-rewe.html",
+    "href": "project-rewe.html",
+    "title": "Project 1 : REWE Products",
+    "section": "",
+    "text": "The first project introduces you to the Structured Query Language, or short SQL."
+  },
+  {
+    "objectID": "project-rewe.html#what-is-sql",
+    "href": "project-rewe.html#what-is-sql",
+    "title": "Project 1 : REWE Products",
+    "section": "What is SQL?",
+    "text": "What is SQL?\nI wrote a Medium article to summarize what SQL is and what it can do."
+  },
+  {
+    "objectID": "case-rewe.html",
+    "href": "case-rewe.html",
+    "title": "Fall 2 : REWE",
+    "section": "",
+    "text": "Wie stellen wir Größenverhältnisse (Proportionen) effektiv dar?"
+  },
+  {
+    "objectID": "case-rewe.html#what-is-sql",
+    "href": "case-rewe.html#what-is-sql",
+    "title": "Fall 1 : REWE",
+    "section": "What is SQL?",
+    "text": "What is SQL?\nI wrote a Medium article to summarize what SQL is and what it can do."
+  },
+  {
+    "objectID": "case-rewe.html#was-ist-sql",
+    "href": "case-rewe.html#was-ist-sql",
+    "title": "Fall 1 : REWE",
+    "section": "Was ist SQL?",
+    "text": "Was ist SQL?\nI wrote a Medium article to summarize what SQL is and what it can do."
+  },
+  {
+    "objectID": "case-rewe.html#der-datensatz",
+    "href": "case-rewe.html#der-datensatz",
+    "title": "Fall 2 : REWE",
+    "section": "Der Datensatz",
+    "text": "Der Datensatz\nDer Datensatz besteht aus einem Snapshot aus dem März 2018 aller im REWE Online-Shop angebotenen Produkte.\n\n\n\n\n\n\nWas ist ein Snapshot?\n\n\n\nEin Snapshot ist der Stand eines Datensatzes zu einem bestimmten Zeitpunkt in der Vergangenheit. In diesem Fall wurden die Daten an einem besitmmten Tag aus dem REWE Online-Shop abgegriffen und gespeichert. Die Daten auf der Webseite können sich seitdem verändert haben. Der Datensatz reflektiert diese Änderungen nicht, er bleibt auf dem Stand der Erstellung."
+  },
+  {
+    "objectID": "sql-intro.html",
+    "href": "sql-intro.html",
+    "title": "1  Was ist SQL?",
+    "section": "",
+    "text": "Die Abkürzung SQL steht für Structured Query Language und hat seine Wurzeln bei den relationalen Datenbanken. Relationale Datenbanken wurden in den 1970er-Jahren entwickelt und als kommerzielle Produkte eingeführt. Sie werden vorrangig für die Verwaltung von strukturierten, operativen Geschäftsdaten verwendet. Bis heute sind relationale Datenbanken weitverbreitet, wir finden sie zum Beispiel in großen Informationssystemen wie dem ERP-System der Firma SAP.\nDie Abfragesprache SQL wurde entwickelt, um möglichst einfach Informationen aus relationalen Datenbanken extrahieren zu können. Mit SQL lassen sich Daten aber nicht nur extrahieren, sondern auch erzeugen, verändern oder löschen. In unserem Kontext geht es um die Analysex von Daten und wir betrachten deshalb nur die Möglichkeiten zur Abfrage von Daten. Der SQL-Befehl select mit seinen Facetten steht dabei im Mittelpunkt"
+  },
+  {
+    "objectID": "sql-intro.html#standardisierung-von-sql",
+    "href": "sql-intro.html#standardisierung-von-sql",
+    "title": "2  Was ist SQL?",
+    "section": "2.1 Standardisierung von SQL",
+    "text": "2.1 Standardisierung von SQL\nWeil es viele unterschiedliche kommerzielle Hersteller relationaler Datenbanken gibt (z. B. Oracle, SAP, Microsoft, Teradata) und daneben viele Open Source Produkte (z. B. MySQL, PostgreSQL) wurde SQL 1986 standardisiert (s. ANSI X3.135 und ISO 9075-1987). Trotz der Standardisierung, in der die grundlegende Syntax und der Funktionsumfang festgelegt wurden, gibt es heute unterschiedliche Dialekte von SQL. Diese unterscheiden sich in Details wie ob eine spezifische erweiterte Funktion existiert oder nicht. Durch die Standardisierung gilt aber: Wenn man SQL in einem Dialekt beherrscht, dann ist es ohne Probleme möglich auch andere Dialekte zu verwenden.\nSQL ist somit unverzichtbar, wenn wir Daten aus relationalen Datenbanken abfragen oder exportieren wollen. Da viele Informationssysteme in Unternehmen auf relationalen Datenbanken basieren, spielt SQL gerade im betriebswirtschaftlichen Kontext eine große Rolle.\nWegen der weiten Verbreitung von SQL ermöglichen auch andere Werkzeuge, Daten mit dieser Sprache zu analysieren. Ein Beispiel ist Apache Spark, ein Open-Source Werkzeug für die Verarbeitung und Analyse großer Datenmengen (Big Data). Hier gibt es eine eigene Schnittstelle (API) für SQL, die den Namen Spark SQL trägt. Wir verwenden Spark SQL in meinen Kursen in der Databricks Cloud-Umgebung. Klickt auf den Link unten, um direkt mit SQL zu beginnen.\n\n\n\n\n\n\nWeiterlesen\n\n\n\nZu dieser Frage habe ich einen Beitrag auf der Blog-Plattform Medium verfasst."
+  },
+  {
+    "objectID": "sql-intro.html#standardisierung-und-dialekte",
+    "href": "sql-intro.html#standardisierung-und-dialekte",
+    "title": "1  Was ist SQL?",
+    "section": "1.2 Standardisierung und Dialekte",
+    "text": "1.2 Standardisierung und Dialekte\nWeil es viele unterschiedliche kommerzielle Hersteller relationaler Datenbanken gibt (z. B. Oracle, SAP, Microsoft, Teradata) und daneben viele Open Source Produkte (z. B. MySQL, PostgreSQL) wurde SQL 1986 standardisiert (s. ANSI X3.135 und ISO 9075-1987). Trotz der Standardisierung, in der die grundlegende Syntax und der Funktionsumfang festgelegt wurden, gibt es heute unterschiedliche Dialekte von SQL. Diese unterscheiden sich in Details wie ob eine spezifische erweiterte Funktion existiert oder nicht. Durch die Standardisierung gilt aber: Wenn man SQL in einem Dialekt beherrscht, dann ist es ohne Probleme möglich auch andere Dialekte zu verwenden.\nSQL ist somit unverzichtbar, wenn wir Daten aus relationalen Datenbanken abfragen oder exportieren wollen. Da viele Informationssysteme in Unternehmen auf relationalen Datenbanken basieren, spielt SQL gerade im betriebswirtschaftlichen Kontext eine große Rolle.\nWegen der weiten Verbreitung von SQL ermöglichen auch andere Werkzeuge, Daten mit dieser Sprache zu analysieren. Ein Beispiel ist Apache Spark, ein Open-Source Werkzeug für die Verarbeitung und Analyse großer Datenmengen (Big Data). Hier gibt es eine eigene Schnittstelle (API) für SQL, die den Namen Spark SQL trägt. Wir verwenden Spark SQL in meinen Kursen in der Databricks Cloud-Umgebung. Klickt auf den Link unten, um direkt mit SQL zu beginnen."
+  },
+  {
+    "objectID": "sql-intro.html#weiterlesen-1",
+    "href": "sql-intro.html#weiterlesen-1",
+    "title": "2  Was ist SQL?",
+    "section": "Weiterlesen",
+    "text": "Weiterlesen\n\nZu dieser Frage habe ich einen Beitrag auf der Blog-Plattform Medium verfasst"
+  },
+  {
+    "objectID": "sql-intro.html#weiterlesen",
+    "href": "sql-intro.html#weiterlesen",
+    "title": "1  Was ist SQL?",
+    "section": "Weiterlesen",
+    "text": "Weiterlesen\n\nMein Blogbeitrag What is SQL - and what can we do with it? auf Medium"
+  },
+  {
+    "objectID": "case-twitter-a.html",
+    "href": "case-twitter-a.html",
+    "title": "Fall 1: Tweets",
+    "section": "",
+    "text": "Was ist SQL und wofür können wir es verwenden?\nWie können wir mit SQL Daten abfragen?"
+  },
+  {
+    "objectID": "rewe-data.html",
+    "href": "rewe-data.html",
+    "title": "2  Der REWE-Datensatz",
+    "section": "",
+    "text": "select * \nfrom food_facts\nwhere product_name like 'Koch%'"
+  },
+  {
+    "objectID": "case-covid.html",
+    "href": "case-covid.html",
+    "title": "Fall 2: Covid",
+    "section": "",
+    "text": "Wie verdeutlichen wir Trends und Entwicklungen über die Zeit?"
+  },
+  {
+    "objectID": "case-covid.html#datensatz",
+    "href": "case-covid.html#datensatz",
+    "title": "Fall 2: Covid",
+    "section": "Datensatz",
+    "text": "Datensatz"
+  },
+  {
+    "objectID": "case-twitter-a.html#datensatz",
+    "href": "case-twitter-a.html#datensatz",
+    "title": "Fall 1: Tweets",
+    "section": "Datensatz",
+    "text": "Datensatz"
+  },
+  {
+    "objectID": "case-rewe.html#datensatz",
+    "href": "case-rewe.html#datensatz",
+    "title": "Fall 2 : REWE",
+    "section": "Datensatz",
+    "text": "Datensatz\nDer Datensatz besteht aus einem Snapshot aus dem März 2018 aller im REWE Online-Shop angebotenen Produkte.\n\n\n\n\n\n\nWas ist ein Snapshot?\n\n\n\nEin Snapshot ist der Stand eines Datensatzes zu einem bestimmten Zeitpunkt in der Vergangenheit. In diesem Fall wurden die Daten an einem besitmmten Tag aus dem REWE Online-Shop abgegriffen und gespeichert. Die Daten auf der Webseite können sich seitdem verändert haben. Der Datensatz reflektiert diese Änderungen nicht, er bleibt auf dem Stand der Erstellung."
+  },
+  {
+    "objectID": "case-rewe.html#daten",
+    "href": "case-rewe.html#daten",
+    "title": "Fall 2 : REWE",
+    "section": "Daten",
+    "text": "Daten"
+  },
+  {
+    "objectID": "long-wide-data.html",
+    "href": "long-wide-data.html",
+    "title": "4  Lange und breite Daten",
+    "section": "",
+    "text": "Wie bereits in Abschnitt Fall 2: Covid gesehen, können Daten in unterschiedlicher Form vorliegen."
+  },
+  {
+    "objectID": "case-binary-adding-machine.html",
+    "href": "case-binary-adding-machine.html",
+    "title": "Fall: Binäre Addition",
+    "section": "",
+    "text": "Stellt euch vor, wir sollen eine Maschine entwickeln, die beliebige Zahlen addieren kann. Dabei stehen uns für den Bau dieser Maschine insgesamt sechs einfache Teile zur Verfügung. Diese können nichts weiter, als ein oder zwei Signale entgegen zu nehmen und einer definierten Regel folgend ein Ausgabesignal zu erzeugen. Wie wir im nächsten Kapitel sehen werden, nennen wir diese Bauteile Logic Gates oder zu Deutsch Logikgatter."
+  },
+  {
+    "objectID": "logic-gates.html",
+    "href": "logic-gates.html",
+    "title": "1  Logikgatter",
+    "section": "",
+    "text": "Funktionen in R\nEigene Funktionen schreiben"
+  },
+  {
+    "objectID": "logic-gates.html#funktionen",
+    "href": "logic-gates.html#funktionen",
+    "title": "1  Logikgatter",
+    "section": "1.1 Funktionen",
+    "text": "1.1 Funktionen\nand(TRUE, TRUE)\n# 1\n\nand(FALSE, TRUE)\n# 0\n\nand(TRUE, FALSE)\n# 0\n\nand(FALSE, FALSE)\n# 0"
+  },
+  {
+    "objectID": "logic-gates.html#eigene-funktionen",
+    "href": "logic-gates.html#eigene-funktionen",
+    "title": "1  Logikgatter",
+    "section": "1.2 Eigene Funktionen",
+    "text": "1.2 Eigene Funktionen"
+  }
+]

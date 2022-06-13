@@ -1,0 +1,39 @@
+project:
+  type: book
+
+book:
+  title: "Data Science for Business"
+  author: "Nicolas Meseth"
+  sharing: [twitter, facebook, linkedin]
+  number-depth: 1
+  toc-depth: 3
+  chapters:
+    - index.qmd
+    - part: case-binary-adding-machine.qmd
+      chapters:
+        - logic-gates.qmd
+    - part: case-twitter-a.qmd
+      chapters: 
+        - sql-intro.qmd
+    - part: case-covid.qmd
+      chapters: 
+        - trends.qmd
+    - part: case-rewe.qmd
+      chapters: 
+        - proportions.qmd
+    - part: case-limonade.qmd
+      chapters:
+        - long-wide-data.qmd
+    - references.qmd
+
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

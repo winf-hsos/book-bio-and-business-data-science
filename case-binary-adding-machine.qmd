@@ -1,0 +1,3 @@
+# Fall: Binäre Addition
+
+Stellt euch vor, wir sollen eine Maschine entwickeln, die beliebige Zahlen addieren kann. Dabei stehen uns für den Bau dieser Maschine insgesamt sechs einfache Teile zur Verfügung. Diese können nichts weiter, als ein oder zwei Signale entgegen zu nehmen und einer definierten Regel folgend ein Ausgabesignal zu erzeugen. Wie wir im [nächsten Kapitel](logic-gates.qmd) sehen werden, nennen wir diese Bauteile *Logic Gates* oder zu Deutsch *Logikgatter*.

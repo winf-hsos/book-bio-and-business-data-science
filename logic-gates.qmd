@@ -1,0 +1,22 @@
+# Logikgatter
+
+-   Funktionen in R
+-   Eigene Funktionen schreiben
+
+## Funktionen
+
+```r
+and(TRUE, TRUE)
+# 1
+
+and(FALSE, TRUE)
+# 0
+
+and(TRUE, FALSE)
+# 0
+
+and(FALSE, FALSE)
+# 0
+```
+
+## Eigene Funktionen
