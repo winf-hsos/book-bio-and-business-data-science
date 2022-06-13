@@ -292,15 +292,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Es muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtung nicht vorhanden sein, so wird einfach nach dem Komma nichts eingetragen und es folgen zwei Kommata nacheinander.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>iso_code,continent,location,date,total_cases,new_cases, ...</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>DEU,Europe,Germany,2020-01-27,1.0,1.0, ...</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>DEU,Europe,Germany,2020-01-28,4.0,3.0</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>DEU,Europe,Germany,2020-01-29,4.0,0.0</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>DEU,Europe,Germany,2020-01-30,4.0,0.0</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>DEU,Europe,Germany,2020-01-28,4.0,3.0, ...</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>DEU,Europe,Germany,2020-01-29,4.0,0.0, ...</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>DEU,Europe,Germany,2020-01-30,4.0,0.0, ...</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section><section id="die-funktion-read_csv" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="die-funktion-read_csv">
 <span class="header-section-number">2.2</span> Die Funktion <code>read_csv</code>
 </h2>
-<p>Die Funktion <code>read_csv</code> aus dem <code>readr</code> Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien.</p>
-<div class="cell">
+<p>Die Funktion <code>read_csv</code> aus dem <code>readr</code> Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien. Der Code unten lädt die tagesaktuelle Version des Covid-19 Datensatzes von Our World in Data:</p>
+<div class="cell" data-hash="r-load-csv-data_cache/html/unnamed-chunk-2_57c506db616523679a1d3d4f7a353eaa">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">covid</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://covid.ourworldindata.org/data/owid-covid-data.csv"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 193573 Columns: 67

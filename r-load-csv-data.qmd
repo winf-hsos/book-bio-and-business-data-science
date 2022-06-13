@@ -33,17 +33,18 @@ Es muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtun
 ```txt
 iso_code,continent,location,date,total_cases,new_cases, ...
 DEU,Europe,Germany,2020-01-27,1.0,1.0, ...
-DEU,Europe,Germany,2020-01-28,4.0,3.0
-DEU,Europe,Germany,2020-01-29,4.0,0.0
-DEU,Europe,Germany,2020-01-30,4.0,0.0
+DEU,Europe,Germany,2020-01-28,4.0,3.0, ...
+DEU,Europe,Germany,2020-01-29,4.0,0.0, ...
+DEU,Europe,Germany,2020-01-30,4.0,0.0, ...
 ...
 ```
 
 ## Die Funktion `read_csv`
 
-Die Funktion `read_csv` aus dem `readr` Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien.
+Die Funktion `read_csv` aus dem `readr` Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien. Der Code unten lädt die tagesaktuelle Version des Covid-19 Datensatzes von Our World in Data: 
 
 ```{r}
+#| cache: true
 covid <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
 
 ```
