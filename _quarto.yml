@@ -20,7 +20,8 @@ book:
         - origin-of-data.qmd
     - part: case-twitter-a.qmd
       chapters: 
-        - sql-intro.qmd
+        - json-with-r.qmd
+        #- sql-intro.qmd
     - part: case-rewe.qmd
       chapters: 
         - proportions.qmd
