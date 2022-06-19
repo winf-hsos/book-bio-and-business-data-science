@@ -2,6 +2,7 @@
 
 ## Lernziele {#sec-case-covid}
 
--   Wie verdeutlichen wir Trends und Entwicklungen über die Zeit?
+- Wie verdeutlichen wir Trends und Entwicklungen über die Zeit?
+- Sind Daten vertrauenswürdig? Was sind Indizien für oder dagegen?
 
 ## Datensatz

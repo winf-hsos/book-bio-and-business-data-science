@@ -15,8 +15,9 @@ book:
     - part: case-covid.qmd
       chapters: 
         - tidyverse.qmd
-        - r-load-csv-data.qmd
+        - csv-format.qmd
         - trends.qmd
+        - origin-of-data.qmd
     - part: case-twitter-a.qmd
       chapters: 
         - sql-intro.qmd
@@ -26,6 +27,9 @@ book:
     - part: case-limonade.qmd
       chapters:
         - long-wide-data.qmd
+    - outliers.qmd
+    - search_text.qmd
+    - sample-bias.qmd
     - references.qmd
 
 

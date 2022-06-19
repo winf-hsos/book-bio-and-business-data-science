@@ -1,1 +1,55 @@
 # Trends
+
+Zahlen über tägliche Neuinfektionen und weitere Kennzahlen einer globalen Pandemie eignen sich für die Einführung von Visualisierungsformen für Trends und Entwicklungen.
+
+::: {.callout-note appearance="simple"}
+## Keine publizierfähigen Visualisuerungen
+
+In diesem Kapitel geht es um die Möglichkeiten, Trends und Entwicklungen visuell darzustellen. Die Feinheiten einer Visualisierung wie die Benamung der Achsen, Verwendung von Farben oder die Auswahl besserer Abstände für die Achsenbeschriftungen, werden hier nicht betrachtet und für möglichst einfache Codebeispiele nicht durchgeführt.
+:::
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+#| eval: false
+
+library(tidyverse)
+
+# Tagesaktuelle Daten einlesen
+covid <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
+```
+
+```{r}
+#| include: false
+#| cache: true
+covid <- read_csv("./data/owid-covid-data.csv")
+```
+
+## Liniendiagramme
+
+### Eine Serie
+
+```{r}
+#| warning: false
+covid %>% 
+  filter(location == "France", date >= "2022-01-01") %>% 
+  select(date, new_cases_smoothed_per_million) %>% 
+  ggplot() +
+  aes(x = date, y = new_cases_smoothed_per_million) +
+  geom_line()
+```
+### Mehrere Serien in einem Diagramm
+
+
+```{r}
+#| warning: false
+covid %>% 
+  filter(location %in% c("France", "Spain"), date >= "2022-01-01") %>% 
+  select(date, new_cases_smoothed_per_million, location) %>% 
+  ggplot() +
+  aes(x = date, y = new_cases_smoothed_per_million, color = location) +
+  geom_line()
+```
