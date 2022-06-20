@@ -151,13 +151,20 @@
     "href": "trends.html",
     "title": "\n3  Trends\n",
     "section": "",
-    "text": "Zahlen über tägliche Neuinfektionen und weitere Kennzahlen einer globalen Pandemie eignen sich für die Einführung von Visualisierungsformen für Trends und Entwicklungen."
+    "text": "Kennzahlen einer globalen Pandemie, wie die täglichen Neuinfektionen, eignen sich gut für die Einführung von Visualisierungsformen für Trends und Entwicklungen. Spätestens sein den Jahren der Pandemie, beginnend im Frühjahr 2020, kennt jeder entsprechende Diagramme aus den Nachrichten. In diesem Kapitel lernen wir, diese und andere Diagramme mit ggplot2 selbst zu erstellen."
   },
   {
     "objectID": "trends.html#liniendiagramme",
     "href": "trends.html#liniendiagramme",
     "title": "\n3  Trends\n",
     "section": "\n3.1 Liniendiagramme",
-    "text": "3.1 Liniendiagramme\nEine Serie\n\ncovid %>% \n  filter(location == \"France\", date >= \"2022-01-01\") %>% \n  select(date, new_cases_smoothed_per_million) %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million) +\n  geom_line()\n\n\n\n\nMehrere Serien in einem Diagramm\n\ncovid %>% \n  filter(location %in% c(\"France\", \"Spain\"), date >= \"2022-01-01\") %>% \n  select(date, new_cases_smoothed_per_million, location) %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million, color = location) +\n  geom_line()"
+    "text": "3.1 Liniendiagramme\nEine Serie\nLiniendiagramme verwenden Verbindungen zwischen benachbarten Punkten, um über die Steigung der Linien Entwicklungen sichtbar werden zu lassen. Für die Umsetzung dieser Linien in ggplot2 verwenden wir die Funktion geom_line. Die Punkte selbst werden über die x- und y-Achsen bestimmt. Typischerweise tragen wir auf der x-Achse eine zeitliche Dimension ab, während wir die y-Achse für die betrachtete Größe verwenden.\nFür die folgenden Visualisierungen filtern wir die Daten auf Frankreich und den Januar 2022:\n\ncov_france <- \n  covid %>% \n  filter(location == \"France\", date >= \"2022-01-01\", date <= \"2022-01-31\") %>%\n  select(date, new_cases_smoothed_per_million)\n\nAuf der Grundlage erstellen wir ein Liniendiagramm:\n\ncov_france %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million) +\n  geom_line()\n\n\n\n\nLinien und Punkte zusammen\nUm die Verbindungen zwischen zwei Punkten deutlicher sichtbar werden zu lassen, können wir zusätzlich zu den Linien auch die Punkte in das Diagramm einzeichnen:\n\ncov_france %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million) +\n  geom_line() +\n  geom_point()\n\n\n\n\nMehrere Serien\n\ncovid %>% \n  filter(location %in% c(\"France\", \"Spain\"), date >= \"2022-01-01\") %>% \n  select(date, new_cases_smoothed_per_million, location) %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million, color = location) +\n  geom_line()"
+  },
+  {
+    "objectID": "json-with-r.html#listen-oder-arrays",
+    "href": "json-with-r.html#listen-oder-arrays",
+    "title": "5  JSON",
+    "section": "5.2 Listen oder Arrays",
+    "text": "5.2 Listen oder Arrays"
   }
 ]

@@ -1,25 +1,17 @@
 # Trends
 
-Zahlen über tägliche Neuinfektionen und weitere Kennzahlen einer globalen Pandemie eignen sich für die Einführung von Visualisierungsformen für Trends und Entwicklungen.
+Kennzahlen einer globalen Pandemie, wie die täglichen Neuinfektionen, eignen sich gut für die Einführung von Visualisierungsformen für Trends und Entwicklungen. Spätestens sein den Jahren der Pandemie, beginnend im Frühjahr 2020, kennt jeder entsprechende Diagramme aus den Nachrichten. In diesem Kapitel lernen wir, diese und andere Diagramme mit `ggplot2` selbst zu erstellen.
 
 ::: {.callout-note appearance="simple"}
 ## Keine publizierfähigen Visualisuerungen
 
-In diesem Kapitel geht es um die Möglichkeiten, Trends und Entwicklungen visuell darzustellen. Die Feinheiten einer Visualisierung wie die Benamung der Achsen, Verwendung von Farben oder die Auswahl besserer Abstände für die Achsenbeschriftungen, werden hier nicht betrachtet und für möglichst einfache Codebeispiele nicht durchgeführt.
+In diesem Kapitel geht es um die Möglichkeiten, Trends und Entwicklungen visuell darzustellen. Die Feinheiten einer Visualisierung, wie die Beschriftung der Achsen, Verwendung von Farben oder Formatierung der Achsenbeschriftungen, werden hier nicht betrachtet und für möglichst einfache Codebeispiele weggelassen.
 :::
 
 ```{r}
 #| include: false
 library(tidyverse)
-```
-
-```{r}
-#| eval: false
-
-library(tidyverse)
-
-# Tagesaktuelle Daten einlesen
-covid <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
+library(lubridate)
 ```
 
 ```{r}
@@ -32,16 +24,41 @@ covid <- read_csv("./data/owid-covid-data.csv")
 
 ### Eine Serie
 
+Liniendiagramme verwenden Verbindungen zwischen benachbarten Punkten, um über die Steigung der Linien Entwicklungen sichtbar werden zu lassen. Für die Umsetzung dieser Linien in `ggplot2` verwenden wir die Funktion `geom_line`. Die Punkte selbst werden über die x- und y-Achsen bestimmt. Typischerweise tragen wir auf der x-Achse eine zeitliche Dimension ab, während wir die y-Achse für die betrachtete Größe verwenden.
+
+Für die folgenden Visualisierungen filtern wir die Daten auf Frankreich und den Januar 2022:
+
+```{r}
+cov_france <- 
+  covid %>% 
+  filter(location == "France", date >= "2022-01-01", date <= "2022-01-31") %>%
+  select(date, new_cases_smoothed_per_million)
+```
+
+Auf der Grundlage erstellen wir ein Liniendiagramm:
+
 ```{r}
 #| warning: false
-covid %>% 
-  filter(location == "France", date >= "2022-01-01") %>% 
-  select(date, new_cases_smoothed_per_million) %>% 
+cov_france %>% 
   ggplot() +
   aes(x = date, y = new_cases_smoothed_per_million) +
   geom_line()
 ```
-### Mehrere Serien in einem Diagramm
+### Linien und Punkte zusammen
+
+Um die Verbindungen zwischen zwei Punkten deutlicher sichtbar werden zu lassen, können wir zusätzlich zu den Linien auch die Punkte in das Diagramm einzeichnen:
+
+```{r}
+#| warning: false
+cov_france %>% 
+  ggplot() +
+  aes(x = date, y = new_cases_smoothed_per_million) +
+  geom_line() +
+  geom_point()
+```
+
+
+### Mehrere Serien
 
 
 ```{r}

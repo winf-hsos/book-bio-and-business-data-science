@@ -210,6 +210,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./json-with-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">JSON</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./associations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Zusammenhänge</span></a>
+  </div>
+</li>
     </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -222,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./proportions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Proportionen</span></a>
+  <a href="./proportions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Proportionen</span></a>
   </div>
 </li>
     </ul>
@@ -237,24 +242,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./long-wide-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lange und breite Daten</span></a>
+  <a href="./long-wide-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lange und breite Daten</span></a>
   </div>
 </li>
     </ul>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./outliers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ausreisser</span></a>
+  <a href="./outliers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ausreisser</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./search_text.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Texte durchsuchen</span></a>
+  <a href="./search_text.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Texte durchsuchen</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sample-bias.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stichprobenverzerrung</span></a>
+  <a href="./sample-bias.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Stichprobenverzerrung</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -272,7 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="#liniendiagramme" id="toc-liniendiagramme" class="nav-link active" data-scroll-target="#liniendiagramme"> <span class="header-section-number">3.1</span> Liniendiagramme</a>
   <ul class="collapse">
 <li><a href="#eine-serie" id="toc-eine-serie" class="nav-link" data-scroll-target="#eine-serie">Eine Serie</a></li>
-  <li><a href="#mehrere-serien-in-einem-diagramm" id="toc-mehrere-serien-in-einem-diagramm" class="nav-link" data-scroll-target="#mehrere-serien-in-einem-diagramm">Mehrere Serien in einem Diagramm</a></li>
+  <li><a href="#linien-und-punkte-zusammen" id="toc-linien-und-punkte-zusammen" class="nav-link" data-scroll-target="#linien-und-punkte-zusammen">Linien und Punkte zusammen</a></li>
+  <li><a href="#mehrere-serien" id="toc-mehrere-serien" class="nav-link" data-scroll-target="#mehrere-serien">Mehrere Serien</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -293,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>Zahlen über tägliche Neuinfektionen und weitere Kennzahlen einer globalen Pandemie eignen sich für die Einführung von Visualisierungsformen für Trends und Entwicklungen.</p>
+</header><p>Kennzahlen einer globalen Pandemie, wie die täglichen Neuinfektionen, eignen sich gut für die Einführung von Visualisierungsformen für Trends und Entwicklungen. Spätestens sein den Jahren der Pandemie, beginnend im Frühjahr 2020, kennt jeder entsprechende Diagramme aus den Nachrichten. In diesem Kapitel lernen wir, diese und andere Diagramme mit <code>ggplot2</code> selbst zu erstellen.</p>
 <div class="callout-note callout callout-style-simple callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -304,39 +310,52 @@ Keine publizierfähigen Visualisuerungen
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In diesem Kapitel geht es um die Möglichkeiten, Trends und Entwicklungen visuell darzustellen. Die Feinheiten einer Visualisierung wie die Benamung der Achsen, Verwendung von Farben oder die Auswahl besserer Abstände für die Achsenbeschriftungen, werden hier nicht betrachtet und für möglichst einfache Codebeispiele nicht durchgeführt.</p>
+<p>In diesem Kapitel geht es um die Möglichkeiten, Trends und Entwicklungen visuell darzustellen. Die Feinheiten einer Visualisierung, wie die Beschriftung der Achsen, Verwendung von Farben oder Formatierung der Achsenbeschriftungen, werden hier nicht betrachtet und für möglichst einfache Codebeispiele weggelassen.</p>
 </div>
-</div>
-<div class="cell" data-hash="trends_cache/html/unnamed-chunk-2_046b0c1cc7c5a9e9823bad02be5c6af9">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-
-<span class="co"># Tagesaktuelle Daten einlesen</span>
-<span class="va">covid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://covid.ourworldindata.org/data/owid-covid-data.csv"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="liniendiagramme" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="liniendiagramme">
 <span class="header-section-number">3.1</span> Liniendiagramme</h2>
 <section id="eine-serie" class="level3"><h3 class="anchored" data-anchor-id="eine-serie">Eine Serie</h3>
-<div class="cell" data-hash="trends_cache/html/unnamed-chunk-4_1a4f65c3b72db17d63ce4be5c1fe3ad9">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">covid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">location</span> <span class="op">==</span> <span class="st">"France"</span>, <span class="va">date</span> <span class="op">&gt;=</span> <span class="st">"2022-01-01"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">new_cases_smoothed_per_million</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">new_cases_smoothed_per_million</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Liniendiagramme verwenden Verbindungen zwischen benachbarten Punkten, um über die Steigung der Linien Entwicklungen sichtbar werden zu lassen. Für die Umsetzung dieser Linien in <code>ggplot2</code> verwenden wir die Funktion <code>geom_line</code>. Die Punkte selbst werden über die x- und y-Achsen bestimmt. Typischerweise tragen wir auf der x-Achse eine zeitliche Dimension ab, während wir die y-Achse für die betrachtete Größe verwenden.</p>
+<p>Für die folgenden Visualisierungen filtern wir die Daten auf Frankreich und den Januar 2022:</p>
+<div class="cell" data-hash="trends_cache/html/unnamed-chunk-3_3ee0596a94c5edf438d6b110c5ef4e3e">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">cov_france</span> <span class="op">&lt;-</span> 
+  <span class="va">covid</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">location</span> <span class="op">==</span> <span class="st">"France"</span>, <span class="va">date</span> <span class="op">&gt;=</span> <span class="st">"2022-01-01"</span>, <span class="va">date</span> <span class="op">&lt;=</span> <span class="st">"2022-01-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="va">date</span>, <span class="va">new_cases_smoothed_per_million</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Auf der Grundlage erstellen wir ein Liniendiagramm:</p>
+<div class="cell" data-hash="trends_cache/html/unnamed-chunk-4_2b650efe0b6ff396f642fb70933cca4c">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">cov_france</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">new_cases_smoothed_per_million</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="trends_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section><section id="mehrere-serien-in-einem-diagramm" class="level3"><h3 class="anchored" data-anchor-id="mehrere-serien-in-einem-diagramm">Mehrere Serien in einem Diagramm</h3>
-<div class="cell" data-hash="trends_cache/html/unnamed-chunk-5_9ca7b717e6c3ec537a59ce72ed09773b">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">covid</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">location</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"France"</span>, <span class="st">"Spain"</span><span class="op">)</span>, <span class="va">date</span> <span class="op">&gt;=</span> <span class="st">"2022-01-01"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">new_cases_smoothed_per_million</span>, <span class="va">location</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">new_cases_smoothed_per_million</span>, color <span class="op">=</span> <span class="va">location</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="linien-und-punkte-zusammen" class="level3"><h3 class="anchored" data-anchor-id="linien-und-punkte-zusammen">Linien und Punkte zusammen</h3>
+<p>Um die Verbindungen zwischen zwei Punkten deutlicher sichtbar werden zu lassen, können wir zusätzlich zu den Linien auch die Punkte in das Diagramm einzeichnen:</p>
+<div class="cell" data-hash="trends_cache/html/unnamed-chunk-5_c476644f895cc6599b8426ba4e841204">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">cov_france</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">new_cases_smoothed_per_million</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="trends_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="mehrere-serien" class="level3"><h3 class="anchored" data-anchor-id="mehrere-serien">Mehrere Serien</h3>
+<div class="cell" data-hash="trends_cache/html/unnamed-chunk-6_6292d27a681dbdb65cbec25d0c9fe932">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">covid</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">location</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"France"</span>, <span class="st">"Spain"</span><span class="op">)</span>, <span class="va">date</span> <span class="op">&gt;=</span> <span class="st">"2022-01-01"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">select</span><span class="op">(</span><span class="va">date</span>, <span class="va">new_cases_smoothed_per_million</span>, <span class="va">location</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">new_cases_smoothed_per_million</span>, color <span class="op">=</span> <span class="va">location</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="trends_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

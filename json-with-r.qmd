@@ -1,1 +1,5 @@
 # JSON
+
+## Objekte
+
+## Listen oder *Arrays*

@@ -21,6 +21,7 @@ book:
     - part: case-twitter-a.qmd
       chapters: 
         - json-with-r.qmd
+        - associations.qmd
         #- sql-intro.qmd
     - part: case-rewe.qmd
       chapters: 
