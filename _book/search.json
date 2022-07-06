@@ -166,5 +166,75 @@
     "title": "5  JSON",
     "section": "5.2 Listen oder Arrays",
     "text": "5.2 Listen oder Arrays"
+  },
+  {
+    "objectID": "case-climate-data.html",
+    "href": "case-climate-data.html",
+    "title": "Fall: Klima",
+    "section": "",
+    "text": "Der Datensatz stammt von der offiziellen Seite des Deutschen Wetterdienstes, der dort Klimadaten zum direkten Download bereitstellt. Die Daten werden als Textdateien bereitgestellt, die wir im Kapitel “Textdateien einlesen” genauer betrachten.\nDaten"
+  },
+  {
+    "objectID": "read-txt-files.html",
+    "href": "read-txt-files.html",
+    "title": "\n1  Textdateien einlesen\n",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(readr)\nlibrary(janitor)\n\nstations <- read_csv2(\"./data/stations_list_CLIMAT_data.txt\")\n\n# Rows: 4510 Columns: 6\n# -- Column specification -------------------------------------------------\n# Delimiter: \";\"\n# chr (6): WMO-Station ID, StationName, Latitude, Longitude, Height, Co...\n\n\nOben haben wir mit janitor ein nützliches Paket eingeführt. Wir verwenden daraus die Funktion clean_names, die wir unmittelbar an das Laden der Daten mit read_delim aufrufen. Was macht diese Funktion?\nUm den Effekt der clean_names Funktion zu beleuchten, schauen wir uns das Ergebnis einmal mit und ohne diese Funktion an:\n\nstations %>%  \n  colnames()\n\n# [1] \"WMO-Station ID\" \"StationName\"    \"Latitude\"       \"Longitude\"     \n# [5] \"Height\"         \"Country\"  \n\nstations %>% \n  clean_names() %>% \n  colnames()\n\n# [1] \"wmo_station_id\" \"station_name\"   \"latitude\"       \"longitude\"     \n# [5] \"height\"         \"country\""
+  },
+  {
+    "objectID": "read-txt-files.html#spalten-konvertieren",
+    "href": "read-txt-files.html#spalten-konvertieren",
+    "title": "\n1  Textdateien einlesen\n",
+    "section": "\n1.2 Spalten konvertieren",
+    "text": "1.2 Spalten konvertieren\nDie Datentypen der Spalten wurden offensichtlich nicht richtig erkannt."
+  },
+  {
+    "objectID": "read-rest-apis.html",
+    "href": "read-rest-apis.html",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "",
+    "text": "Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für Application Programming Interface und bedeutet übersetzt Programmierschnittstelle. Was aber ist eine REST API?"
+  },
+  {
+    "objectID": "read-rest-apis.html#rest",
+    "href": "read-rest-apis.html#rest",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.1 REST?",
+    "text": "4.1 REST?\nREST steht für Representational State Transfer und ist ein häufig verwendetes Protokoll für Webschnittstellen.\nREST-Schnittstellen verwenden das HTTP-Protokoll für die Kommunikation zwischen Client und Server. Um HTTP-Aufrufe mit R zu erstellen und auszuführen, installieren wir das Paket httr2:\n\ninstall.packages(\"httr2\")\n\nAnschließend können wir die Funktion request verwenden, um einen HTTP-Aufruf mit einer URL auszuführen. Im Standard verwendet die Funktion die Operation GET:\n\nlibrary(httr2)\n\nurl <- \"https://hs-osnabrueck.de\"\nreq <- request(url)\nreq\n\n# <httr2_request>\n# GET https://hs-osnabrueck.de\n# Body: empty\n\n\n\n\n\n\n\nMehr über HTTP-Requests\n\n\n\nNeben GET kennt das HTTP-Protokoll auch andere Operationen. Einen Überblick findet ihr auf den Webseiten des Mozilla Developer Networks.\n\n\nEinen Request ausführen\n\nresp <- req_perform(req)\nresp\n\n# GET https://www.hs-osnabrueck.de/\n# Status: 200 OK\n# Content-Type: text/html\n# Body: In memory (72768 bytes)"
+  },
+  {
+    "objectID": "read-rest-apis.html#die-shopify-api",
+    "href": "read-rest-apis.html#die-shopify-api",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.3 Die Shopify API",
+    "text": "4.3 Die Shopify API\nUm die Shopify API verwenden zu können, lohnt es sich, in die Dokumentation der Schnittstelle zu schauen. Shopify bietet mehrere Programmierschnittstellen für verschiedene Zwecke. Darunter ist zum Beispiel die Storefront API, um eigene Oberflächen für einen Webshop zu erstellen. Die für uns relevante API ist die Admin API. Sie bietet vollen Zugriff auf die Daten eines Shops. Voraussetzung dafür ist, dass der Shopinhaber eine App angelegt hat und die Berechtigungen für den Zugriff auf relevante Daten, wie die Bestellungen, erteilt hat. Mit dieser App generiert Shopify eine Kombination aus API-Schlüssel (API Key) und Passwort. Beide Informationen werden für den Zugriff auf die API benötigt.\nDie allgemeine URL für einen Aufruf der REST Admin API sieht wie folgt aus:\nhttps://{apikey}:{password}@{hostname}/admin/api/{version}/{resource}.json\nBeispielaufruf\nZuerst definieren wir die URL für den Aufruf:\n\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json\"\n\nAnschließend verwenden wir die request Funktion, um einen GET-Request zu erzeugen und danach mit req_perform auszuführen:\n\nreq <- request(url)\nresp <- req_perform(req)\nresp\n\n# <httr2_response>\n# GET\n# https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json\n# Status: 200 OK\n# Content-Type: application/json\n# Body: In memory (3016 bytes)"
+  },
+  {
+    "objectID": "read-rest-apis.html#was-ist-rest",
+    "href": "read-rest-apis.html#was-ist-rest",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.1 Was ist REST?",
+    "text": "4.1 Was ist REST?\nREST steht für Representational State Transfer und ist ein häufig verwendetes Protokoll für Programmierschnittstellen, die über Webprotkolle kommunizieren. Wir sprechen dann auch von Webschnittstellen oder Webservices."
+  },
+  {
+    "objectID": "read-rest-apis.html#rest-aufrufe-mit-r",
+    "href": "read-rest-apis.html#rest-aufrufe-mit-r",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.2 REST-Aufrufe mit R",
+    "text": "4.2 REST-Aufrufe mit R\nEinen HTTP-Request erstellen\nREST-Schnittstellen verwenden das HTTP-Protokoll für die Kommunikation zwischen Client und Server. Um HTTP-Aufrufe mit R zu erstellen und auszuführen, installieren wir das Paket httr2:\n\ninstall.packages(\"httr2\")\ninstall.packages(\"jsonlite\")\n\nAnschließend können wir die Funktion request verwenden, um einen HTTP-Aufruf mit einer URL auszuführen. Im Standard verwendet die Funktion die Operation GET:\n\nlibrary(httr2)\n\nurl <- \"https://hs-osnabrueck.de\"\nreq <- request(url)\nreq\n\n# <httr2_request>\n# GET https://hs-osnabrueck.de\n# Body: empty\n\n\n\n\n\n\n\nMehr über HTTP-Requests\n\n\n\nNeben GET kennt das HTTP-Protokoll auch andere Operationen. Einen Überblick findet ihr auf den Webseiten des Mozilla Developer Networks.\n\n\nEinen HTTP-Request ausführen\n\nresp <- req_perform(req)\nresp\n\n# GET https://www.hs-osnabrueck.de/\n# Status: 200 OK\n# Content-Type: text/html\n# Body: In memory (72768 bytes)\n\nDer Status-Code 200 zeigt an, das der Request erfolgreich war. Zusätzlich wird der Antworttyp im Feld Content-Type ausgegeben, der hier text/html ist. Für den Content Type gibt es eine standardisierte Liste von Werten, die auch MIME-Types genannt werden. Die Größe der Antwort, die wir vom Webserver erhalten haben, beträgt 72768 Bytes oder ca. 73 Kilobytes. Das ist somit die Größe des HTML-Dokuments für die Startseite der Hochschule Osnabrück."
+  },
+  {
+    "objectID": "read-rest-apis.html#der-body-einer-rest-response",
+    "href": "read-rest-apis.html#der-body-einer-rest-response",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.4 Der Body einer REST-Response",
+    "text": "4.4 Der Body einer REST-Response\nDer interessante Teil der Antwort steckt im sogenannten Body, dessen Inhalt wir je nach MIME-Type mit definierten Funktionen resp_body_* auslesen können. Wir bedienen uns hier der einfachsten und agnostischen Variante und lesen den Body als Zeichenkette (String) aus:\n\nlocations <- resp %>% resp_body_string()\nlocations %>%\n  glimpse()\n\n chr \"{\\\"locations\\\":[{\\\"id\\\":66635038954,\\\"name\\\":\\\"Abholaktion 17.12.2021 (Haste)\\\",\\\"address1\\\":\\\"Oldenburger Land\"| __truncated__\n\n# chr \"{\\\"locations\\\":[{\\\"id\\\":66635038954,\\\"name\\\":\\\"Abholaktion 17.12.2021 # (Haste)\\\",\\\"address1\\\":\\\"Oldenburger Land\"| __truncated__\n\nWie schon durch den Content-Type angekündigt handelt es sich bei der Antwort um einen JSON-formatierten Text."
+  },
+  {
+    "objectID": "read-rest-apis.html#json-verarbeiten-mit-jsonlite",
+    "href": "read-rest-apis.html#json-verarbeiten-mit-jsonlite",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.5 JSON verarbeiten mit jsonlite\n",
+    "text": "4.5 JSON verarbeiten mit jsonlite\n\n\nlibrary(tidyverse)\nlibrary(jsonlite)\n\nlocations_json <- fromJSON(locations)\nlocations_json <- tibble(locations_json)\nlocations_json <- locations_json %>% \n  unnest(locations_json)\nlocations_json\n\n# A tibble: 6 x 19\n        id name  address1 address2 city  zip   province country phone created_at\n     <dbl> <chr> <chr>    <chr>    <chr> <chr> <chr>    <chr>   <chr> <chr>     \n1  6.66e10 Abho~ Oldenbu~ \"Einfah~ Osna~ 49090  <NA>    DE      \"\"    2021-12-0~\n2  6.48e10 Camp~ Kaisers~ \"\"       Ling~ 49809  <NA>    DE      \"\"    2021-08-1~\n3  6.94e10 Hafe~ Am Spei~ \"\"       Osna~ 49090  <NA>    DE      \"\"    2022-06-2~\n4  6.48e10 Mens~ Barbara~ \"\"       Osna~ 49076  <NA>    DE      \"\"    2021-08-1~\n5  2.15e10 Schm~ Oldenbu~ \"\"       Osna~ 49090 \"\"       DE      \"+49~ 2019-03-2~\n6  3.68e10 Zwis~ Große H~ \"\"       Osna~ 49074 \"\"       DE      \"\"    2020-09-1~\n# ... with 9 more variables: updated_at <chr>, country_code <chr>,\n#   country_name <chr>, province_code <lgl>, legacy <lgl>, active <lgl>,\n#   admin_graphql_api_id <chr>, localized_country_name <chr>,\n#   localized_province_name <lgl>"
   }
 ]

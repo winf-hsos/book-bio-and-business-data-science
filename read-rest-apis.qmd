@@ -1,0 +1,135 @@
+# Daten aus REST APIs
+
+Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für *Application Programming Interface* und bedeutet übersetzt *Programmierschnittstelle*. Was aber ist eine REST API?
+
+## Was ist REST?
+
+REST steht für **Representational State Transfer** und ist ein häufig verwendetes Protokoll für Programmierschnittstellen, die über Webprotkolle kommunizieren. Wir sprechen dann auch von *Webschnittstellen* oder *Webservices*.
+
+## REST-Aufrufe mit R
+
+### Einen HTTP-Request erstellen
+
+REST-Schnittstellen verwenden das HTTP-Protokoll für die Kommunikation zwischen Client und Server. Um HTTP-Aufrufe mit R zu erstellen und auszuführen, installieren wir das Paket `httr2`:
+
+```{r}
+#| output: false
+install.packages("httr2")
+install.packages("jsonlite")
+```
+
+Anschließend können wir die Funktion `request` verwenden, um einen HTTP-Aufruf mit einer URL auszuführen. Im Standard verwendet die Funktion die Operation `GET`:
+
+```{r}
+#| warning: false
+#| output: false
+library(httr2)
+
+url <- "https://hs-osnabrueck.de"
+req <- request(url)
+req
+
+# <httr2_request>
+# GET https://hs-osnabrueck.de
+# Body: empty
+```
+
+::: {.callout-tip appearance="minimal"}
+## Mehr über HTTP-Requests
+
+Neben `GET` kennt das HTTP-Protokoll auch andere Operationen. Einen Überblick findet ihr auf den Webseiten des [Mozilla Developer Networks](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
+:::
+
+### Einen HTTP-Request ausführen
+
+```{r}
+#| warning: false
+#| output: false
+resp <- req_perform(req)
+resp
+
+# GET https://www.hs-osnabrueck.de/
+# Status: 200 OK
+# Content-Type: text/html
+# Body: In memory (72768 bytes)
+
+```
+
+Der [Status-Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 200 zeigt an, das der Request erfolgreich war. Zusätzlich wird der Antworttyp im Feld *Content-Type* ausgegeben, der hier `text/html` ist. Für den Content Type gibt es eine [standardisierte Liste von Werten](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types), die auch MIME-Types genannt werden. Die Größe der Antwort, die wir vom Webserver erhalten haben, beträgt 72768 Bytes oder ca. 73 Kilobytes. Das ist somit die Größe des HTML-Dokuments für die [Startseite der Hochschule Osnabrück](https://www.hs-osnabrueck.de/).
+
+## Die Shopify API
+
+Um die Shopify API verwenden zu können, lohnt es sich, in die Dokumentation der Schnittstelle zu schauen. Shopify bietet [mehrere Programmierschnittstellen](https://shopify.dev/api) für verschiedene Zwecke. Darunter ist zum Beispiel die [Storefront API](https://shopify.dev/api/storefront), um eigene Oberflächen für einen Webshop zu erstellen. Die für uns relevante API ist die [Admin API](https://shopify.dev/api/admin). Sie bietet vollen Zugriff auf die Daten eines Shops. Voraussetzung dafür ist, dass der Shopinhaber eine App angelegt hat und die Berechtigungen für den Zugriff auf relevante Daten, wie die Bestellungen, erteilt hat. Mit dieser App generiert Shopify eine Kombination aus API-Schlüssel (API Key) und Passwort. Beide Informationen werden für den Zugriff auf die API benötigt.
+
+Die allgemeine URL für einen Aufruf der REST Admin API sieht wie folgt aus:
+
+```
+https://{apikey}:{password}@{hostname}/admin/api/{version}/{resource}.json
+```
+
+### Beispielaufruf
+
+Zuerst definieren wir die URL für den Aufruf:
+
+```{r}
+#| echo: false
+url <- "https://b22fe6bc63864cde730c380f65b1584f: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@haster-bier.myshopify.com/admin/api/2022-04/locations.json"
+```
+
+```{r}
+#| eval: false
+url <- "https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json"
+```
+
+Anschließend verwenden wir die `request` Funktion, um einen `GET`-Request zu erzeugen und danach  mit `req_perform` auszuführen:
+
+```{r}
+#| warning: false
+#| output: false
+
+req <- request(url)
+resp <- req_perform(req)
+resp
+
+# <httr2_response>
+# GET
+# https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json
+# Status: 200 OK
+# Content-Type: application/json
+# Body: In memory (3016 bytes)
+
+```
+## Der Body einer REST-Response
+
+Der interessante Teil der Antwort steckt im sogenannten *Body*, dessen Inhalt wir je nach MIME-Type mit definierten Funktionen `resp_body_*` auslesen können. Wir bedienen uns hier der einfachsten und agnostischen Variante und lesen den Body als Zeichenkette (String) aus:
+
+```{r}
+#| warning: false
+locations <- resp %>% resp_body_string()
+locations %>%
+  glimpse()
+
+# chr "{\"locations\":[{\"id\":66635038954,\"name\":\"Abholaktion 17.12.2021 # (Haste)\",\"address1\":\"Oldenburger Land"| __truncated__
+
+```
+
+Wie schon durch den Content-Type angekündigt, handelt es sich bei der Antwort um einen JSON-formatierten Text.
+
+## JSON verarbeiten mit `jsonlite`
+
+Um JSON-formatierte Texte in eine nutzbare Datenstruktur umzuwandeln, verwenden wir das Paket `jsonlite`. Es bietet zahlreiche Funktionen für die Arbeit mit dem JSON-Format, darunter die Funktion `fromJSON`, die uns einen String im JSON-Format in eine Liste von Dataframes umwandelt. Anschließend können wir mit der `tibble` Funktion daraus einen Tibble erstellen, den wir dann noch mit `unnest` auftrennen müssen:
+
+```{r}
+#| warning: false
+library(tidyverse)
+library(jsonlite)
+
+locations_json <- fromJSON(locations)
+locations_json <- tibble(locations_json)
+locations_json <- locations_json %>% 
+  unnest(locations_json)
+locations_json
+```
+
+
+

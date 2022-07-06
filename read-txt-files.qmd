@@ -1,0 +1,46 @@
+# Textdateien einlesen
+
+## Die `read_csv2` Funktion
+
+```{r}
+#| warning: false
+library(dplyr)
+library(readr)
+library(janitor)
+
+stations <- read_csv2("./data/stations_list_CLIMAT_data.txt")
+
+# Rows: 4510 Columns: 6
+# -- Column specification -------------------------------------------------
+# Delimiter: ";"
+# chr (6): WMO-Station ID, StationName, Latitude, Longitude, Height, Co...
+```
+
+### Das `janitor` Paket
+
+Oben haben wir mit `janitor` ein nützliches Paket eingeführt. Wir verwenden daraus die Funktion `clean_names`, die wir unmittelbar an das Laden der Daten mit `read_delim` aufrufen. Was macht diese Funktion?
+
+Um den Effekt der `clean_names` Funktion zu beleuchten, schauen wir uns das Ergebnis einmal mit und ohne diese Funktion an:
+
+```{r}
+#| output: false
+#| warning: false
+stations %>%  
+  colnames()
+
+# [1] "WMO-Station ID" "StationName"    "Latitude"       "Longitude"     
+# [5] "Height"         "Country"  
+
+stations %>% 
+  clean_names() %>% 
+  colnames()
+
+# [1] "wmo_station_id" "station_name"   "latitude"       "longitude"     
+# [5] "height"         "country"
+
+```
+
+
+## Spalten konvertieren
+
+Die Datentypen der Spalten wurden offensichtlich nicht richtig erkannt.

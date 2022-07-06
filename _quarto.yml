@@ -12,9 +12,17 @@ book:
     #- part: case-binary-adding-machine.qmd
     #  chapters:
     #    - logic-gates.qmd
+    - part: case-climate-data.qmd
+      chapters:
+        - read-txt-files.qmd
+        - tidyverse.qmd
+        - select-columns.qmd
+    - part: case-shopify-sales.qmd
+      chapters: 
+        - read-rest-apis.qmd
     - part: case-covid.qmd
       chapters: 
-        - tidyverse.qmd
+        
         - csv-format.qmd
         - trends.qmd
         - origin-of-data.qmd
@@ -29,9 +37,11 @@ book:
     - part: case-limonade.qmd
       chapters:
         - long-wide-data.qmd
-    - outliers.qmd
-    - search_text.qmd
-    - sample-bias.qmd
+    - part: case-open-food-facts.qmd
+      chapters:
+        - outliers.qmd
+        - search_text.qmd
+        - sample-bias.qmd
     - references.qmd
 
 

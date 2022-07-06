@@ -1,0 +1,7 @@
+# Fall: Klima
+
+## Der Datensatz
+
+Der Datensatz stammt von der offiziellen Seite des Deutschen Wetterdienstes, der dort [Klimadaten zum direkten Download](https://www.dwd.de/DE/leistungen/cdc/cdc_ueberblick-klimadaten.html) bereitstellt. Die Daten werden als Textdateien bereitgestellt, die wir im [Kapitel "Textdateien einlesen"](read-txt-files.qmd) genauer betrachten.
+
+[Daten](https://opendata.dwd.de/climate_environment/CDC/observations_global/CLIMAT/monthly/qc/air_temperature_mean/historical/)
