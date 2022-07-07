@@ -4,7 +4,7 @@ Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in 
 
 ## Was ist REST?
 
-REST steht für **Representational State Transfer** und ist ein häufig verwendetes Protokoll für Programmierschnittstellen, die über Webprotkolle kommunizieren. Wir sprechen dann auch von *Webschnittstellen* oder *Webservices*.
+REST steht für **Representational State Transfer** und ist ein häufig verwendetes Protokoll für Programmierschnittstellen, die über Webprotokolle kommunizieren. Wir sprechen dann auch von *Webschnittstellen* oder *Webservices*.
 
 ## REST-Aufrufe mit R
 
@@ -55,11 +55,13 @@ resp
 
 ```
 
-Der [Status-Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 200 zeigt an, das der Request erfolgreich war. Zusätzlich wird der Antworttyp im Feld *Content-Type* ausgegeben, der hier `text/html` ist. Für den Content Type gibt es eine [standardisierte Liste von Werten](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types), die auch MIME-Types genannt werden. Die Größe der Antwort, die wir vom Webserver erhalten haben, beträgt 72768 Bytes oder ca. 73 Kilobytes. Das ist somit die Größe des HTML-Dokuments für die [Startseite der Hochschule Osnabrück](https://www.hs-osnabrueck.de/).
+Der [Status-Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 200 zeigt an, dass der Request erfolgreich war. Zusätzlich wird der Antworttyp im Feld *Content-Type* ausgegeben, der hier `text/html` ist. Für den Content Type gibt es eine [standardisierte Liste von Werten](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types), die auch MIME-Types genannt werden. Die Größe der Antwort, die wir vom Webserver erhalten haben, beträgt 72768 Bytes oder ca. 73 Kilobytes. Das ist somit die Größe des HTML-Dokuments für die [Startseite der Hochschule Osnabrück](https://www.hs-osnabrueck.de/).
+
+Wir könnten jetzt den Body der Antwort auslesen und das HTML-Dokument mit R weiter verarbeiten. Wenngleich das Analysieren von Webinhalten spannend sein kann, ist es nicht Thema dieses Kapitels.
 
 ## Die Shopify API
 
-Um die Shopify API verwenden zu können, lohnt es sich, in die Dokumentation der Schnittstelle zu schauen. Shopify bietet [mehrere Programmierschnittstellen](https://shopify.dev/api) für verschiedene Zwecke. Darunter ist zum Beispiel die [Storefront API](https://shopify.dev/api/storefront), um eigene Oberflächen für einen Webshop zu erstellen. Die für uns relevante API ist die [Admin API](https://shopify.dev/api/admin). Sie bietet vollen Zugriff auf die Daten eines Shops. Voraussetzung dafür ist, dass der Shopinhaber eine App angelegt hat und die Berechtigungen für den Zugriff auf relevante Daten, wie die Bestellungen, erteilt hat. Mit dieser App generiert Shopify eine Kombination aus API-Schlüssel (API Key) und Passwort. Beide Informationen werden für den Zugriff auf die API benötigt.
+Zum Start lohnt es sich, in die Dokumentation der Shopify API zu schauen. Shopify bietet [mehrere Programmierschnittstellen](https://shopify.dev/api) für unterschiedliche Zwecke. Darunter ist etwa die [Storefront-API](https://shopify.dev/api/storefront), um eigene Oberflächen für einen Webshop zu erstellen. Die für uns relevante API ist die [Admin-API](https://shopify.dev/api/admin). Sie bietet vollen Zugriff auf die Daten eines Shops. Voraussetzung dafür ist, dass der Shop-Inhaber eine App angelegt und die Berechtigungen für den Zugriff auf relevante Daten, wie die Bestellungen, erteilt hat. Mit dieser App generiert Shopify eine Kombination aus API-Schlüssel (API Key) und Passwort. Beide Informationen werden für den Zugriff auf die API benötigt.
 
 Die allgemeine URL für einen Aufruf der REST Admin API sieht wie folgt aus:
 
@@ -73,7 +75,11 @@ Zuerst definieren wir die URL für den Aufruf:
 
 ```{r}
 #| echo: false
-url <- "https://b22fe6bc63864cde730c380f65b1584f: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@haster-bier.myshopify.com/admin/api/2022-04/locations.json"
+source("api_keys.R")
+
+url <- paste0("https://", shopify_api_key, ":", shopify_access_token, "@haster-bier.myshopify.com/admin/api/2022-04/locations.json")
+
+url
 ```
 
 ```{r}
@@ -105,7 +111,10 @@ Der interessante Teil der Antwort steckt im sogenannten *Body*, dessen Inhalt wi
 
 ```{r}
 #| warning: false
-locations <- resp %>% resp_body_string()
+#| output: false
+locations <- resp %>%
+  resp_body_string()
+
 locations %>%
   glimpse()
 
@@ -124,12 +133,69 @@ Um JSON-formatierte Texte in eine nutzbare Datenstruktur umzuwandeln, verwenden 
 library(tidyverse)
 library(jsonlite)
 
-locations_json <- fromJSON(locations)
-locations_json <- tibble(locations_json)
-locations_json <- locations_json %>% 
-  unnest(locations_json)
-locations_json
+locations_tbl <- fromJSON(locations) %>% 
+  tibble() %>% 
+  unnest(cols = c(.))
+
+# Alle Spaltennamen ausgeben lassen
+locations_tbl %>% 
+  colnames()
 ```
 
+```{r}
+locations_tbl %>% 
+  select(name)
+```
+
+```{r}
+locations_tbl
+```
+## Bestellungen abfragen
+
+Da es in diesem Anwendungsfall um Verkaufsanalysen geht, interessieren uns speziell die Bestellungen, die Kunden in unserem Shop getätigt haben. Auch diese können wir über die Admin-API abrufen. Die URL von oben ändern wir [gemäß der Dokumentation](https://shopify.dev/api/admin-rest/2022-07/resources/order) ab:
+
+```{r}
+#| echo: false
+#| output: false
+url <- paste0("https://", shopify_api_key, ":", shopify_access_token, "@haster-bier.myshopify.com/admin/api/2022-04/orders.json?limit=250")
+```
+
+```{r}
+#| eval: false
+url <- "https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json"
+```
+
+```{r}
+#| echo: false
+#| output: false
+req <- request(url)
+resp <- req_perform(req)
+
+orders <- resp %>% 
+  resp_body_string() %>% 
+  fromJSON() %>% 
+  tibble() %>% 
+  unnest(cols = c(.)) 
+
+dim_orders <- orders %>% 
+  dim()
+```
+
+Wenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt `r dim_orders[1]` Zeilen und `r dim_orders[2]` Spalten:  
+
+```{r}
+#| warning: false
+req <- request(url)
+resp <- req_perform(req)
+
+orders <- resp %>% 
+  resp_body_string() %>% 
+  fromJSON() %>% 
+  tibble() %>% 
+  unnest(cols = c(.)) %>% 
+  dim()
+
+orders
+```
 
 

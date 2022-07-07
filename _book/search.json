@@ -1,5 +1,82 @@
 [
   {
+    "objectID": "case-climate-data.html",
+    "href": "case-climate-data.html",
+    "title": "Fall: Klima",
+    "section": "",
+    "text": "Der Datensatz stammt von der offiziellen Seite des Deutschen Wetterdienstes, der dort Klimadaten zum direkten Download bereitstellt. Die Daten werden als Textdateien bereitgestellt, die wir im Kapitel “Textdateien einlesen” genauer betrachten.\nDaten"
+  },
+  {
+    "objectID": "read-txt-files.html",
+    "href": "read-txt-files.html",
+    "title": "\n1  Textdateien einlesen\n",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(readr)\nlibrary(janitor)\n\nstations <- read_csv2(\"./data/stations_list_CLIMAT_data.txt\")\n\n# Rows: 4510 Columns: 6\n# -- Column specification -------------------------------------------------\n# Delimiter: \";\"\n# chr (6): WMO-Station ID, StationName, Latitude, Longitude, Height, Co...\n\n\nOben haben wir mit janitor ein nützliches Paket eingeführt. Wir verwenden daraus die Funktion clean_names, die wir unmittelbar an das Laden der Daten mit read_delim aufrufen. Was macht diese Funktion?\nUm den Effekt der clean_names Funktion zu beleuchten, schauen wir uns das Ergebnis einmal mit und ohne diese Funktion an:\n\nstations %>%  \n  colnames()\n\n# [1] \"WMO-Station ID\" \"StationName\"    \"Latitude\"       \"Longitude\"     \n# [5] \"Height\"         \"Country\"  \n\nstations %>% \n  clean_names() %>% \n  colnames()\n\n# [1] \"wmo_station_id\" \"station_name\"   \"latitude\"       \"longitude\"     \n# [5] \"height\"         \"country\""
+  },
+  {
+    "objectID": "read-txt-files.html#spalten-konvertieren",
+    "href": "read-txt-files.html#spalten-konvertieren",
+    "title": "\n1  Textdateien einlesen\n",
+    "section": "\n1.2 Spalten konvertieren",
+    "text": "1.2 Spalten konvertieren\nDie Datentypen der Spalten wurden offensichtlich nicht richtig erkannt."
+  },
+  {
+    "objectID": "tidyverse.html#tibbles",
+    "href": "tidyverse.html#tibbles",
+    "title": "\n2  Das Tidyverse\n",
+    "section": "\n2.2 Tibbles",
+    "text": "2.2 Tibbles\nIn Kapitel X haben wir den Dataframe als Datenstruktur in R kennengelernt. Mit einem Dataframe können wir tabellarische Daten, wie wir sie aus Spreadsheet-Programmen wie Microsoft Excel oder Google Sheets kennen, in R abbilden. Das Tidyverse bringt eine verbesserte Version des klassischen Dataframes mit, das Tibble.\nDer Name Tibble leitet sich vermutlich aus dem Begriff Tidy Table ab. Ein Tibble bringt die folgenden Verbesserungen im Vergleich zu einem klassischen Dataframe mit sich:\n\nKürzere und prägnantere Ausgabe auf der Konsole.\nKeine Veränderung von Spaltennamen im Vergleich zur Quelle.\nKeine Umwandlung von Zeichenketten in Faktoren als Standard.\nEin Tibble erzeugt keine Namen für Zeilen (rownames)\n\nAusgabe auf der Konsole\nEine nützliche Verbesserung ist die sinnvollere Ausgabe eines Tibbles auf der Konsole. Das Beispiel unten gibt das Tibble tweets, das wir im nächsten Kapitel laden werden, auf der Konsole aus:\n\ntweets\n\n# A tibble: 46,787 x 22\n   id             screen_name text  retweet_count favorite_count is_quote_status\n   <chr>          <chr>       <chr>         <dbl>          <dbl> <lgl>          \n 1 1518891431288~ MarcoBusch~ \"beg~             3             12 FALSE          \n 2 1518891429820~ MarcoBusch~ \"Die~             3             15 FALSE          \n 3 1518907549420~ starkwatzi~ \"@Ko~             1             10 FALSE          \n 4 1518907549420~ starkwatzi~ \"@Ko~             1             10 FALSE          \n 5 1518916990915~ NancyFaeser \"Uns~            53            490 FALSE          \n 6 1518916990915~ NancyFaeser \"Uns~            53            490 FALSE          \n 7 1518947908980~ c_lindner   \"So ~             6             53 FALSE          \n 8 1518960421214~ MarcoBusch~ \"@ar~             1              4 FALSE          \n 9 1518957407845~ MarcoBusch~ \"Bei~            20             99 FALSE          \n10 1518922009157~ MarcoBusch~ \"@sc~             1              0 FALSE          \n# ... with 46,777 more rows, and 16 more variables: is_retweet <lgl>,\n#   lang <chr>, in_reply_to_screen_name <chr>, in_reply_to_status_id <chr>,\n#   hashtags <list>, urls <list>, user_mentions <list>, photos <list>,\n#   source <chr>, insert_timestamp <chr>, created_at <dttm>, quote_count <dbl>,\n#   reply_count <dbl>, retweeted_status_id <chr>, retweeted_user <chr>,\n#   quoted_status_id <chr>\n\n\nWäre tweets ein normaler Dateframe bekämen wir eine sehr lange Ausgabe aller 46787 Zeilen und 22 Spalten. Ein Tibble zeigt uns nur die ersten 10 Zeilen als Beispiele, mit jeweils so vielen Spalten wie sinnvoll in die Ausgabe passen. Die Information, dass es noch weitere Zeilen und Spalten gibt (und wieviele), folgt darunter.\nTibbles sind auch Dataframes\nJedes Tibble ist gleichzeitig ein klassischer Dataframe. Es besitzt aber zusätzlich die Klassen tbl und tbl_df, die für die zusätzlichen Funktionen und das veränderte Verhalten sorgen.\nZur Illustration erstellen wir manuell einen Dataframe und einen Tibble und lassen uns danach mit class die R-Klassen ausgeben, die beide Objekte besitzen:\n\ndf <- data.frame(id = c(1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nclass(df)\n\n[1] \"data.frame\"\n\n\nUnd nun das Tibble:\n\ntbl <- tibble(id = c (1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nclass(tbl)\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nDadurch, dass ein Tibble auch gleichzeitig ein klassischer Dataframe ist, können wir alle Funktionen darauf anwenden, die auch mit Dataframes funktionieren. Schließlich ist ein Tibble ja ein Dataframe.\n\ncolnames(tbl)\n\n[1] \"id\"   \"name\"\n\n\nWir können jederzeit aus einem Dataframe ein Tibble erzeugen:\n\ndf <- as_tibble(df)\n\ndf\n\n# A tibble: 3 x 2\n     id name \n  <dbl> <chr>\n1     1 Mark \n2     2 John \n3     3 Eve  \n\n\nDas manuelle Erzeugen eines Tibble geht auf zwei unterschiedliche Wege. Zum einen mit der tibble Funktion, die Paare aus Spaltenname und zugehörigen Werten als Vektor erwartet (s. oben):\n\ntbl <- tibble(id = c (1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nEine andere Möglichkeit ist die zeilenweise Erstellung mit tribble:\n\ntbl <- tribble(\n  ~id, ~name,\n    1, \"Mark\",\n    2, \"John\",\n    3, \"Eve\"\n)"
+  },
+  {
+    "objectID": "tidyverse.html#mehr-lesen",
+    "href": "tidyverse.html#mehr-lesen",
+    "title": "\n2  Das Tidyverse\n",
+    "section": "Mehr lesen",
+    "text": "Mehr lesen\n\nLink zur offziellen Webseite des Tidyverse\nLink zur Dokumentation des Tibble-Pakets"
+  },
+  {
+    "objectID": "read-rest-apis.html",
+    "href": "read-rest-apis.html",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "",
+    "text": "Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für Application Programming Interface und bedeutet übersetzt Programmierschnittstelle. Was aber ist eine REST API?"
+  },
+  {
+    "objectID": "read-rest-apis.html#was-ist-rest",
+    "href": "read-rest-apis.html#was-ist-rest",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.1 Was ist REST?",
+    "text": "4.1 Was ist REST?\nREST steht für Representational State Transfer und ist ein häufig verwendetes Protokoll für Programmierschnittstellen, die über Webprotokolle kommunizieren. Wir sprechen dann auch von Webschnittstellen oder Webservices."
+  },
+  {
+    "objectID": "read-rest-apis.html#rest-aufrufe-mit-r",
+    "href": "read-rest-apis.html#rest-aufrufe-mit-r",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.2 REST-Aufrufe mit R",
+    "text": "4.2 REST-Aufrufe mit R\nEinen HTTP-Request erstellen\nREST-Schnittstellen verwenden das HTTP-Protokoll für die Kommunikation zwischen Client und Server. Um HTTP-Aufrufe mit R zu erstellen und auszuführen, installieren wir das Paket httr2:\n\ninstall.packages(\"httr2\")\ninstall.packages(\"jsonlite\")\n\nAnschließend können wir die Funktion request verwenden, um einen HTTP-Aufruf mit einer URL auszuführen. Im Standard verwendet die Funktion die Operation GET:\n\nlibrary(httr2)\n\nurl <- \"https://hs-osnabrueck.de\"\nreq <- request(url)\nreq\n\n# <httr2_request>\n# GET https://hs-osnabrueck.de\n# Body: empty\n\n\n\n\n\n\n\nMehr über HTTP-Requests\n\n\n\nNeben GET kennt das HTTP-Protokoll auch andere Operationen. Einen Überblick findet ihr auf den Webseiten des Mozilla Developer Networks.\n\n\nEinen HTTP-Request ausführen\n\nresp <- req_perform(req)\nresp\n\n# GET https://www.hs-osnabrueck.de/\n# Status: 200 OK\n# Content-Type: text/html\n# Body: In memory (72768 bytes)\n\nDer Status-Code 200 zeigt an, dass der Request erfolgreich war. Zusätzlich wird der Antworttyp im Feld Content-Type ausgegeben, der hier text/html ist. Für den Content Type gibt es eine standardisierte Liste von Werten, die auch MIME-Types genannt werden. Die Größe der Antwort, die wir vom Webserver erhalten haben, beträgt 72768 Bytes oder ca. 73 Kilobytes. Das ist somit die Größe des HTML-Dokuments für die Startseite der Hochschule Osnabrück.\nWir könnten jetzt den Body der Antwort auslesen und das HTML-Dokument mit R weiter verarbeiten. Wenngleich das Analysieren von Webinhalten spannend sein kann, ist es nicht Thema dieses Kapitels."
+  },
+  {
+    "objectID": "read-rest-apis.html#die-shopify-api",
+    "href": "read-rest-apis.html#die-shopify-api",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.3 Die Shopify API",
+    "text": "4.3 Die Shopify API\nZum Start lohnt es sich, in die Dokumentation der Shopify API zu schauen. Shopify bietet mehrere Programmierschnittstellen für unterschiedliche Zwecke. Darunter ist etwa die Storefront-API, um eigene Oberflächen für einen Webshop zu erstellen. Die für uns relevante API ist die Admin-API. Sie bietet vollen Zugriff auf die Daten eines Shops. Voraussetzung dafür ist, dass der Shop-Inhaber eine App angelegt und die Berechtigungen für den Zugriff auf relevante Daten, wie die Bestellungen, erteilt hat. Mit dieser App generiert Shopify eine Kombination aus API-Schlüssel (API Key) und Passwort. Beide Informationen werden für den Zugriff auf die API benötigt.\nDie allgemeine URL für einen Aufruf der REST Admin API sieht wie folgt aus:\nhttps://{apikey}:{password}@{hostname}/admin/api/{version}/{resource}.json\nBeispielaufruf\nZuerst definieren wir die URL für den Aufruf:\n\n\n[1] \"https://e1b14daf3821a15edac451f0c99c22dc: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@haster-bier.myshopify.com/admin/api/2022-04/locations.json\"\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json\"\n\nAnschließend verwenden wir die request Funktion, um einen GET-Request zu erzeugen und danach mit req_perform auszuführen:\n\nreq <- request(url)\nresp <- req_perform(req)\nresp\n\n# <httr2_response>\n# GET\n# https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json\n# Status: 200 OK\n# Content-Type: application/json\n# Body: In memory (3016 bytes)"
+  },
+  {
+    "objectID": "read-rest-apis.html#der-body-einer-rest-response",
+    "href": "read-rest-apis.html#der-body-einer-rest-response",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.4 Der Body einer REST-Response",
+    "text": "4.4 Der Body einer REST-Response\nDer interessante Teil der Antwort steckt im sogenannten Body, dessen Inhalt wir je nach MIME-Type mit definierten Funktionen resp_body_* auslesen können. Wir bedienen uns hier der einfachsten und agnostischen Variante und lesen den Body als Zeichenkette (String) aus:\n\nlocations <- resp %>%\n  resp_body_string()\n\nlocations %>%\n  glimpse()\n\n# chr \"{\\\"locations\\\":[{\\\"id\\\":66635038954,\\\"name\\\":\\\"Abholaktion 17.12.2021 # (Haste)\\\",\\\"address1\\\":\\\"Oldenburger Land\"| __truncated__\n\nWie schon durch den Content-Type angekündigt, handelt es sich bei der Antwort um einen JSON-formatierten Text."
+  },
+  {
+    "objectID": "read-rest-apis.html#json-verarbeiten-mit-jsonlite",
+    "href": "read-rest-apis.html#json-verarbeiten-mit-jsonlite",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.5 JSON verarbeiten mit jsonlite\n",
+    "text": "4.5 JSON verarbeiten mit jsonlite\n\nUm JSON-formatierte Texte in eine nutzbare Datenstruktur umzuwandeln, verwenden wir das Paket jsonlite. Es bietet zahlreiche Funktionen für die Arbeit mit dem JSON-Format, darunter die Funktion fromJSON, die uns einen String im JSON-Format in eine Liste von Dataframes umwandelt. Anschließend können wir mit der tibble Funktion daraus einen Tibble erstellen, den wir dann noch mit unnest auftrennen müssen:\n\nlibrary(tidyverse)\nlibrary(jsonlite)\n\nlocations_tbl <- fromJSON(locations) %>% \n  tibble() %>% \n  unnest(cols = c(.))\n\n# Alle Spaltennamen ausgeben lassen\nlocations_tbl %>% \n  colnames()\n\n [1] \"id\"                      \"name\"                   \n [3] \"address1\"                \"address2\"               \n [5] \"city\"                    \"zip\"                    \n [7] \"province\"                \"country\"                \n [9] \"phone\"                   \"created_at\"             \n[11] \"updated_at\"              \"country_code\"           \n[13] \"country_name\"            \"province_code\"          \n[15] \"legacy\"                  \"active\"                 \n[17] \"admin_graphql_api_id\"    \"localized_country_name\" \n[19] \"localized_province_name\"\n\n\n\nlocations_tbl %>% \n  select(name)\n\n\n\n  \n\n\n\n\nlocations_tbl"
+  },
+  {
     "objectID": "case-covid.html",
     "href": "case-covid.html",
     "title": "Fall: Covid",
@@ -14,32 +91,39 @@
     "text": "Datensatz"
   },
   {
-    "objectID": "tidyverse.html#tibbles",
-    "href": "tidyverse.html#tibbles",
-    "title": "\n1  Das Tidyverse\n",
-    "section": "\n1.2 Tibbles",
-    "text": "1.2 Tibbles\nIn Kapitel X haben wir den Dataframe als Datenstruktur in R kennengelernt. Mit einem Dataframe können wir tabellarische Daten, wie wir sie aus Spreadsheet-Programmen wie Microsoft Excel oder Google Sheets kennen, in R abbilden. Das Tidyverse bringt eine verbesserte Version des klassischen Dataframes mit, das Tibble.\nDer Name Tibble leitet sich vermutlich aus dem Begriff Tidy Table ab. Ein Tibble bringt die folgenden Verbesserungen im Vergleich zu einem klassischen Dataframe mit sich:\n\nKürzere und prägnantere Ausgabe auf der Konsole.\nKeine Veränderung von Spaltennamen im Vergleich zur Quelle.\nKeine Umwandlung von Zeichenketten in Faktoren als Standard.\nEin Tibble erzeugt keine Namen für Zeilen (rownames)\n\nAusgabe auf der Konsole\nEine nützliche Verbesserung ist die sinnvollere Ausgabe eines Tibbles auf der Konsole. Das Beispiel unten gibt das Tibble tweets, das wir im nächsten Kapitel laden werden, auf der Konsole aus:\n\ntweets\n\n# A tibble: 46,787 x 22\n   id             screen_name text  retweet_count favorite_count is_quote_status\n   <chr>          <chr>       <chr>         <dbl>          <dbl> <lgl>          \n 1 1518891431288~ MarcoBusch~ \"beg~             3             12 FALSE          \n 2 1518891429820~ MarcoBusch~ \"Die~             3             15 FALSE          \n 3 1518907549420~ starkwatzi~ \"@Ko~             1             10 FALSE          \n 4 1518907549420~ starkwatzi~ \"@Ko~             1             10 FALSE          \n 5 1518916990915~ NancyFaeser \"Uns~            53            490 FALSE          \n 6 1518916990915~ NancyFaeser \"Uns~            53            490 FALSE          \n 7 1518947908980~ c_lindner   \"So ~             6             53 FALSE          \n 8 1518960421214~ MarcoBusch~ \"@ar~             1              4 FALSE          \n 9 1518957407845~ MarcoBusch~ \"Bei~            20             99 FALSE          \n10 1518922009157~ MarcoBusch~ \"@sc~             1              0 FALSE          \n# ... with 46,777 more rows, and 16 more variables: is_retweet <lgl>,\n#   lang <chr>, in_reply_to_screen_name <chr>, in_reply_to_status_id <chr>,\n#   hashtags <list>, urls <list>, user_mentions <list>, photos <list>,\n#   source <chr>, insert_timestamp <chr>, created_at <dttm>, quote_count <dbl>,\n#   reply_count <dbl>, retweeted_status_id <chr>, retweeted_user <chr>,\n#   quoted_status_id <chr>\n\n\nWäre tweets ein normaler Dateframe bekämen wir eine sehr lange Ausgabe aller 46787 Zeilen und 22 Spalten. Ein Tibble zeigt uns nur die ersten 10 Zeilen als Beispiele, mit jeweils so vielen Spalten wie sinnvoll in die Ausgabe passen. Die Information, dass es noch weitere Zeilen und Spalten gibt (und wieviele), folgt darunter.\nTibbles sind auch Dataframes\nJedes Tibble ist gleichzeitig ein klassischer Dataframe. Es besitzt aber zusätzlich die Klassen tbl und tbl_df, die für die zusätzlichen Funktionen und das veränderte Verhalten sorgen.\nZur Illustration erstellen wir manuell einen Dataframe und einen Tibble und lassen uns danach mit class die R-Klassen ausgeben, die beide Objekte besitzen:\n\ndf <- data.frame(id = c(1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nclass(df)\n\n[1] \"data.frame\"\n\n\nUnd nun das Tibble:\n\ntbl <- tibble(id = c (1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nclass(tbl)\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nDadurch, dass ein Tibble auch gleichzeitig ein klassischer Dataframe ist, können wir alle Funktionen darauf anwenden, die auch mit Dataframes funktionieren. Schließlich ist ein Tibble ja ein Dataframe.\n\ncolnames(tbl)\n\n[1] \"id\"   \"name\"\n\n\nWir können jederzeit aus einem Dataframe ein Tibble erzeugen:\n\ndf <- as_tibble(df)\n\ndf\n\n# A tibble: 3 x 2\n     id name \n  <dbl> <chr>\n1     1 Mark \n2     2 John \n3     3 Eve  \n\n\nDas manuelle Erzeugen eines Tibble geht auf zwei unterschiedliche Wege. Zum einen mit der tibble Funktion, die Paare aus Spaltenname und zugehörigen Werten als Vektor erwartet (s. oben):\n\ntbl <- tibble(id = c (1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nEine andere Möglichkeit ist die zeilenweise Erstellung mit tribble:\n\ntbl <- tribble(\n  ~id, ~name,\n    1, \"Mark\",\n    2, \"John\",\n    3, \"Eve\"\n)"
-  },
-  {
-    "objectID": "tidyverse.html#mehr-lesen",
-    "href": "tidyverse.html#mehr-lesen",
-    "title": "\n1  Das Tidyverse\n",
-    "section": "Mehr lesen",
-    "text": "Mehr lesen\n\nLink zur offziellen Webseite des Tidyverse\nLink zur Dokumentation des Tibble-Pakets"
-  },
-  {
-    "objectID": "r-load-csv-data.html",
-    "href": "r-load-csv-data.html",
-    "title": "\n2  Das CSV-Format\n",
+    "objectID": "csv-format.html",
+    "href": "csv-format.html",
+    "title": "\n5  Das CSV-Format\n",
     "section": "",
     "text": "Im ersten Schritt jeder Datenanalyse müssen wir unserem Computer den Datensatz zur Verfügung stellen. Wir sprechen dabei auch vom Laden des Datesatzes. Dabei sagen wir dem Computer, wo die Daten zu finden sind und dass er sie für den schnelleren Zugriff in seinen Arbeitsspeicher holen soll.\nDaten liegen in den meisten Fällen in Form von Dateien vor. In manchen Fällen sind sie auch in einer Datenbank gespeichert. Im Fall einer Datei kann ein Datensatz in unterschiedlichen Formaten darin gespeichert werden. Ein gängiges Format ist das CSV-Format."
   },
   {
-    "objectID": "r-load-csv-data.html#das-paket-readr",
-    "href": "r-load-csv-data.html#das-paket-readr",
-    "title": "2  CSV-Daten laden mit R",
-    "section": "2.1 Das Paket readr",
-    "text": "2.1 Das Paket readr"
+    "objectID": "csv-format.html#das-csv-format",
+    "href": "csv-format.html#das-csv-format",
+    "title": "\n5  Das CSV-Format\n",
+    "section": "\n5.1 Das CSV-Format",
+    "text": "5.1 Das CSV-Format\nStrukturierte Daten\nCSV steht für Comma Separated Values und beschreibt ein Format, um strukturierte Daten in einer Textdatei abzuspeichern. Ihr erkennt eine Textdatei im CSV-Format an der Endung .csv.\nDas CSV-Format ist das wohl verbreitetste Format für die Speicherung und den Austausch von strukturierten Daten. Fast jede Software, die Daten verwaltet oder analysiert, bietet Schnittstellen für CSV-Dateien an. Dafür gibt es gute Gründe:\n\nDie Verwendung von einfachen Textdateien erlaubt die Speicherung und Verarbeitung auf unterschiedlichen Umgebungen wie Windows, macOS oder Linux.\nDas Format ist einfach zu verstehen und auch für Menschen lesbar.\nCSV ist ein offenes Format, d. h. es gibt keine Organisation, die daran die Rechte besitzt und es kann daher von jeder Software verwendet werden. Es gab lange nicht einmal eine offizielle Spezifikation des Formats. Mittlerweile gibt es eine Spezifikation als offizieller MIME Type.\nKopfzeile und Trennzeichen\nDas CSV-Format speichert strukturierte Daten in einer tabellarischen Form, ähnlich wie in Spreadsheets. Jede Zeile stellt eine Beobachtung (Englisch: observation oder case) oder Datensatz (Englisch: record) dar, und jeder Datensatz hat verschiedene Attribute (oder Spalten), deren Werte durch ein Komma voneinander getrennt sind. Das Komma als Trennzeichen ist keineswegs verbindlich. Generell kann jedes Symbol verwendet werden. Häufige Alternativen sind das Semikolon, Leerzeichen oder ein Tabstop. Letzteres wird oft mit der eigenen Endung .tsv für Tab Separated Values gespeichert.\nUnten ihr einen Ausschnitt aus dem Covid19-Datensatz von Our World in Data, wie man ihn in einem einfachen Texteditor wie Notepad++ anzeigen lassen kann. Man erkennt schnell, dass sich die erste Zeile von den anderen unterscheidet: Sie beinhaltet die Spaltennamen, die hintereinander durch das Trennzeichen (hier: Komma) getrennt aufgelistet werden. Man nennt die erste Zeile auch Kopfzeile (Englisch: Header). Die Kopfzeile ist nicht verpflichtend. Es gibt auch CSV-Dateien ohne Kopfzeile. In diesem Fall muss die Benennung der Spalten später manuell erfolgen.\nNach der Kopfzeile stellt jede weitere Zeile die Spaltenwerte eines Datensatzes (oder Beobachtung) dar. Diese werden stets in der gleichen Reihenfolge wie in der Kopfzeile durch das Trennzeichen (hier: Komma) voneinander getrennt aufgelistet. Diese Regel ist wichtig, da sonst die Zuordnung von Werten zu Spaltennamen unmöglich wäre.\nEs muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtung nicht vorhanden sein, so wird einfach nach dem Komma nichts eingetragen und es folgen zwei Kommata nacheinander.\niso_code,continent,location,date,total_cases,new_cases, ...\nDEU,Europe,Germany,2020-01-27,1.0,1.0, ...\nDEU,Europe,Germany,2020-01-28,4.0,3.0, ...\nDEU,Europe,Germany,2020-01-29,4.0,0.0, ...\nDEU,Europe,Germany,2020-01-30,4.0,0.0, ...\n..."
+  },
+  {
+    "objectID": "csv-format.html#die-funktion-read_csv",
+    "href": "csv-format.html#die-funktion-read_csv",
+    "title": "\n5  Das CSV-Format\n",
+    "section": "\n5.2 Die Funktion read_csv\n",
+    "text": "5.2 Die Funktion read_csv\n\nDie Funktion read_csv aus dem readr Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien. Der Code unten lädt die tagesaktuelle Version des Covid-19 Datensatzes von Our World in Data:\n\ncovid <- read_csv(\"https://covid.ourworldindata.org/data/owid-covid-data.csv\")\n\nRows: 194496 Columns: 67\n-- Column specification --------------------------------------------------------\nDelimiter: \",\"\nchr   (4): iso_code, continent, location, tests_units\ndbl  (62): total_cases, new_cases, new_cases_smoothed, total_deaths, new_dea...\ndate  (1): date\n\ni Use `spec()` to retrieve the full column specification for this data.\ni Specify the column types or set `show_col_types = FALSE` to quiet this message."
+  },
+  {
+    "objectID": "trends.html",
+    "href": "trends.html",
+    "title": "\n6  Trends\n",
+    "section": "",
+    "text": "Kennzahlen einer globalen Pandemie, wie die täglichen Neuinfektionen, eignen sich gut für die Einführung von Visualisierungsformen für Trends und Entwicklungen. Spätestens sein den Jahren der Pandemie, beginnend im Frühjahr 2020, kennt jeder entsprechende Diagramme aus den Nachrichten. In diesem Kapitel lernen wir, diese und andere Diagramme mit ggplot2 selbst zu erstellen."
+  },
+  {
+    "objectID": "trends.html#liniendiagramme",
+    "href": "trends.html#liniendiagramme",
+    "title": "\n6  Trends\n",
+    "section": "\n6.1 Liniendiagramme",
+    "text": "6.1 Liniendiagramme\nEine Serie\nLiniendiagramme verwenden Verbindungen zwischen benachbarten Punkten, um über die Steigung der Linien Entwicklungen sichtbar werden zu lassen. Für die Umsetzung dieser Linien in ggplot2 verwenden wir die Funktion geom_line. Die Punkte selbst werden über die x- und y-Achsen bestimmt. Typischerweise tragen wir auf der x-Achse eine zeitliche Dimension ab, während wir die y-Achse für die betrachtete Größe verwenden.\nFür die folgenden Visualisierungen filtern wir die Daten auf Frankreich und den Januar 2022:\n\ncov_france <- \n  covid %>% \n  filter(location == \"France\", date >= \"2022-01-01\", date <= \"2022-01-31\") %>%\n  select(date, new_cases_smoothed_per_million)\n\nAuf der Grundlage erstellen wir ein Liniendiagramm:\n\ncov_france %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million) +\n  geom_line()\n\n\n\n\nLinien und Punkte zusammen\nUm die Verbindungen zwischen zwei Punkten deutlicher sichtbar werden zu lassen, können wir zusätzlich zu den Linien auch die Punkte in das Diagramm einzeichnen:\n\ncov_france %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million) +\n  geom_line() +\n  geom_point()\n\n\n\n\nMehrere Serien\n\ncovid %>% \n  filter(location %in% c(\"France\", \"Spain\"), date >= \"2022-01-01\") %>% \n  select(date, new_cases_smoothed_per_million, location) %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million, color = location) +\n  geom_line()"
   },
   {
     "objectID": "case-twitter-a.html",
@@ -56,25 +140,11 @@
     "text": "Datensatz"
   },
   {
-    "objectID": "sql-intro.html",
-    "href": "sql-intro.html",
-    "title": "4  Was ist SQL?",
-    "section": "",
-    "text": "Die Abkürzung SQL steht für Structured Query Language und hat seine Wurzeln bei den relationalen Datenbanken. Relationale Datenbanken wurden in den 1970er-Jahren entwickelt und als kommerzielle Produkte eingeführt. Sie werden vorrangig für die Verwaltung von strukturierten, operativen Geschäftsdaten verwendet. Bis heute sind relationale Datenbanken weitverbreitet, wir finden sie zum Beispiel in großen Informationssystemen wie dem ERP-System der Firma SAP.\nDie Abfragesprache SQL wurde entwickelt, um möglichst einfach Informationen aus relationalen Datenbanken extrahieren zu können. Mit SQL lassen sich Daten aber nicht nur extrahieren, sondern auch erzeugen, verändern oder löschen. In unserem Kontext geht es um die Analysex von Daten und wir betrachten deshalb nur die Möglichkeiten zur Abfrage von Daten. Der SQL-Befehl select mit seinen Facetten steht dabei im Mittelpunkt"
-  },
-  {
-    "objectID": "sql-intro.html#standardisierung-und-dialekte",
-    "href": "sql-intro.html#standardisierung-und-dialekte",
-    "title": "4  Was ist SQL?",
-    "section": "4.2 Standardisierung und Dialekte",
-    "text": "4.2 Standardisierung und Dialekte\nWeil es viele unterschiedliche kommerzielle Hersteller relationaler Datenbanken gibt (z. B. Oracle, SAP, Microsoft, Teradata) und daneben viele Open Source Produkte (z. B. MySQL, PostgreSQL) wurde SQL 1986 standardisiert (s. ANSI X3.135 und ISO 9075-1987). Trotz der Standardisierung, in der die grundlegende Syntax und der Funktionsumfang festgelegt wurden, gibt es heute unterschiedliche Dialekte von SQL. Diese unterscheiden sich in Details wie ob eine spezifische erweiterte Funktion existiert oder nicht. Durch die Standardisierung gilt aber: Wenn man SQL in einem Dialekt beherrscht, dann ist es ohne Probleme möglich auch andere Dialekte zu verwenden.\nSQL ist somit unverzichtbar, wenn wir Daten aus relationalen Datenbanken abfragen oder exportieren wollen. Da viele Informationssysteme in Unternehmen auf relationalen Datenbanken basieren, spielt SQL gerade im betriebswirtschaftlichen Kontext eine große Rolle.\nWegen der weiten Verbreitung von SQL ermöglichen auch andere Werkzeuge, Daten mit dieser Sprache zu analysieren. Ein Beispiel ist Apache Spark, ein Open-Source Werkzeug für die Verarbeitung und Analyse großer Datenmengen (Big Data). Hier gibt es eine eigene Schnittstelle (API) für SQL, die den Namen Spark SQL trägt. Wir verwenden Spark SQL in meinen Kursen in der Databricks Cloud-Umgebung. Klickt auf den Link unten, um direkt mit SQL zu beginnen."
-  },
-  {
-    "objectID": "sql-intro.html#weiterlesen",
-    "href": "sql-intro.html#weiterlesen",
-    "title": "4  Was ist SQL?",
-    "section": "Weiterlesen",
-    "text": "Weiterlesen\n\nMein Blogbeitrag What is SQL - and what can we do with it? auf Medium"
+    "objectID": "json-with-r.html#listen-oder-arrays",
+    "href": "json-with-r.html#listen-oder-arrays",
+    "title": "8  JSON",
+    "section": "8.2 Listen oder Arrays",
+    "text": "8.2 Listen oder Arrays"
   },
   {
     "objectID": "case-rewe.html",
@@ -100,141 +170,22 @@
   {
     "objectID": "long-wide-data.html",
     "href": "long-wide-data.html",
-    "title": "6  Lange und breite Daten",
+    "title": "11  Lange und breite Daten",
     "section": "",
     "text": "Wie bereits in Abschnitt Fall 2: Covid gesehen, können Daten in unterschiedlicher Form vorliegen."
   },
   {
-    "objectID": "r-load-csv-data.html#das-csv-format",
-    "href": "r-load-csv-data.html#das-csv-format",
-    "title": "\n2  Das CSV-Format\n",
-    "section": "\n2.1 Das CSV-Format",
-    "text": "2.1 Das CSV-Format\nStrukturierte Daten\nCSV steht für Comma Separated Values und beschreibt ein Format, um strukturierte Daten in einer Textdatei abzuspeichern. Ihr erkennt eine Textdatei im CSV-Format an der Endung .csv.\nDas CSV-Format ist das wohl verbreitetste Format für die Speicherung und den Austausch von strukturierten Daten. Fast jede Software, die Daten verwaltet oder analysiert, bietet Schnittstellen für CSV-Dateien an. Dafür gibt es gute Gründe:\n\nDie Verwendung von einfachen Textdateien erlaubt die Speicherung und Verarbeitung auf unterschiedlichen Umgebungen wie Windows, macOS oder Linux.\nDas Format ist einfach zu verstehen und auch für Menschen lesbar.\nCSV ist ein offenes Format, d. h. es gibt keine Organisation, die daran die Rechte besitzt und es kann daher von jeder Software verwendet werden. Es gab lange nicht einmal eine offizielle Spezifikation des Formats. Mittlerweile gibt es eine Spezifikation als offizieller MIME Type.\nKopfzeile und Trennzeichen\nDas CSV-Format speichert strukturierte Daten in einer tabellarischen Form, ähnlich wie in Spreadsheets. Jede Zeile stellt eine Beobachtung (Englisch: observation oder case) oder Datensatz (Englisch: record) dar, und jeder Datensatz hat verschiedene Attribute (oder Spalten), deren Werte durch ein Komma voneinander getrennt sind. Das Komma als Trennzeichen ist keineswegs verbindlich. Generell kann jedes Symbol verwendet werden. Häufige Alternativen sind das Semikolon, Leerzeichen oder ein Tabstop. Letzteres wird oft mit der eigenen Endung .tsv für Tab Separated Values gespeichert.\nUnten ihr einen Ausschnitt aus dem Covid19-Datensatz von Our World in Data, wie man ihn in einem einfachen Texteditor wie Notepad++ anzeigen lassen kann. Man erkennt schnell, dass sich die erste Zeile von den anderen unterscheidet: Sie beinhaltet die Spaltennamen, die hintereinander durch das Trennzeichen (hier: Komma) getrennt aufgelistet werden. Man nennt die erste Zeile auch Kopfzeile (Englisch: Header). Die Kopfzeile ist nicht verpflichtend. Es gibt auch CSV-Dateien ohne Kopfzeile. In diesem Fall muss die Benennung der Spalten später manuell erfolgen.\nNach der Kopfzeile stellt jede weitere Zeile die Spaltenwerte eines Datensatzes (oder Beobachtung) dar. Diese werden stets in der gleichen Reihenfolge wie in der Kopfzeile durch das Trennzeichen (hier: Komma) voneinander getrennt aufgelistet. Diese Regel ist wichtig, da sonst die Zuordnung von Werten zu Spaltennamen unmöglich wäre.\nEs muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtung nicht vorhanden sein, so wird einfach nach dem Komma nichts eingetragen und es folgen zwei Kommata nacheinander.\niso_code,continent,location,date,total_cases,new_cases, ...\nDEU,Europe,Germany,2020-01-27,1.0,1.0, ...\nDEU,Europe,Germany,2020-01-28,4.0,3.0, ...\nDEU,Europe,Germany,2020-01-29,4.0,0.0, ...\nDEU,Europe,Germany,2020-01-30,4.0,0.0, ...\n..."
-  },
-  {
-    "objectID": "r-load-csv-data.html#die-funktion-read_csv",
-    "href": "r-load-csv-data.html#die-funktion-read_csv",
-    "title": "\n2  Das CSV-Format\n",
-    "section": "\n2.2 Die Funktion read_csv\n",
-    "text": "2.2 Die Funktion read_csv\n\nDie Funktion read_csv aus dem readr Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien. Der Code unten lädt die tagesaktuelle Version des Covid-19 Datensatzes von Our World in Data:\n\ncovid <- read_csv(\"https://covid.ourworldindata.org/data/owid-covid-data.csv\")\n\nRows: 193573 Columns: 67\n-- Column specification --------------------------------------------------------\nDelimiter: \",\"\nchr   (4): iso_code, continent, location, tests_units\ndbl  (62): total_cases, new_cases, new_cases_smoothed, total_deaths, new_dea...\ndate  (1): date\n\ni Use `spec()` to retrieve the full column specification for this data.\ni Specify the column types or set `show_col_types = FALSE` to quiet this message."
-  },
-  {
-    "objectID": "csv-format.html",
-    "href": "csv-format.html",
-    "title": "\n2  Das CSV-Format\n",
-    "section": "",
-    "text": "Im ersten Schritt jeder Datenanalyse müssen wir unserem Computer den Datensatz zur Verfügung stellen. Wir sprechen dabei auch vom Laden des Datesatzes. Dabei sagen wir dem Computer, wo die Daten zu finden sind und dass er sie für den schnelleren Zugriff in seinen Arbeitsspeicher holen soll.\nDaten liegen in den meisten Fällen in Form von Dateien vor. In manchen Fällen sind sie auch in einer Datenbank gespeichert. Im Fall einer Datei kann ein Datensatz in unterschiedlichen Formaten darin gespeichert werden. Ein gängiges Format ist das CSV-Format."
-  },
-  {
-    "objectID": "csv-format.html#das-csv-format",
-    "href": "csv-format.html#das-csv-format",
-    "title": "\n2  Das CSV-Format\n",
-    "section": "\n2.1 Das CSV-Format",
-    "text": "2.1 Das CSV-Format\nStrukturierte Daten\nCSV steht für Comma Separated Values und beschreibt ein Format, um strukturierte Daten in einer Textdatei abzuspeichern. Ihr erkennt eine Textdatei im CSV-Format an der Endung .csv.\nDas CSV-Format ist das wohl verbreitetste Format für die Speicherung und den Austausch von strukturierten Daten. Fast jede Software, die Daten verwaltet oder analysiert, bietet Schnittstellen für CSV-Dateien an. Dafür gibt es gute Gründe:\n\nDie Verwendung von einfachen Textdateien erlaubt die Speicherung und Verarbeitung auf unterschiedlichen Umgebungen wie Windows, macOS oder Linux.\nDas Format ist einfach zu verstehen und auch für Menschen lesbar.\nCSV ist ein offenes Format, d. h. es gibt keine Organisation, die daran die Rechte besitzt und es kann daher von jeder Software verwendet werden. Es gab lange nicht einmal eine offizielle Spezifikation des Formats. Mittlerweile gibt es eine Spezifikation als offizieller MIME Type.\nKopfzeile und Trennzeichen\nDas CSV-Format speichert strukturierte Daten in einer tabellarischen Form, ähnlich wie in Spreadsheets. Jede Zeile stellt eine Beobachtung (Englisch: observation oder case) oder Datensatz (Englisch: record) dar, und jeder Datensatz hat verschiedene Attribute (oder Spalten), deren Werte durch ein Komma voneinander getrennt sind. Das Komma als Trennzeichen ist keineswegs verbindlich. Generell kann jedes Symbol verwendet werden. Häufige Alternativen sind das Semikolon, Leerzeichen oder ein Tabstop. Letzteres wird oft mit der eigenen Endung .tsv für Tab Separated Values gespeichert.\nUnten ihr einen Ausschnitt aus dem Covid19-Datensatz von Our World in Data, wie man ihn in einem einfachen Texteditor wie Notepad++ anzeigen lassen kann. Man erkennt schnell, dass sich die erste Zeile von den anderen unterscheidet: Sie beinhaltet die Spaltennamen, die hintereinander durch das Trennzeichen (hier: Komma) getrennt aufgelistet werden. Man nennt die erste Zeile auch Kopfzeile (Englisch: Header). Die Kopfzeile ist nicht verpflichtend. Es gibt auch CSV-Dateien ohne Kopfzeile. In diesem Fall muss die Benennung der Spalten später manuell erfolgen.\nNach der Kopfzeile stellt jede weitere Zeile die Spaltenwerte eines Datensatzes (oder Beobachtung) dar. Diese werden stets in der gleichen Reihenfolge wie in der Kopfzeile durch das Trennzeichen (hier: Komma) voneinander getrennt aufgelistet. Diese Regel ist wichtig, da sonst die Zuordnung von Werten zu Spaltennamen unmöglich wäre.\nEs muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtung nicht vorhanden sein, so wird einfach nach dem Komma nichts eingetragen und es folgen zwei Kommata nacheinander.\niso_code,continent,location,date,total_cases,new_cases, ...\nDEU,Europe,Germany,2020-01-27,1.0,1.0, ...\nDEU,Europe,Germany,2020-01-28,4.0,3.0, ...\nDEU,Europe,Germany,2020-01-29,4.0,0.0, ...\nDEU,Europe,Germany,2020-01-30,4.0,0.0, ...\n..."
-  },
-  {
-    "objectID": "csv-format.html#die-funktion-read_csv",
-    "href": "csv-format.html#die-funktion-read_csv",
-    "title": "\n2  Das CSV-Format\n",
-    "section": "\n2.2 Die Funktion read_csv\n",
-    "text": "2.2 Die Funktion read_csv\n\nDie Funktion read_csv aus dem readr Paket erlaubt und das effiziente Laden von Daten aus CSV-Dateien. Der Code unten lädt die tagesaktuelle Version des Covid-19 Datensatzes von Our World in Data:\n\ncovid <- read_csv(\"https://covid.ourworldindata.org/data/owid-covid-data.csv\")\n\nRows: 194496 Columns: 67\n-- Column specification --------------------------------------------------------\nDelimiter: \",\"\nchr   (4): iso_code, continent, location, tests_units\ndbl  (62): total_cases, new_cases, new_cases_smoothed, total_deaths, new_dea...\ndate  (1): date\n\ni Use `spec()` to retrieve the full column specification for this data.\ni Specify the column types or set `show_col_types = FALSE` to quiet this message."
-  },
-  {
-    "objectID": "origin-of-data.html",
-    "href": "origin-of-data.html",
-    "title": "4  Datenherkunft",
-    "section": "",
-    "text": "Sind Daten vertrauenswürdig? Was sind Indizien für oder dagegen?"
-  },
-  {
-    "objectID": "trends.html",
-    "href": "trends.html",
-    "title": "\n3  Trends\n",
-    "section": "",
-    "text": "Kennzahlen einer globalen Pandemie, wie die täglichen Neuinfektionen, eignen sich gut für die Einführung von Visualisierungsformen für Trends und Entwicklungen. Spätestens sein den Jahren der Pandemie, beginnend im Frühjahr 2020, kennt jeder entsprechende Diagramme aus den Nachrichten. In diesem Kapitel lernen wir, diese und andere Diagramme mit ggplot2 selbst zu erstellen."
-  },
-  {
-    "objectID": "trends.html#liniendiagramme",
-    "href": "trends.html#liniendiagramme",
-    "title": "\n3  Trends\n",
-    "section": "\n3.1 Liniendiagramme",
-    "text": "3.1 Liniendiagramme\nEine Serie\nLiniendiagramme verwenden Verbindungen zwischen benachbarten Punkten, um über die Steigung der Linien Entwicklungen sichtbar werden zu lassen. Für die Umsetzung dieser Linien in ggplot2 verwenden wir die Funktion geom_line. Die Punkte selbst werden über die x- und y-Achsen bestimmt. Typischerweise tragen wir auf der x-Achse eine zeitliche Dimension ab, während wir die y-Achse für die betrachtete Größe verwenden.\nFür die folgenden Visualisierungen filtern wir die Daten auf Frankreich und den Januar 2022:\n\ncov_france <- \n  covid %>% \n  filter(location == \"France\", date >= \"2022-01-01\", date <= \"2022-01-31\") %>%\n  select(date, new_cases_smoothed_per_million)\n\nAuf der Grundlage erstellen wir ein Liniendiagramm:\n\ncov_france %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million) +\n  geom_line()\n\n\n\n\nLinien und Punkte zusammen\nUm die Verbindungen zwischen zwei Punkten deutlicher sichtbar werden zu lassen, können wir zusätzlich zu den Linien auch die Punkte in das Diagramm einzeichnen:\n\ncov_france %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million) +\n  geom_line() +\n  geom_point()\n\n\n\n\nMehrere Serien\n\ncovid %>% \n  filter(location %in% c(\"France\", \"Spain\"), date >= \"2022-01-01\") %>% \n  select(date, new_cases_smoothed_per_million, location) %>% \n  ggplot() +\n  aes(x = date, y = new_cases_smoothed_per_million, color = location) +\n  geom_line()"
-  },
-  {
-    "objectID": "json-with-r.html#listen-oder-arrays",
-    "href": "json-with-r.html#listen-oder-arrays",
-    "title": "5  JSON",
-    "section": "5.2 Listen oder Arrays",
-    "text": "5.2 Listen oder Arrays"
-  },
-  {
-    "objectID": "case-climate-data.html",
-    "href": "case-climate-data.html",
-    "title": "Fall: Klima",
-    "section": "",
-    "text": "Der Datensatz stammt von der offiziellen Seite des Deutschen Wetterdienstes, der dort Klimadaten zum direkten Download bereitstellt. Die Daten werden als Textdateien bereitgestellt, die wir im Kapitel “Textdateien einlesen” genauer betrachten.\nDaten"
-  },
-  {
-    "objectID": "read-txt-files.html",
-    "href": "read-txt-files.html",
-    "title": "\n1  Textdateien einlesen\n",
-    "section": "",
-    "text": "library(dplyr)\nlibrary(readr)\nlibrary(janitor)\n\nstations <- read_csv2(\"./data/stations_list_CLIMAT_data.txt\")\n\n# Rows: 4510 Columns: 6\n# -- Column specification -------------------------------------------------\n# Delimiter: \";\"\n# chr (6): WMO-Station ID, StationName, Latitude, Longitude, Height, Co...\n\n\nOben haben wir mit janitor ein nützliches Paket eingeführt. Wir verwenden daraus die Funktion clean_names, die wir unmittelbar an das Laden der Daten mit read_delim aufrufen. Was macht diese Funktion?\nUm den Effekt der clean_names Funktion zu beleuchten, schauen wir uns das Ergebnis einmal mit und ohne diese Funktion an:\n\nstations %>%  \n  colnames()\n\n# [1] \"WMO-Station ID\" \"StationName\"    \"Latitude\"       \"Longitude\"     \n# [5] \"Height\"         \"Country\"  \n\nstations %>% \n  clean_names() %>% \n  colnames()\n\n# [1] \"wmo_station_id\" \"station_name\"   \"latitude\"       \"longitude\"     \n# [5] \"height\"         \"country\""
-  },
-  {
-    "objectID": "read-txt-files.html#spalten-konvertieren",
-    "href": "read-txt-files.html#spalten-konvertieren",
-    "title": "\n1  Textdateien einlesen\n",
-    "section": "\n1.2 Spalten konvertieren",
-    "text": "1.2 Spalten konvertieren\nDie Datentypen der Spalten wurden offensichtlich nicht richtig erkannt."
-  },
-  {
-    "objectID": "read-rest-apis.html",
-    "href": "read-rest-apis.html",
+    "objectID": "read-rest-apis.html#daten-filtern",
+    "href": "read-rest-apis.html#daten-filtern",
     "title": "\n4  Daten aus REST APIs\n",
-    "section": "",
-    "text": "Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für Application Programming Interface und bedeutet übersetzt Programmierschnittstelle. Was aber ist eine REST API?"
+    "section": "\n4.6 Daten filtern",
+    "text": "4.6 Daten filtern\nDas es in diesem Anwendungsfall um Verkaufanylsen geht, interessieren uns speziell die Bestellungen, die Kunden in unserem Shop getätigt haben. Auch diese können wir über die Admin API abrufen. Die URL von oben ändern wir gemäß der Dokumentation ab:\n\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json\"\n\n\n\n\nWenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt 37 Zeilen und 85 Spalten:\n\nreq <- request(url)\nresp <- req_perform(req)\n\norders <- resp %>% \n  resp_body_string() %>% \n  fromJSON() %>% \n  tibble() %>% \n  unnest(cols = c(.)) %>% \n  dim()\n\norders\n\n[1] 37 85"
   },
   {
-    "objectID": "read-rest-apis.html#rest",
-    "href": "read-rest-apis.html#rest",
+    "objectID": "read-rest-apis.html#bestellungen-abfragen",
+    "href": "read-rest-apis.html#bestellungen-abfragen",
     "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.1 REST?",
-    "text": "4.1 REST?\nREST steht für Representational State Transfer und ist ein häufig verwendetes Protokoll für Webschnittstellen.\nREST-Schnittstellen verwenden das HTTP-Protokoll für die Kommunikation zwischen Client und Server. Um HTTP-Aufrufe mit R zu erstellen und auszuführen, installieren wir das Paket httr2:\n\ninstall.packages(\"httr2\")\n\nAnschließend können wir die Funktion request verwenden, um einen HTTP-Aufruf mit einer URL auszuführen. Im Standard verwendet die Funktion die Operation GET:\n\nlibrary(httr2)\n\nurl <- \"https://hs-osnabrueck.de\"\nreq <- request(url)\nreq\n\n# <httr2_request>\n# GET https://hs-osnabrueck.de\n# Body: empty\n\n\n\n\n\n\n\nMehr über HTTP-Requests\n\n\n\nNeben GET kennt das HTTP-Protokoll auch andere Operationen. Einen Überblick findet ihr auf den Webseiten des Mozilla Developer Networks.\n\n\nEinen Request ausführen\n\nresp <- req_perform(req)\nresp\n\n# GET https://www.hs-osnabrueck.de/\n# Status: 200 OK\n# Content-Type: text/html\n# Body: In memory (72768 bytes)"
-  },
-  {
-    "objectID": "read-rest-apis.html#die-shopify-api",
-    "href": "read-rest-apis.html#die-shopify-api",
-    "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.3 Die Shopify API",
-    "text": "4.3 Die Shopify API\nUm die Shopify API verwenden zu können, lohnt es sich, in die Dokumentation der Schnittstelle zu schauen. Shopify bietet mehrere Programmierschnittstellen für verschiedene Zwecke. Darunter ist zum Beispiel die Storefront API, um eigene Oberflächen für einen Webshop zu erstellen. Die für uns relevante API ist die Admin API. Sie bietet vollen Zugriff auf die Daten eines Shops. Voraussetzung dafür ist, dass der Shopinhaber eine App angelegt hat und die Berechtigungen für den Zugriff auf relevante Daten, wie die Bestellungen, erteilt hat. Mit dieser App generiert Shopify eine Kombination aus API-Schlüssel (API Key) und Passwort. Beide Informationen werden für den Zugriff auf die API benötigt.\nDie allgemeine URL für einen Aufruf der REST Admin API sieht wie folgt aus:\nhttps://{apikey}:{password}@{hostname}/admin/api/{version}/{resource}.json\nBeispielaufruf\nZuerst definieren wir die URL für den Aufruf:\n\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json\"\n\nAnschließend verwenden wir die request Funktion, um einen GET-Request zu erzeugen und danach mit req_perform auszuführen:\n\nreq <- request(url)\nresp <- req_perform(req)\nresp\n\n# <httr2_response>\n# GET\n# https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json\n# Status: 200 OK\n# Content-Type: application/json\n# Body: In memory (3016 bytes)"
-  },
-  {
-    "objectID": "read-rest-apis.html#was-ist-rest",
-    "href": "read-rest-apis.html#was-ist-rest",
-    "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.1 Was ist REST?",
-    "text": "4.1 Was ist REST?\nREST steht für Representational State Transfer und ist ein häufig verwendetes Protokoll für Programmierschnittstellen, die über Webprotkolle kommunizieren. Wir sprechen dann auch von Webschnittstellen oder Webservices."
-  },
-  {
-    "objectID": "read-rest-apis.html#rest-aufrufe-mit-r",
-    "href": "read-rest-apis.html#rest-aufrufe-mit-r",
-    "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.2 REST-Aufrufe mit R",
-    "text": "4.2 REST-Aufrufe mit R\nEinen HTTP-Request erstellen\nREST-Schnittstellen verwenden das HTTP-Protokoll für die Kommunikation zwischen Client und Server. Um HTTP-Aufrufe mit R zu erstellen und auszuführen, installieren wir das Paket httr2:\n\ninstall.packages(\"httr2\")\ninstall.packages(\"jsonlite\")\n\nAnschließend können wir die Funktion request verwenden, um einen HTTP-Aufruf mit einer URL auszuführen. Im Standard verwendet die Funktion die Operation GET:\n\nlibrary(httr2)\n\nurl <- \"https://hs-osnabrueck.de\"\nreq <- request(url)\nreq\n\n# <httr2_request>\n# GET https://hs-osnabrueck.de\n# Body: empty\n\n\n\n\n\n\n\nMehr über HTTP-Requests\n\n\n\nNeben GET kennt das HTTP-Protokoll auch andere Operationen. Einen Überblick findet ihr auf den Webseiten des Mozilla Developer Networks.\n\n\nEinen HTTP-Request ausführen\n\nresp <- req_perform(req)\nresp\n\n# GET https://www.hs-osnabrueck.de/\n# Status: 200 OK\n# Content-Type: text/html\n# Body: In memory (72768 bytes)\n\nDer Status-Code 200 zeigt an, das der Request erfolgreich war. Zusätzlich wird der Antworttyp im Feld Content-Type ausgegeben, der hier text/html ist. Für den Content Type gibt es eine standardisierte Liste von Werten, die auch MIME-Types genannt werden. Die Größe der Antwort, die wir vom Webserver erhalten haben, beträgt 72768 Bytes oder ca. 73 Kilobytes. Das ist somit die Größe des HTML-Dokuments für die Startseite der Hochschule Osnabrück."
-  },
-  {
-    "objectID": "read-rest-apis.html#der-body-einer-rest-response",
-    "href": "read-rest-apis.html#der-body-einer-rest-response",
-    "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.4 Der Body einer REST-Response",
-    "text": "4.4 Der Body einer REST-Response\nDer interessante Teil der Antwort steckt im sogenannten Body, dessen Inhalt wir je nach MIME-Type mit definierten Funktionen resp_body_* auslesen können. Wir bedienen uns hier der einfachsten und agnostischen Variante und lesen den Body als Zeichenkette (String) aus:\n\nlocations <- resp %>% resp_body_string()\nlocations %>%\n  glimpse()\n\n chr \"{\\\"locations\\\":[{\\\"id\\\":66635038954,\\\"name\\\":\\\"Abholaktion 17.12.2021 (Haste)\\\",\\\"address1\\\":\\\"Oldenburger Land\"| __truncated__\n\n# chr \"{\\\"locations\\\":[{\\\"id\\\":66635038954,\\\"name\\\":\\\"Abholaktion 17.12.2021 # (Haste)\\\",\\\"address1\\\":\\\"Oldenburger Land\"| __truncated__\n\nWie schon durch den Content-Type angekündigt handelt es sich bei der Antwort um einen JSON-formatierten Text."
-  },
-  {
-    "objectID": "read-rest-apis.html#json-verarbeiten-mit-jsonlite",
-    "href": "read-rest-apis.html#json-verarbeiten-mit-jsonlite",
-    "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.5 JSON verarbeiten mit jsonlite\n",
-    "text": "4.5 JSON verarbeiten mit jsonlite\n\n\nlibrary(tidyverse)\nlibrary(jsonlite)\n\nlocations_json <- fromJSON(locations)\nlocations_json <- tibble(locations_json)\nlocations_json <- locations_json %>% \n  unnest(locations_json)\nlocations_json\n\n# A tibble: 6 x 19\n        id name  address1 address2 city  zip   province country phone created_at\n     <dbl> <chr> <chr>    <chr>    <chr> <chr> <chr>    <chr>   <chr> <chr>     \n1  6.66e10 Abho~ Oldenbu~ \"Einfah~ Osna~ 49090  <NA>    DE      \"\"    2021-12-0~\n2  6.48e10 Camp~ Kaisers~ \"\"       Ling~ 49809  <NA>    DE      \"\"    2021-08-1~\n3  6.94e10 Hafe~ Am Spei~ \"\"       Osna~ 49090  <NA>    DE      \"\"    2022-06-2~\n4  6.48e10 Mens~ Barbara~ \"\"       Osna~ 49076  <NA>    DE      \"\"    2021-08-1~\n5  2.15e10 Schm~ Oldenbu~ \"\"       Osna~ 49090 \"\"       DE      \"+49~ 2019-03-2~\n6  3.68e10 Zwis~ Große H~ \"\"       Osna~ 49074 \"\"       DE      \"\"    2020-09-1~\n# ... with 9 more variables: updated_at <chr>, country_code <chr>,\n#   country_name <chr>, province_code <lgl>, legacy <lgl>, active <lgl>,\n#   admin_graphql_api_id <chr>, localized_country_name <chr>,\n#   localized_province_name <lgl>"
+    "section": "\n4.6 Bestellungen abfragen",
+    "text": "4.6 Bestellungen abfragen\nDa es in diesem Anwendungsfall um Verkaufsanalysen geht, interessieren uns speziell die Bestellungen, die Kunden in unserem Shop getätigt haben. Auch diese können wir über die Admin-API abrufen. Die URL von oben ändern wir gemäß der Dokumentation ab:\n\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json\"\n\n\n\n\nWenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt 37 Zeilen und 85 Spalten:\n\nreq <- request(url)\nresp <- req_perform(req)\n\norders <- resp %>% \n  resp_body_string() %>% \n  fromJSON() %>% \n  tibble() %>% \n  unnest(cols = c(.)) %>% \n  dim()\n\norders\n\n[1] 37 85"
   }
 ]

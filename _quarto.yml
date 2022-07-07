@@ -4,6 +4,7 @@ number-depth: 2
 toc-depth: 3
 book:
   title: "Bio & Business Data Science"
+  lang: de
   author: "Nicolas Meseth"
   sharing: [twitter, facebook, linkedin]
   toc-depth: 1
@@ -44,6 +45,9 @@ book:
         - sample-bias.qmd
     - references.qmd
 
+language:
+    toc-title-document: "Inhalt"
+    search-matching-documents-text: "Suchtreffer"
 
 bibliography: references.bib
 
@@ -51,11 +55,13 @@ format:
   html:
     theme: cosmo
     code-link: true
+    df-print: paged
   pdf:
     documentclass: scrreprt
+    
 
 editor: visual
 
 execute:
-  cache: true
+  cache: false
 
