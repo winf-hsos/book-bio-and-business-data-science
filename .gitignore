@@ -5,4 +5,7 @@
 
 /.quarto/
 
+*_cache
+*_files
+
 api_keys.R
