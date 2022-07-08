@@ -1,45 +1,10 @@
 [
   {
-    "objectID": "case-climate-data.html",
-    "href": "case-climate-data.html",
-    "title": "Fall: Klima",
-    "section": "",
-    "text": "Der Datensatz stammt von der offiziellen Seite des Deutschen Wetterdienstes, der dort Klimadaten zum direkten Download bereitstellt. Die Daten werden als Textdateien bereitgestellt, die wir im Kapitel “Textdateien einlesen” genauer betrachten.\nDaten"
-  },
-  {
-    "objectID": "read-txt-files.html",
-    "href": "read-txt-files.html",
-    "title": "\n1  Textdateien einlesen\n",
-    "section": "",
-    "text": "library(dplyr)\nlibrary(readr)\nlibrary(janitor)\n\nstations <- read_csv2(\"./data/stations_list_CLIMAT_data.txt\")\n\n# Rows: 4510 Columns: 6\n# -- Column specification -------------------------------------------------\n# Delimiter: \";\"\n# chr (6): WMO-Station ID, StationName, Latitude, Longitude, Height, Co...\n\n\nOben haben wir mit janitor ein nützliches Paket eingeführt. Wir verwenden daraus die Funktion clean_names, die wir unmittelbar an das Laden der Daten mit read_delim aufrufen. Was macht diese Funktion?\nUm den Effekt der clean_names Funktion zu beleuchten, schauen wir uns das Ergebnis einmal mit und ohne diese Funktion an:\n\nstations %>%  \n  colnames()\n\n# [1] \"WMO-Station ID\" \"StationName\"    \"Latitude\"       \"Longitude\"     \n# [5] \"Height\"         \"Country\"  \n\nstations %>% \n  clean_names() %>% \n  colnames()\n\n# [1] \"wmo_station_id\" \"station_name\"   \"latitude\"       \"longitude\"     \n# [5] \"height\"         \"country\""
-  },
-  {
-    "objectID": "read-txt-files.html#spalten-konvertieren",
-    "href": "read-txt-files.html#spalten-konvertieren",
-    "title": "\n1  Textdateien einlesen\n",
-    "section": "\n1.2 Spalten konvertieren",
-    "text": "1.2 Spalten konvertieren\nDie Datentypen der Spalten wurden offensichtlich nicht richtig erkannt."
-  },
-  {
-    "objectID": "tidyverse.html#tibbles",
-    "href": "tidyverse.html#tibbles",
-    "title": "\n2  Das Tidyverse\n",
-    "section": "\n2.2 Tibbles",
-    "text": "2.2 Tibbles\nIn Kapitel X haben wir den Dataframe als Datenstruktur in R kennengelernt. Mit einem Dataframe können wir tabellarische Daten, wie wir sie aus Spreadsheet-Programmen wie Microsoft Excel oder Google Sheets kennen, in R abbilden. Das Tidyverse bringt eine verbesserte Version des klassischen Dataframes mit, das Tibble.\nDer Name Tibble leitet sich vermutlich aus dem Begriff Tidy Table ab. Ein Tibble bringt die folgenden Verbesserungen im Vergleich zu einem klassischen Dataframe mit sich:\n\nKürzere und prägnantere Ausgabe auf der Konsole.\nKeine Veränderung von Spaltennamen im Vergleich zur Quelle.\nKeine Umwandlung von Zeichenketten in Faktoren als Standard.\nEin Tibble erzeugt keine Namen für Zeilen (rownames)\n\nAusgabe auf der Konsole\nEine nützliche Verbesserung ist die sinnvollere Ausgabe eines Tibbles auf der Konsole. Das Beispiel unten gibt das Tibble tweets, das wir im nächsten Kapitel laden werden, auf der Konsole aus:\n\ntweets\n\n# A tibble: 46,787 x 22\n   id             screen_name text  retweet_count favorite_count is_quote_status\n   <chr>          <chr>       <chr>         <dbl>          <dbl> <lgl>          \n 1 1518891431288~ MarcoBusch~ \"beg~             3             12 FALSE          \n 2 1518891429820~ MarcoBusch~ \"Die~             3             15 FALSE          \n 3 1518907549420~ starkwatzi~ \"@Ko~             1             10 FALSE          \n 4 1518907549420~ starkwatzi~ \"@Ko~             1             10 FALSE          \n 5 1518916990915~ NancyFaeser \"Uns~            53            490 FALSE          \n 6 1518916990915~ NancyFaeser \"Uns~            53            490 FALSE          \n 7 1518947908980~ c_lindner   \"So ~             6             53 FALSE          \n 8 1518960421214~ MarcoBusch~ \"@ar~             1              4 FALSE          \n 9 1518957407845~ MarcoBusch~ \"Bei~            20             99 FALSE          \n10 1518922009157~ MarcoBusch~ \"@sc~             1              0 FALSE          \n# ... with 46,777 more rows, and 16 more variables: is_retweet <lgl>,\n#   lang <chr>, in_reply_to_screen_name <chr>, in_reply_to_status_id <chr>,\n#   hashtags <list>, urls <list>, user_mentions <list>, photos <list>,\n#   source <chr>, insert_timestamp <chr>, created_at <dttm>, quote_count <dbl>,\n#   reply_count <dbl>, retweeted_status_id <chr>, retweeted_user <chr>,\n#   quoted_status_id <chr>\n\n\nWäre tweets ein normaler Dateframe bekämen wir eine sehr lange Ausgabe aller 46787 Zeilen und 22 Spalten. Ein Tibble zeigt uns nur die ersten 10 Zeilen als Beispiele, mit jeweils so vielen Spalten wie sinnvoll in die Ausgabe passen. Die Information, dass es noch weitere Zeilen und Spalten gibt (und wieviele), folgt darunter.\nTibbles sind auch Dataframes\nJedes Tibble ist gleichzeitig ein klassischer Dataframe. Es besitzt aber zusätzlich die Klassen tbl und tbl_df, die für die zusätzlichen Funktionen und das veränderte Verhalten sorgen.\nZur Illustration erstellen wir manuell einen Dataframe und einen Tibble und lassen uns danach mit class die R-Klassen ausgeben, die beide Objekte besitzen:\n\ndf <- data.frame(id = c(1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nclass(df)\n\n[1] \"data.frame\"\n\n\nUnd nun das Tibble:\n\ntbl <- tibble(id = c (1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nclass(tbl)\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nDadurch, dass ein Tibble auch gleichzeitig ein klassischer Dataframe ist, können wir alle Funktionen darauf anwenden, die auch mit Dataframes funktionieren. Schließlich ist ein Tibble ja ein Dataframe.\n\ncolnames(tbl)\n\n[1] \"id\"   \"name\"\n\n\nWir können jederzeit aus einem Dataframe ein Tibble erzeugen:\n\ndf <- as_tibble(df)\n\ndf\n\n# A tibble: 3 x 2\n     id name \n  <dbl> <chr>\n1     1 Mark \n2     2 John \n3     3 Eve  \n\n\nDas manuelle Erzeugen eines Tibble geht auf zwei unterschiedliche Wege. Zum einen mit der tibble Funktion, die Paare aus Spaltenname und zugehörigen Werten als Vektor erwartet (s. oben):\n\ntbl <- tibble(id = c (1, 2, 3), name = c(\"Mark\", \"John\", \"Eve\"))\n\nEine andere Möglichkeit ist die zeilenweise Erstellung mit tribble:\n\ntbl <- tribble(\n  ~id, ~name,\n    1, \"Mark\",\n    2, \"John\",\n    3, \"Eve\"\n)"
-  },
-  {
-    "objectID": "tidyverse.html#mehr-lesen",
-    "href": "tidyverse.html#mehr-lesen",
-    "title": "\n2  Das Tidyverse\n",
-    "section": "Mehr lesen",
-    "text": "Mehr lesen\n\nLink zur offziellen Webseite des Tidyverse\nLink zur Dokumentation des Tibble-Pakets"
-  },
-  {
     "objectID": "read-rest-apis.html",
     "href": "read-rest-apis.html",
     "title": "\n4  Daten aus REST APIs\n",
     "section": "",
-    "text": "Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für Application Programming Interface und bedeutet übersetzt Programmierschnittstelle. Was aber ist eine REST API?"
+    "text": "Warning: Paket 'tidyverse' wurde unter R Version 4.1.3 erstellt\n\n\n-- Attaching packages --------------------------------------- tidyverse 1.3.1 --\n\n\nv ggplot2 3.3.6          v purrr   0.3.4     \nv tibble  3.1.7          v dplyr   1.0.9     \nv tidyr   1.2.0          v stringr 1.4.0.9000\nv readr   2.1.2          v forcats 0.5.1     \n\n\nWarning: Paket 'ggplot2' wurde unter R Version 4.1.3 erstellt\n\n\nWarning: Paket 'tibble' wurde unter R Version 4.1.3 erstellt\n\n\nWarning: Paket 'tidyr' wurde unter R Version 4.1.3 erstellt\n\n\nWarning: Paket 'readr' wurde unter R Version 4.1.3 erstellt\n\n\nWarning: Paket 'dplyr' wurde unter R Version 4.1.3 erstellt\n\n\n-- Conflicts ------------------------------------------ tidyverse_conflicts() --\nx dplyr::filter() masks stats::filter()\nx dplyr::lag()    masks stats::lag()\nNeben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für Application Programming Interface und bedeutet übersetzt Programmierschnittstelle. Was aber ist eine REST API?"
   },
   {
     "objectID": "read-rest-apis.html#was-ist-rest",
@@ -75,6 +40,13 @@
     "title": "\n4  Daten aus REST APIs\n",
     "section": "\n4.5 JSON verarbeiten mit jsonlite\n",
     "text": "4.5 JSON verarbeiten mit jsonlite\n\nUm JSON-formatierte Texte in eine nutzbare Datenstruktur umzuwandeln, verwenden wir das Paket jsonlite. Es bietet zahlreiche Funktionen für die Arbeit mit dem JSON-Format, darunter die Funktion fromJSON, die uns einen String im JSON-Format in eine Liste von Dataframes umwandelt. Anschließend können wir mit der tibble Funktion daraus einen Tibble erstellen, den wir dann noch mit unnest auftrennen müssen:\n\nlibrary(tidyverse)\nlibrary(jsonlite)\n\nlocations_tbl <- fromJSON(locations) %>% \n  tibble() %>% \n  unnest(cols = c(.))\n\n# Alle Spaltennamen ausgeben lassen\nlocations_tbl %>% \n  colnames()\n\n [1] \"id\"                      \"name\"                   \n [3] \"address1\"                \"address2\"               \n [5] \"city\"                    \"zip\"                    \n [7] \"province\"                \"country\"                \n [9] \"phone\"                   \"created_at\"             \n[11] \"updated_at\"              \"country_code\"           \n[13] \"country_name\"            \"province_code\"          \n[15] \"legacy\"                  \"active\"                 \n[17] \"admin_graphql_api_id\"    \"localized_country_name\" \n[19] \"localized_province_name\"\n\n\n\nlocations_tbl %>% \n  select(name)\n\n\n\n  \n\n\n\n\nlocations_tbl"
+  },
+  {
+    "objectID": "read-rest-apis.html#bestellungen-abfragen",
+    "href": "read-rest-apis.html#bestellungen-abfragen",
+    "title": "\n4  Daten aus REST APIs\n",
+    "section": "\n4.6 Bestellungen abfragen",
+    "text": "4.6 Bestellungen abfragen\nDa es in diesem Anwendungsfall um Verkaufsanalysen geht, interessieren uns speziell die Bestellungen, die Kunden in unserem Shop getätigt haben. Auch diese können wir über die Admin-API abrufen. Die URL von oben ändern wir gemäß der Dokumentation ab:\n\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json\"\n\n\n\n\nWenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt 36 Zeilen und 85 Spalten:\n\nreq <- request(url)\nresp <- req_perform(req)\n\norders <- resp %>% \n  resp_body_string() %>% \n  fromJSON() %>% \n  tibble() %>% \n  unnest(cols = c(.)) %>% \n  dim()\n\norders\n\n[1] 36 85"
   },
   {
     "objectID": "case-covid.html",
@@ -173,19 +145,5 @@
     "title": "11  Lange und breite Daten",
     "section": "",
     "text": "Wie bereits in Abschnitt Fall 2: Covid gesehen, können Daten in unterschiedlicher Form vorliegen."
-  },
-  {
-    "objectID": "read-rest-apis.html#daten-filtern",
-    "href": "read-rest-apis.html#daten-filtern",
-    "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.6 Daten filtern",
-    "text": "4.6 Daten filtern\nDas es in diesem Anwendungsfall um Verkaufanylsen geht, interessieren uns speziell die Bestellungen, die Kunden in unserem Shop getätigt haben. Auch diese können wir über die Admin API abrufen. Die URL von oben ändern wir gemäß der Dokumentation ab:\n\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json\"\n\n\n\n\nWenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt 37 Zeilen und 85 Spalten:\n\nreq <- request(url)\nresp <- req_perform(req)\n\norders <- resp %>% \n  resp_body_string() %>% \n  fromJSON() %>% \n  tibble() %>% \n  unnest(cols = c(.)) %>% \n  dim()\n\norders\n\n[1] 37 85"
-  },
-  {
-    "objectID": "read-rest-apis.html#bestellungen-abfragen",
-    "href": "read-rest-apis.html#bestellungen-abfragen",
-    "title": "\n4  Daten aus REST APIs\n",
-    "section": "\n4.6 Bestellungen abfragen",
-    "text": "4.6 Bestellungen abfragen\nDa es in diesem Anwendungsfall um Verkaufsanalysen geht, interessieren uns speziell die Bestellungen, die Kunden in unserem Shop getätigt haben. Auch diese können wir über die Admin-API abrufen. Die URL von oben ändern wir gemäß der Dokumentation ab:\n\n\n\n\nurl <- \"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json\"\n\n\n\n\nWenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt 37 Zeilen und 85 Spalten:\n\nreq <- request(url)\nresp <- req_perform(req)\n\norders <- resp %>% \n  resp_body_string() %>% \n  fromJSON() %>% \n  tibble() %>% \n  unnest(cols = c(.)) %>% \n  dim()\n\norders\n\n[1] 37 85"
   }
 ]

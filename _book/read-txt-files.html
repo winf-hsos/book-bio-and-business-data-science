@@ -103,7 +103,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
+    "search-matching-documents-text": "Suchtreffer",
     "search-copy-link-title": "Copy link to search",
     "search-hide-matches-text": "Hide additional matches",
     "search-more-match-text": "more match in this document",
@@ -112,7 +112,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 </head>
 <body class="nav-sidebar floating">
 
@@ -315,7 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Inhalt</h2>
    
   <ul>
 <li>
@@ -345,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header><section id="die-read_csv2-funktion" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="die-read_csv2-funktion">
 <span class="header-section-number">1.1</span> Die <code>read_csv2</code> Funktion</h2>
-<div class="cell" data-hash="read-txt-files_cache/html/unnamed-chunk-1_69ed62b3a9af3a76dc06cf8f39812309">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span>
@@ -360,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="das-janitor-paket" class="level3"><h3 class="anchored" data-anchor-id="das-janitor-paket">Das <code>janitor</code> Paket</h3>
 <p>Oben haben wir mit <code>janitor</code> ein nützliches Paket eingeführt. Wir verwenden daraus die Funktion <code>clean_names</code>, die wir unmittelbar an das Laden der Daten mit <code>read_delim</code> aufrufen. Was macht diese Funktion?</p>
 <p>Um den Effekt der <code>clean_names</code> Funktion zu beleuchten, schauen wir uns das Ergebnis einmal mit und ohne diese Funktion an:</p>
-<div class="cell" data-hash="read-txt-files_cache/html/unnamed-chunk-2_265620f57a536e4dcabf44599a32fcbd">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  
   <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span>
 

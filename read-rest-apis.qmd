@@ -1,5 +1,10 @@
 # Daten aus REST APIs
 
+```{r}
+#| echo: false
+library(tidyverse)
+```
+
 Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für *Application Programming Interface* und bedeutet übersetzt *Programmierschnittstelle*. Was aber ist eine REST API?
 
 ## Was ist REST?

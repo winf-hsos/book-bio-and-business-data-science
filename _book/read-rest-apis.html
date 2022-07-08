@@ -354,7 +354,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für <em>Application Programming Interface</em> und bedeutet übersetzt <em>Programmierschnittstelle</em>. Was aber ist eine REST API?</p>
+</header><div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'tidyverse' wurde unter R Version 4.1.3 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>-- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>v ggplot2 3.3.6          v purrr   0.3.4     
+v tibble  3.1.7          v dplyr   1.0.9     
+v tidyr   1.2.0          v stringr 1.4.0.9000
+v readr   2.1.2          v forcats 0.5.1     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'ggplot2' wurde unter R Version 4.1.3 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'tibble' wurde unter R Version 4.1.3 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'tidyr' wurde unter R Version 4.1.3 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'readr' wurde unter R Version 4.1.3 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Paket 'dplyr' wurde unter R Version 4.1.3 erstellt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+</div>
+<p>Neben Dateien, wie CSV oder Excel-Formate, bieten gerade Softwareanwendungen in der Cloud häufig Webschnittstellen für den Zugriff auf ihre Daten an. Auch Shopify erlaubt den Zugriff auf sämtliche Daten mittels einer REST API. Der Begriff API steht für <em>Application Programming Interface</em> und bedeutet übersetzt <em>Programmierschnittstelle</em>. Was aber ist eine REST API?</p>
 <section id="was-ist-rest" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="was-ist-rest">
 <span class="header-section-number">4.1</span> Was ist REST?</h2>
 <p>REST steht für <strong>Representational State Transfer</strong> und ist ein häufig verwendetes Protokoll für Programmierschnittstellen, die über Webprotokolle kommunizieren. Wir sprechen dann auch von <em>Webschnittstellen</em> oder <em>Webservices</em>.</p>
@@ -362,13 +396,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">4.2</span> REST-Aufrufe mit R</h2>
 <section id="einen-http-request-erstellen" class="level3"><h3 class="anchored" data-anchor-id="einen-http-request-erstellen">Einen HTTP-Request erstellen</h3>
 <p>REST-Schnittstellen verwenden das HTTP-Protokoll für die Kommunikation zwischen Client und Server. Um HTTP-Aufrufe mit R zu erstellen und auszuführen, installieren wir das Paket <code>httr2</code>:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-1_c8232a386bb1c7c92a2594435cda965c">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"httr2"</span><span class="op">)</span>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"httr2"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"jsonlite"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Anschließend können wir die Funktion <code>request</code> verwenden, um einen HTTP-Aufruf mit einer URL auszuführen. Im Standard verwendet die Funktion die Operation <code>GET</code>:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-2_d2d91680cf8454d98279ebcec9d32f37">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr2.r-lib.org">httr2</a></span><span class="op">)</span>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr2.r-lib.org">httr2</a></span><span class="op">)</span>
 
 <span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://hs-osnabrueck.de"</span>
 <span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
@@ -392,8 +426,8 @@ Mehr über HTTP-Requests
 </div>
 </div>
 </section><section id="einen-http-request-ausführen" class="level3"><h3 class="anchored" data-anchor-id="einen-http-request-ausführen">Einen HTTP-Request ausführen</h3>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-3_e1f26186863dbd81bd3f3494e06ca477">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span>
 <span class="va">resp</span>
 
 <span class="co"># GET https://www.hs-osnabrueck.de/</span>
@@ -410,17 +444,17 @@ Mehr über HTTP-Requests
 <pre><code>https://{apikey}:{password}@{hostname}/admin/api/{version}/{resource}.json</code></pre>
 <section id="beispielaufruf" class="level3"><h3 class="anchored" data-anchor-id="beispielaufruf">Beispielaufruf</h3>
 <p>Zuerst definieren wir die URL für den Aufruf:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-4_de4f2e83db39ad0a3a1bfc94d591751c">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "https://e1b14daf3821a15edac451f0c99c22dc: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@haster-bier.myshopify.com/admin/api/2022-04/locations.json"</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-5_4b98d1bfb397ba2b89c5a526675b2050">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/locations.json"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Anschließend verwenden wir die <code>request</code> Funktion, um einen <code>GET</code>-Request zu erzeugen und danach mit <code>req_perform</code> auszuführen:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-6_a3c828c23f30a3d8777856c40f564c30">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
 <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span>
 <span class="va">resp</span>
 
@@ -434,8 +468,8 @@ Mehr über HTTP-Requests
 </section></section><section id="der-body-einer-rest-response" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="der-body-einer-rest-response">
 <span class="header-section-number">4.4</span> Der Body einer REST-Response</h2>
 <p>Der interessante Teil der Antwort steckt im sogenannten <em>Body</em>, dessen Inhalt wir je nach MIME-Type mit definierten Funktionen <code>resp_body_*</code> auslesen können. Wir bedienen uns hier der einfachsten und agnostischen Variante und lesen den Body als Zeichenkette (String) aus:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-7_b80960ac05534cca4763f26579a05d48">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">locations</span> <span class="op">&lt;-</span> <span class="va">resp</span> <span class="op"><a href="https://httr2.r-lib.org/reference/pipe.html">%&gt;%</a></span>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">locations</span> <span class="op">&lt;-</span> <span class="va">resp</span> <span class="op"><a href="https://httr2.r-lib.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html">resp_body_string</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">locations</span> <span class="op"><a href="https://httr2.r-lib.org/reference/pipe.html">%&gt;%</a></span>
@@ -448,8 +482,8 @@ Mehr über HTTP-Requests
 <span class="header-section-number">4.5</span> JSON verarbeiten mit <code>jsonlite</code>
 </h2>
 <p>Um JSON-formatierte Texte in eine nutzbare Datenstruktur umzuwandeln, verwenden wir das Paket <code>jsonlite</code>. Es bietet zahlreiche Funktionen für die Arbeit mit dem JSON-Format, darunter die Funktion <code>fromJSON</code>, die uns einen String im JSON-Format in eine Liste von Dataframes umwandelt. Anschließend können wir mit der <code>tibble</code> Funktion daraus einen Tibble erstellen, den wir dann noch mit <code>unnest</code> auftrennen müssen:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-8_2ac1ebcfb8cf4826f781a8e500ad12f4">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805">jsonlite</a></span><span class="op">)</span>
 
 <span class="va">locations_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="va">locations</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -472,8 +506,8 @@ Mehr über HTTP-Requests
 [19] "localized_province_name"</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-9_7d679e34aef3b8167fe5e8f56d2ba85c">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">locations_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">locations_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -484,8 +518,8 @@ Mehr über HTTP-Requests
 </div>
 </div>
 </div>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-10_7de2abeeb5fff44134edc5ea4ceaf965">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">locations_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">locations_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div data-pagedtable="false">
@@ -498,18 +532,18 @@ Mehr über HTTP-Requests
 </section><section id="bestellungen-abfragen" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="bestellungen-abfragen">
 <span class="header-section-number">4.6</span> Bestellungen abfragen</h2>
 <p>Da es in diesem Anwendungsfall um Verkaufsanalysen geht, interessieren uns speziell die Bestellungen, die Kunden in unserem Shop getätigt haben. Auch diese können wir über die Admin-API abrufen. Die URL von oben ändern wir <a href="https://shopify.dev/api/admin-rest/2022-07/resources/order">gemäß der Dokumentation</a> ab:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-11_edf040c1cdcb0aeb8d896c90f70f1301">
+<div class="cell">
 
 </div>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-12_d7c34415390a2a5a52644fe34eaf9d45">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://**:**@haster-bier.myshopify.com/admin/api/2022-04/orders.json"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-13_58e796eca0b2e2debd6fb78327c65563">
+<div class="cell">
 
 </div>
-<p>Wenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt 37 Zeilen und 85 Spalten:</p>
-<div class="cell" data-hash="read-rest-apis_cache/html/unnamed-chunk-14_db2c1e70e291c5a7e31a3e1b8fe96612">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
+<p>Wenn wir nun den Request mit der neuen URL ausführen, erhalten wir als Ergebnis alle Bestellungen mit insgesamt 36 Zeilen und 85 Spalten:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>
 <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span>
 
 <span class="va">orders</span> <span class="op">&lt;-</span> <span class="va">resp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -521,7 +555,7 @@ Mehr über HTTP-Requests
 
 <span class="va">orders</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 37 85</code></pre>
+<pre><code>[1] 36 85</code></pre>
 </div>
 </div>
 
