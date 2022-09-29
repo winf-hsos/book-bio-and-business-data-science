@@ -21,6 +21,13 @@ Neben den ersten paar Zeilen als Vorschau gibt ein Tibble auch die Gesamtzahl an
 Versucht das einmal: Ladet die CSV-Datei statt mit `read_csv` mit der Funktion `read.csv` aus dem Basis-R. Gebt jetzt den Namen des Dataframes in die Konsole ein und drückt Enter. Was ist der Unterschied bei der Ausgabe? Was gefällt euch besser?
 :::
 
+## Spalten und deren Datentypen
+
+```{r}
+spec(orders)
+```
+
+
 ## Häufigkeiten schnell erfassen
 
 Mit dem bereits bekannten `{janitor}`-Paket erhalten wir eine Funktion, um für nominal skalierte Merkmale schnell die Häufigkeiten, sowohl absolut als auch prozentual, zu ermitteln:
@@ -32,12 +39,14 @@ library(janitor)
 orders %>% 
   tabyl(payment_details_gateway)
 ```
+
 Wenn wir eine zweite Variable hinzufügen, so erstellt `tabyl` eine Kreuztabelle mit den absoluten Häufigkeiten der jeweiligen Kombinationen:
 
 ```{r}
 orders %>% 
   tabyl(payment_details_gateway, payment_details_credit_card_company)
 ```
+
 Wir können so erkennen, dass für PayPal-Zahlungen nur sehr selten ein Kreditkartenanbieter hinterlegt ist. Bei den Shopify-Payments hingegen ist das in den meisten Bestellungen der Fall. Dabei liegt Mastercard knapp vor Visa, American Express ist eher die Ausnahme.
 
 ::: {.callout-tip appearance="simple"}

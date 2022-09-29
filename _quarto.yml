@@ -17,39 +17,40 @@ book:
       chapters: 
         - read-csv-files.qmd
         - explore-new-data-sets.qmd
-    
-    - part: case-climate-data.qmd
-      chapters:
-        - read-txt-files.qmd
-        - tidyverse.qmd
         - select-columns.qmd
+    
+    #- part: case-climate-data.qmd
+    #  chapters:
+    #    - read-txt-files.qmd
+    #    - tidyverse.qmd
+        
         
     #- part: case-shopify-sales.qmd
     #  chapters: 
     #   - read-rest-apis.qmd
     
-    - part: case-covid.qmd
-      chapters: 
+    #- part: case-covid.qmd
+    #  chapters: 
         
-        - csv-format.qmd
-        - trends.qmd
-        - origin-of-data.qmd
-    - part: case-twitter-a.qmd
-      chapters: 
-        - json-with-r.qmd
-        - associations.qmd
+        #
+        #- trends.qmd
+        #- origin-of-data.qmd
+    #- part: case-twitter-a.qmd
+      #chapters: 
+      #  - json-with-r.qmd
+      #  - associations.qmd
         #- sql-intro.qmd
-    - part: case-rewe.qmd
-      chapters: 
-        - proportions.qmd
-    - part: case-limonade.qmd
-      chapters:
-        - long-wide-data.qmd
-    - part: case-open-food-facts.qmd
-      chapters:
-        - outliers.qmd
-        - search_text.qmd
-        - sample-bias.qmd
+    #- part: case-rewe.qmd
+     # chapters: 
+    #    - proportions.qmd
+    #- part: case-limonade.qmd
+     # chapters:
+        #- long-wide-data.qmd
+    #- part: case-open-food-facts.qmd
+     # chapters:
+    #    - outliers.qmd
+     #   - search_text.qmd
+      #  - sample-bias.qmd
     - references.qmd
 
 language:
