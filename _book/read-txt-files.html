@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.563">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Bio &amp; Business Data Science - 1&nbsp; Textdateien einlesen</title>
+<title>Bio &amp; Business Data Science - 3&nbsp; Textdateien einlesen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -120,7 +120,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Textdateien einlesen</span>
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Textdateien einlesen</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./case-climate-data.html" class="sidebar-item-text sidebar-link">Fall: Klima</a>
+        <a href="./case-campusbier.html" class="sidebar-item-text sidebar-link">Fall: Campusbier</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -178,24 +178,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./read-txt-files.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Textdateien einlesen</span></a>
+  <a href="./read-csv-files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CSV-Dateien einlesen</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Das Tidyverse</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./select-columns.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></a>
+  <a href="./explore-new-data-sets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Datensätze erkunden</span></a>
   </div>
 </li>
     </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./case-shopify-sales.html" class="sidebar-item-text sidebar-link">Fall: Shopify Sales</a>
+        <a href="./case-climate-data.html" class="sidebar-item-text sidebar-link">Fall: Klima</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -203,7 +198,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./read-rest-apis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Daten aus REST APIs</span></a>
+  <a href="./read-txt-files.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Textdateien einlesen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Das Tidyverse</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./select-columns.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></a>
   </div>
 </li>
     </ul>
@@ -218,17 +223,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./csv-format.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Das CSV-Format</span></a>
+  <a href="./csv-format.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Das CSV-Format</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./trends.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Trends</span></a>
+  <a href="./trends.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trends</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./origin-of-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Datenherkunft</span></a>
+  <a href="./origin-of-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenherkunft</span></a>
   </div>
 </li>
     </ul>
@@ -243,12 +248,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./json-with-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">JSON</span></a>
+  <a href="./json-with-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">JSON</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./associations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Zusammenhänge</span></a>
+  <a href="./associations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Zusammenhänge</span></a>
   </div>
 </li>
     </ul>
@@ -263,7 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./proportions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Proportionen</span></a>
+  <a href="./proportions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Proportionen</span></a>
   </div>
 </li>
     </ul>
@@ -278,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./long-wide-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lange und breite Daten</span></a>
+  <a href="./long-wide-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lange und breite Daten</span></a>
   </div>
 </li>
     </ul>
@@ -293,17 +298,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./outliers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ausreisser</span></a>
+  <a href="./outliers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ausreisser</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./search_text.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Texte durchsuchen</span></a>
+  <a href="./search_text.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Texte durchsuchen</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sample-bias.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Stichprobenverzerrung</span></a>
+  <a href="./sample-bias.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Stichprobenverzerrung</span></a>
   </div>
 </li>
     </ul>
@@ -320,18 +325,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
 <li>
-<a href="#die-read_csv2-funktion" id="toc-die-read_csv2-funktion" class="nav-link active" data-scroll-target="#die-read_csv2-funktion"> <span class="header-section-number">1.1</span> Die <code>read_csv2</code> Funktion</a>
+<a href="#die-read_csv2-funktion" id="toc-die-read_csv2-funktion" class="nav-link active" data-scroll-target="#die-read_csv2-funktion"> <span class="header-section-number">3.1</span> Die <code>read_csv2</code> Funktion</a>
   <ul class="collapse">
 <li><a href="#das-janitor-paket" id="toc-das-janitor-paket" class="nav-link" data-scroll-target="#das-janitor-paket">Das <code>janitor</code> Paket</a></li>
   </ul>
 </li>
-  <li><a href="#spalten-konvertieren" id="toc-spalten-konvertieren" class="nav-link" data-scroll-target="#spalten-konvertieren"> <span class="header-section-number">1.2</span> Spalten konvertieren</a></li>
+  <li><a href="#spalten-konvertieren" id="toc-spalten-konvertieren" class="nav-link" data-scroll-target="#spalten-konvertieren"> <span class="header-section-number">3.2</span> Spalten konvertieren</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Textdateien einlesen</span>
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Textdateien einlesen</span>
 </h1>
 </div>
 
@@ -344,39 +349,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><section id="die-read_csv2-funktion" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="die-read_csv2-funktion">
-<span class="header-section-number">1.1</span> Die <code>read_csv2</code> Funktion</h2>
+</header><section id="die-read_csv2-funktion" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="die-read_csv2-funktion">
+<span class="header-section-number">3.1</span> Die <code>read_csv2</code> Funktion</h2>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span>
-
-<span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv2</a></span><span class="op">(</span><span class="st">"./data/stations_list_CLIMAT_data.txt"</span><span class="op">)</span>
-
-<span class="co"># Rows: 4510 Columns: 6</span>
-<span class="co"># -- Column specification -------------------------------------------------</span>
-<span class="co"># Delimiter: ";"</span>
-<span class="co"># chr (6): WMO-Station ID, StationName, Latitude, Longitude, Height, Co...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv2</a></span><span class="op">(</span><span class="st">"./data/stations_list_CLIMAT_data.txt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Rows: 4510 Columns: 6</span></span>
+<span><span class="co"># -- Column specification -------------------------------------------------</span></span>
+<span><span class="co"># Delimiter: ";"</span></span>
+<span><span class="co"># chr (6): WMO-Station ID, StationName, Latitude, Longitude, Height, Co...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="das-janitor-paket" class="level3"><h3 class="anchored" data-anchor-id="das-janitor-paket">Das <code>janitor</code> Paket</h3>
 <p>Oben haben wir mit <code>janitor</code> ein nützliches Paket eingeführt. Wir verwenden daraus die Funktion <code>clean_names</code>, die wir unmittelbar an das Laden der Daten mit <code>read_delim</code> aufrufen. Was macht diese Funktion?</p>
 <p>Um den Effekt der <code>clean_names</code> Funktion zu beleuchten, schauen wir uns das Ergebnis einmal mit und ohne diese Funktion an:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  
-  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># [1] "WMO-Station ID" "StationName"    "Latitude"       "Longitude"     </span>
-<span class="co"># [5] "Height"         "Country"  </span>
-
-<span class="va">stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># [1] "wmo_station_id" "station_name"   "latitude"       "longitude"     </span>
-<span class="co"># [5] "height"         "country"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># [1] "WMO-Station ID" "StationName"    "Latitude"       "Longitude"     </span></span>
+<span><span class="co"># [5] "Height"         "Country"  </span></span>
+<span></span>
+<span><span class="va">stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># [1] "wmo_station_id" "station_name"   "latitude"       "longitude"     </span></span>
+<span><span class="co"># [5] "height"         "country"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="spalten-konvertieren" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="spalten-konvertieren">
-<span class="header-section-number">1.2</span> Spalten konvertieren</h2>
+</section></section><section id="spalten-konvertieren" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="spalten-konvertieren">
+<span class="header-section-number">3.2</span> Spalten konvertieren</h2>
 <p>Die Datentypen der Spalten wurden offensichtlich nicht richtig erkannt.</p>
 
 
@@ -465,7 +470,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./tidyverse.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Das Tidyverse</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Das Tidyverse</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

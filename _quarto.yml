@@ -12,17 +12,22 @@ book:
   toc-depth: 1
   chapters:
     - index.qmd
-    #- part: case-binary-adding-machine.qmd
-    #  chapters:
-    #    - logic-gates.qmd
+    
+    - part: case-campusbier.qmd
+      chapters: 
+        - read-csv-files.qmd
+        - explore-new-data-sets.qmd
+    
     - part: case-climate-data.qmd
       chapters:
         - read-txt-files.qmd
         - tidyverse.qmd
         - select-columns.qmd
-    - part: case-shopify-sales.qmd
-      chapters: 
-        - read-rest-apis.qmd
+        
+    #- part: case-shopify-sales.qmd
+    #  chapters: 
+    #   - read-rest-apis.qmd
+    
     - part: case-covid.qmd
       chapters: 
         
@@ -57,12 +62,12 @@ format:
   html:
     theme: cosmo
     code-link: true
-    df-print: paged
+    df-print: tibble
   pdf:
     documentclass: scrreprt
     
 
-editor: visual
+editor: source
 
 execute:
   cache: false

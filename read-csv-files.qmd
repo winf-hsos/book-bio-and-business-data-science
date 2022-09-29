@@ -1,0 +1,10 @@
+# CSV-Dateien einlesen
+
+```{r}
+#| output: false
+library(tidyverse)
+
+orders <- read_csv("./data/orders.csv")
+```
+
+

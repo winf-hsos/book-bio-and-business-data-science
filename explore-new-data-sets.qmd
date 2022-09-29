@@ -1,0 +1,45 @@
+# Datensätze erkunden
+
+```{r}
+#| include: false
+library(tidyverse)
+orders <- read_csv("./data/orders.csv")
+```
+
+## Sprechende Tibbles
+
+Alleine beim Aufruf seines Namens gibt ein Tibble in der Konsole viele seiner Informationen preis:
+
+```{r, output.lines = 8}
+#| output.lines = 8
+orders
+```
+
+Neben den ersten paar Zeilen als Vorschau gibt ein Tibble auch die Gesamtzahl an Zeilen und Spalten aus. Hier sind es `r dim(orders)[1]` Zeilen und `r dim(orders)[2]` Spalten. Darunter folgt eine mit Kommata getrennte Auflistung der Spaltennamen und ihren Datentypen. Diese Liste wird aber nach wenigen Zeilen abgebrochen, um die Konsole nicht mit Text zu überladen.
+
+::: {.callout-note appearance="minimal"}
+Versucht das einmal: Ladet die CSV-Datei statt mit `read_csv` mit der Funktion `read.csv` aus dem Basis-R. Gebt jetzt den Namen des Dataframes in die Konsole ein und drückt Enter. Was ist der Unterschied bei der Ausgabe? Was gefällt euch besser?
+:::
+
+## Häufigkeiten schnell erfassen
+
+Mit dem bereits bekannten `{janitor}`-Paket erhalten wir eine Funktion, um für nominal skalierte Merkmale schnell die Häufigkeiten, sowohl absolut als auch prozentual, zu ermitteln:
+
+```{r}
+#| warning: false
+library(janitor)
+
+orders %>% 
+  tabyl(payment_details_gateway)
+```
+Wenn wir eine zweite Variable hinzufügen, so erstellt `tabyl` eine Kreuztabelle mit den absoluten Häufigkeiten der jeweiligen Kombinationen:
+
+```{r}
+orders %>% 
+  tabyl(payment_details_gateway, payment_details_credit_card_company)
+```
+Wir können so erkennen, dass für PayPal-Zahlungen nur sehr selten ein Kreditkartenanbieter hinterlegt ist. Bei den Shopify-Payments hingegen ist das in den meisten Bestellungen der Fall. Dabei liegt Mastercard knapp vor Visa, American Express ist eher die Ausnahme.
+
+::: {.callout-tip appearance="simple"}
+Es wäre doch interessant zu wissen, warum genau eine Bestellung keine Angabe zur Zahlungsart besitzt. Prüft doch mal nach, welche das ist und versucht die Frage zu beantworten.
+:::
