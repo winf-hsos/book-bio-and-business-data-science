@@ -1,1 +1,7 @@
 # Vorwort {.unnumbered}
+
+Die vorliegende Webseite stellt das Skript für meine Lehrveranstaltungen zum Thema Data Science dar. Es ist momentan im Aufbau und es kommen wöchentlich neue Inhalte hinzu. Zu einem späteren Zeitpunkt soll es in Form eines Buches veröffentlicht werden. Bis dahin bitte ich um Geduld.
+
+Es gibt eine PDF-Version, die hier heruntergeladen werden kann: [PDF-Version "Bio and Business Data Science"](Bio-and-Business-Data-Science.pdf).
+
+Für Hinweise zu Fehlern bin ich dankbar. Am besten per E-Mail unter `n.meseth@hs-osnabrueck.de` oder auf [Twitter](https://twitter.com/nicolasmeseth).
