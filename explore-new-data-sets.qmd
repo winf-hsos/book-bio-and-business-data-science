@@ -21,14 +21,144 @@ Neben den ersten paar Zeilen als Vorschau gibt ein Tibble auch die Gesamtzahl an
 Versucht das einmal: Ladet die CSV-Datei statt mit `read_csv` mit der Funktion `read.csv` aus dem Basis-R. Gebt jetzt den Namen des Dataframes in die Konsole ein und drückt Enter. Was ist der Unterschied bei der Ausgabe? Was gefällt euch besser?
 :::
 
-## Spalten und deren Datentypen
+## Anzahl Spalten und Zeilen ermitteln
+
+Ein Tibble gibt es uns freiwillig Auskunft über seine Dimensionierung, wenn wir seinen Namen aufrufen. Wir können diese Werte auch dediziert ermitteln, falls wir mit diesen Information etwa weitere Berechnungen in unserem Skript durchführen wollen.
+
+Mit `ncol` erhalten wir die Anzahl Spalten:
+
+```{r}
+orders %>% 
+  ncol()
+
+```
+
+Mit `nrow` entsprechend die Anzahl Zeilen:
+
+```{r}
+orders %>% 
+  nrow()
+```
+
+Wir könnten mit beiden Werten die Anzahl Zellen errechnen:
+
+```{r}
+cols <- ncol(orders)
+rows <- nrow(orders)
+cells <- cols * rows
+cells
+```
+
+Mit der Funktion `dim` erhalten wir einen Vektor mit beiden Informationen:
+
+```{r}
+orders %>% 
+  dim()
+```
+
+Der erste Wert steht für die Anzahl Zeilen, der zweite für die Spalten.
+
+Wenn wir als Ergebnis statt eines Vektors lieber ein Tibble hätten, können wir uns für für die Anzahl Zeilen mit `count` helfen:
+
+```{r}
+orders %>% 
+  count()
+```
+
+Wir können auch `nrow` und `ncol` als Spalten in einen neuen Dataframe (Tibble) verwenden und darauf basierend eine weitere, berechnete Spalte erstellen:
+
+```{r}
+tibble(
+  number_cols = ncol(orders), 
+  number_rows = nrow(orders),
+  number_cells = number_cols * number_rows
+  )
+```
+
+## Datentypen
+
+Die schnellste und, wie ich finde, einfachste Möglichkeit, einen Überblick über die Datentypen in einem Tibble zu erhalten, ist die `glimpse`-Funktion:
+
+```{r}
+orders %>% 
+  glimpse()
+```
+
+Neben dem Namen der Spalten erhalten wir den Datentyp sowie eine Vorschau der ersten in jeder Spalte enthaltenen Werte. Auch die Anzahl Zeilen und Spalten nennt uns `glimpse`.
+
+Etwas technischer geht es mit der `spec`-Funktion. Diese liefert statt des Datentyp-Kürzels auch gleich die genaue Spezfikation als R-Funktion zurück:
 
 ```{r}
 spec(orders)
 ```
 
+Fällt uns auf, dass ein Datentyp falsch erkannt wurde, so können wir entweder unseren Ladevorgang anpassen und etwa den Datentyp direkt beim Lesen korrigieren. Alternativ verändern wir die Spalte mit `mutate`, was wir in @sec-add-and-modify-columns lernen werden.
 
-## Häufigkeiten schnell erfassen
+## Spaltennamen
+
+Ist man noch nicht lange mit einem Datensatz vertraut, ist eine Funktion für die Auflistung der Spaltennamen hilfreich:
+
+```{r}
+orders %>% 
+  colnames()
+```
+
+Diese Information liefert einem auch `glimpse`, wie oben gezeigt. Mit `colnames` bekommen wir die Spaltennamen als Vektor, was nützlich sein kann, um damit weiter arbeiten zu können.
+
+## Stichproben betrachten
+
+Für einen ersten Eindruck der Daten reicht es oft schon, sich ein paar Zeilen anzeigen zu lassen. Das geht mit unterschiedlichen Funktionen:
+
+```{r}
+#| eval: false
+
+# Zeigt standardmäßig die ersten 6 Zeilen an
+orders %>% 
+  head()
+
+# Zeigt die ersten 20 Zeilen an
+orders %>% 
+  head(20)
+
+# Wenn man mehr anzeigen möchte, kann print verwendet werden
+orders %>% 
+  print(n = 100)
+
+# Das Ganze geht auch von unten
+orders %>% 
+  tail()
+```
+
+Möchte man nicht die oberen oder unteren Zeilen anzeigen, sondern eine zufällige Auswahl, so hilft `sample_n`:
+
+```{r}
+orders %>% 
+  sample_n(size = 5)
+```
+
+Um ein bestimmten prozentualen Anteil an den gesamten Zeilen zufällig zu ermitteln, gibt es `sample_frac`:
+
+```{r}
+# Gibt zufällig gewählte Zeilen zurück, die 1% entsprechen
+orders %>% 
+  sample_frac(size = 0.01)
+```
+
+## Häufigkeiten erfassen
+
+Wir haben oben bereits `count` für das Zählen der Zeilen kennengelernt. Die Funktion eignet sich auch für das Zählen von Zeilen gruppiert nach einem Merkmal in den Daten:
+
+```{r}
+orders %>% 
+  count(payment_details_gateway)
+```
+
+Das geht auch sortiert nach Häufigkeit:
+
+```{r}
+orders %>% 
+  count(payment_details_gateway, sort = TRUE)
+```
 
 Mit dem bereits bekannten `{janitor}`-Paket erhalten wir eine Funktion, um für nominal skalierte Merkmale schnell die Häufigkeiten, sowohl absolut als auch prozentual, zu ermitteln:
 
@@ -38,6 +168,14 @@ library(janitor)
 
 orders %>% 
   tabyl(payment_details_gateway)
+```
+
+Hier müssen wir das Sortieren manuelle mit `arrange` vornehmen:
+
+```{r}
+orders %>% 
+  tabyl(payment_details_gateway) %>% 
+  arrange(-n)
 ```
 
 Wenn wir eine zweite Variable hinzufügen, so erstellt `tabyl` eine Kreuztabelle mit den absoluten Häufigkeiten der jeweiligen Kombinationen:
@@ -52,3 +190,51 @@ Wir können so erkennen, dass für PayPal-Zahlungen nur sehr selten ein Kreditka
 ::: {.callout-tip appearance="simple"}
 Es wäre doch interessant zu wissen, warum genau eine Bestellung keine Angabe zur Zahlungsart besitzt. Prüft doch mal nach, welche das ist und versucht die Frage zu beantworten.
 :::
+
+## Übungsaufgaben {.unnumbered}
+
+Speichert die Lösungen für die folgenden Aufgaben in einem neuen R-Skript. Vergesst nicht, die Datei zwischendurch zu speichern.
+
+1.  **Dimensionen ermitteln**
+
+    -   Ermittelt die Anzahl Spalten und Zeilen des Datensatzes. Ihr werdet herausfinden, dass es dafür verschiedene Möglichkeiten gibt.
+
+    -   Findet auch eine Möglichkeit, mit der ihr beide Größen auf jeweils einer Variable speichern könnt. Das kann zum Beispiel wichtig sein, wenn ihr mit den Größen im weiteren Skriptverlauf weiter arbeiten wollt.
+
+2.  **Nützliche Funktionen**
+
+    -   Recherchiert und testet die folgenden Funktionen. Notiert euch in eigenen Worten, was jede Funktion zurückgibt:
+
+        -   `head()`
+
+        -   `tail()`
+
+        -   `print()`
+
+        -   `sample_n()`
+
+        -   `glimpse()`
+
+        -   `summary()`
+
+        -   `colnames()`
+
+    -   Welche Parameter könnt ihr den Funktionen jeweils übergeben und wozu dienen sie?
+
+    -   Wozu würdet ihr die Funktionen verwenden?
+
+3.  **Datentypen ermitteln**
+
+    -   Findet einen Weg, um den Datentyp für jede Spalte auf der Konsole auszugeben!
+
+    -   Welche Datentypen sind vertreten?
+
+    -   Sind eurer Meinung nach alle Spalten korrekt erkannt worden?
+
+4.  **Das Paket `{skimr}`**
+
+    -   Installiert das Paket `{skimr}` und betrachtet nun die Funktion `skim()`.
+
+    -   Was ermittelt die Funktion, wenn wir ihr einen Datensatz übergeben?
+
+    -   Gebt mithilfe der Funktion nur den prozentualen Anteil fehlender Werte (`NA`) für jede Spalte auf der Konsole aus!

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.563">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Bio &amp; Business Data Science - 2&nbsp; Datensätze erkunden</title>
+<title>Bio and Business Data Science - 2&nbsp; Datensätze erkunden</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Bio &amp; Business Data Science</a> 
+      <a href="./">Bio and Business Data Science</a> 
         <div class="sidebar-tools-main">
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
@@ -190,6 +190,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./select-columns.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./add-and-modify-columns.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Spalten hinzufügen und verändern</span></a>
+  </div>
+</li>
     </ul>
 </li>
         <li class="sidebar-item">
@@ -204,8 +209,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
 <li><a href="#sprechende-tibbles" id="toc-sprechende-tibbles" class="nav-link active" data-scroll-target="#sprechende-tibbles"> <span class="header-section-number">2.1</span> Sprechende Tibbles</a></li>
-  <li><a href="#spalten-und-deren-datentypen" id="toc-spalten-und-deren-datentypen" class="nav-link" data-scroll-target="#spalten-und-deren-datentypen"> <span class="header-section-number">2.2</span> Spalten und deren Datentypen</a></li>
-  <li><a href="#h%C3%A4ufigkeiten-schnell-erfassen" id="toc-häufigkeiten-schnell-erfassen" class="nav-link" data-scroll-target="#h%C3%A4ufigkeiten-schnell-erfassen"> <span class="header-section-number">2.3</span> Häufigkeiten schnell erfassen</a></li>
+  <li><a href="#anzahl-spalten-und-zeilen-ermitteln" id="toc-anzahl-spalten-und-zeilen-ermitteln" class="nav-link" data-scroll-target="#anzahl-spalten-und-zeilen-ermitteln"> <span class="header-section-number">2.2</span> Anzahl Spalten und Zeilen ermitteln</a></li>
+  <li><a href="#datentypen" id="toc-datentypen" class="nav-link" data-scroll-target="#datentypen"> <span class="header-section-number">2.3</span> Datentypen</a></li>
+  <li><a href="#spaltennamen" id="toc-spaltennamen" class="nav-link" data-scroll-target="#spaltennamen"> <span class="header-section-number">2.4</span> Spaltennamen</a></li>
+  <li><a href="#stichproben-betrachten" id="toc-stichproben-betrachten" class="nav-link" data-scroll-target="#stichproben-betrachten"> <span class="header-section-number">2.5</span> Stichproben betrachten</a></li>
+  <li><a href="#h%C3%A4ufigkeiten-erfassen" id="toc-häufigkeiten-erfassen" class="nav-link" data-scroll-target="#h%C3%A4ufigkeiten-erfassen"> <span class="header-section-number">2.6</span> Häufigkeiten erfassen</a></li>
+  <li><a href="#%C3%BCbungsaufgaben" id="toc-übungsaufgaben" class="nav-link" data-scroll-target="#%C3%BCbungsaufgaben">Übungsaufgaben</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -263,10 +272,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</section><section id="spalten-und-deren-datentypen" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="spalten-und-deren-datentypen">
-<span class="header-section-number">2.2</span> Spalten und deren Datentypen</h2>
+</section><section id="anzahl-spalten-und-zeilen-ermitteln" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="anzahl-spalten-und-zeilen-ermitteln">
+<span class="header-section-number">2.2</span> Anzahl Spalten und Zeilen ermitteln</h2>
+<p>Ein Tibble gibt es uns freiwillig Auskunft über seine Dimensionierung, wenn wir seinen Namen aufrufen. Wir können diese Werte auch dediziert ermitteln, falls wir mit diesen Information etwa weitere Berechnungen in unserem Skript durchführen wollen.</p>
+<p>Mit <code>ncol</code> erhalten wir die Anzahl Spalten:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">spec</span><span class="op">(</span><span class="va">orders</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68</code></pre>
+</div>
+</div>
+<p>Mit <code>nrow</code> entsprechend die Anzahl Zeilen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2874</code></pre>
+</div>
+</div>
+<p>Wir könnten mit beiden Werten die Anzahl Zellen errechnen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">orders</span><span class="op">)</span></span>
+<span><span class="va">rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">orders</span><span class="op">)</span></span>
+<span><span class="va">cells</span> <span class="op">&lt;-</span> <span class="va">cols</span> <span class="op">*</span> <span class="va">rows</span></span>
+<span><span class="va">cells</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 195432</code></pre>
+</div>
+</div>
+<p>Mit der Funktion <code>dim</code> erhalten wir einen Vektor mit beiden Informationen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2874   68</code></pre>
+</div>
+</div>
+<p>Der erste Wert steht für die Anzahl Zeilen, der zweite für die Spalten.</p>
+<p>Wenn wir als Ergebnis statt eines Vektors lieber ein Tibble hätten, können wir uns für für die Anzahl Zeilen mit <code>count</code> helfen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 x 1
+      n
+  &lt;int&gt;
+1  2874</code></pre>
+</div>
+</div>
+<p>Wir können auch <code>nrow</code> und <code>ncol</code> als Spalten in einen neuen Dataframe (Tibble) verwenden und darauf basierend eine weitere, berechnete Spalte erstellen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  number_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">orders</span><span class="op">)</span>, </span>
+<span>  number_rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">orders</span><span class="op">)</span>,</span>
+<span>  number_cells <span class="op">=</span> <span class="va">number_cols</span> <span class="op">*</span> <span class="va">number_rows</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 x 3
+  number_cols number_rows number_cells
+        &lt;int&gt;       &lt;int&gt;        &lt;int&gt;
+1          68        2874       195432</code></pre>
+</div>
+</div>
+</section><section id="datentypen" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="datentypen">
+<span class="header-section-number">2.3</span> Datentypen</h2>
+<p>Die schnellste und, wie ich finde, einfachste Möglichkeit, einen Überblick über die Datentypen in einem Tibble zu erhalten, ist die <code>glimpse</code>-Funktion:</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,874
+Columns: 68
+$ order_id                              &lt;dbl&gt; 1.130007e+12, 1.130015e+12, 1.13~
+$ name                                  &lt;chr&gt; "B1014", "B1015", "B1016", "B101~
+$ order_number                          &lt;dbl&gt; 1014, 1015, 1016, 1017, 1018, 10~
+$ app_id                                &lt;dbl&gt; 580111, 580111, 580111, 580111, ~
+$ created_at                            &lt;dttm&gt; 2019-05-24 12:59:16, 2019-05-24~
+$ updated_at                            &lt;dttm&gt; 2019-06-19 13:23:26, 2019-06-21~
+$ test                                  &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALS~
+$ current_subtotal_price                &lt;dbl&gt; 94.66, 32.22, 30.22, 32.22, 30.2~
+$ current_total_price                   &lt;dbl&gt; 94.66, 32.22, 30.22, 32.22, 30.2~
+$ current_total_discounts               &lt;dbl&gt; 2, 0, 2, 0, 2, 2, 2, 0, 0, 0, 0,~
+$ current_total_duties_set              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+$ total_discounts                       &lt;dbl&gt; 2, 0, 2, 0, 2, 2, 2, 0, 0, 0, 0,~
+$ total_line_items_price                &lt;dbl&gt; 96.66, 32.22, 32.22, 32.22, 32.2~
+$ total_outstanding                     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+$ total_price                           &lt;dbl&gt; 94.66, 32.22, 30.22, 32.22, 30.2~
+$ total_tax                             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+$ total_tip_received                    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+$ taxes_included                        &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TR~
+$ discount_codes                        &lt;chr&gt; "DCBPXGJB1JGA", NA, "KY0D5MNEZBM~
+$ financial_status                      &lt;chr&gt; "paid", "paid", "paid", "paid", ~
+$ fulfillment_status                    &lt;chr&gt; "fulfilled", "fulfilled", "fulfi~
+$ source_name                           &lt;chr&gt; "web", "web", "web", "web", "web~
+$ landing_site                          &lt;chr&gt; "/password", "/wallets/checkouts~
+$ landing_site_ref                      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ location_id                           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ note                                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ tags                                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ processed_at                          &lt;dttm&gt; 2019-05-24 12:59:15, 2019-05-24~
+$ processing_method                     &lt;chr&gt; "direct", "express", "express", ~
+$ payment_details_gateway               &lt;chr&gt; "shopify_payments", "paypal", "p~
+$ payment_details_credit_card_company   &lt;chr&gt; "Mastercard", NA, NA, NA, NA, NA~
+$ customer_id                           &lt;dbl&gt; 1.861678e+12, 1.856892e+12, 1.87~
+$ customer_accepts_marketing            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+$ customer_accepts_marketing_updated_at &lt;dttm&gt; 2019-05-21 13:38:54, 2019-05-24~
+$ customer_marketing_opt_in_level       &lt;chr&gt; "single_opt_in", "single_opt_in"~
+$ customer_sms_marketing_consent        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ customer_created_at                   &lt;dttm&gt; 2019-05-13 14:41:16, 2019-05-10~
+$ customer_updated_at                   &lt;dttm&gt; 2022-02-23 13:50:50, 2022-06-21~
+$ customer_gender                       &lt;chr&gt; "f", "m", "m", "m", "f", "m", "m~
+$ customer_is_hsos                      &lt;dbl&gt; 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0,~
+$ customer_state                        &lt;chr&gt; "disabled", "disabled", "enabled~
+$ customer_orders_count                 &lt;dbl&gt; 7, 10, 3, 1, 2, 1, 1, 1, 3, 6, 1~
+$ customer_total_spent                  &lt;dbl&gt; 345.22, 338.40, 95.17, 32.22, 66~
+$ customer_last_order_id                &lt;dbl&gt; 4.640512e+12, 5.053779e+12, 1.95~
+$ customer_note                         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ customer_verified_email               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,~
+$ customer_tax_exempt                   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+$ customer_tags                         &lt;chr&gt; "password page, prospect, umfrag~
+$ customer_last_order_name              &lt;chr&gt; "41005353622", "41005379922", "1~
+$ campaign_tag                          &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ shipping_address_city                 &lt;chr&gt; NA, "Osnabrück", NA, NA, NA, NA,~
+$ shipping_address_zip                  &lt;dbl&gt; NA, 49088, NA, NA, NA, NA, 49090~
+$ shipping_address_country              &lt;chr&gt; NA, "Germany", NA, NA, NA, NA, "~
+$ shipping_address_latitude             &lt;dbl&gt; NA, 52.29756, NA, NA, NA, NA, 52~
+$ shipping_address_longitude            &lt;dbl&gt; NA, 8.058480, NA, NA, NA, NA, 8.~
+$ billing_address_city                  &lt;chr&gt; "Quakenbrück", "Osnabrück", "Osn~
+$ billing_address_zip                   &lt;dbl&gt; 49610, 49088, 49080, 45888, 4935~
+$ billing_address_country               &lt;chr&gt; "Germany", "Germany", "Germany",~
+$ billing_address_company               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ billing_address_latitude              &lt;dbl&gt; 52.67033, 52.29756, 52.26469, 51~
+$ billing_address_longitude             &lt;dbl&gt; 7.959575, 8.058480, 8.035603, 7.~
+$ client_details_browser_ip             &lt;chr&gt; "131.173.97.189", "131.173.96.36~
+$ client_details_browser_height         &lt;dbl&gt; 665, 1010, 657, 600, 560, 553, 5~
+$ client_details_browser_width          &lt;dbl&gt; 1263, 2048, 1349, 360, 360, 375,~
+$ client_details_user_agent             &lt;chr&gt; "Mozilla/5.0 (Windows NT 10.0; W~
+$ cancel_reason                         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, ~
+$ cancelled_at                          &lt;dttm&gt; NA, NA, NA, NA, NA, NA, NA, NA,~
+$ closed_at                             &lt;dttm&gt; 2019-06-19 13:23:26, 2019-06-21~</code></pre>
+</div>
+</div>
+<p>Neben dem Namen der Spalten erhalten wir den Datentyp sowie eine Vorschau der ersten in jeder Spalte enthaltenen Werte. Auch die Anzahl Zeilen und Spalten nennt uns <code>glimpse</code>.</p>
+<p>Etwas technischer geht es mit der <code>spec</code>-Funktion. Diese liefert statt des Datentyp-Kürzels auch gleich die genaue Spezfikation als R-Funktion zurück:</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">spec</span><span class="op">(</span><span class="va">orders</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>cols(
   order_id = col_double(),
@@ -340,11 +491,188 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 )</code></pre>
 </div>
 </div>
-</section><section id="häufigkeiten-schnell-erfassen" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="häufigkeiten-schnell-erfassen">
-<span class="header-section-number">2.3</span> Häufigkeiten schnell erfassen</h2>
+<p>Fällt uns auf, dass ein Datentyp falsch erkannt wurde, so können wir entweder unseren Ladevorgang anpassen und etwa den Datentyp direkt beim Lesen korrigieren. Alternativ verändern wir die Spalte mit <code>mutate</code>, was wir in <a href="add-and-modify-columns.html"><span>Kapitel&nbsp;4</span></a> lernen werden.</p>
+</section><section id="spaltennamen" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="spaltennamen">
+<span class="header-section-number">2.4</span> Spaltennamen</h2>
+<p>Ist man noch nicht lange mit einem Datensatz vertraut, ist eine Funktion für die Auflistung der Spaltennamen hilfreich:</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "order_id"                             
+ [2] "name"                                 
+ [3] "order_number"                         
+ [4] "app_id"                               
+ [5] "created_at"                           
+ [6] "updated_at"                           
+ [7] "test"                                 
+ [8] "current_subtotal_price"               
+ [9] "current_total_price"                  
+[10] "current_total_discounts"              
+[11] "current_total_duties_set"             
+[12] "total_discounts"                      
+[13] "total_line_items_price"               
+[14] "total_outstanding"                    
+[15] "total_price"                          
+[16] "total_tax"                            
+[17] "total_tip_received"                   
+[18] "taxes_included"                       
+[19] "discount_codes"                       
+[20] "financial_status"                     
+[21] "fulfillment_status"                   
+[22] "source_name"                          
+[23] "landing_site"                         
+[24] "landing_site_ref"                     
+[25] "location_id"                          
+[26] "note"                                 
+[27] "tags"                                 
+[28] "processed_at"                         
+[29] "processing_method"                    
+[30] "payment_details_gateway"              
+[31] "payment_details_credit_card_company"  
+[32] "customer_id"                          
+[33] "customer_accepts_marketing"           
+[34] "customer_accepts_marketing_updated_at"
+[35] "customer_marketing_opt_in_level"      
+[36] "customer_sms_marketing_consent"       
+[37] "customer_created_at"                  
+[38] "customer_updated_at"                  
+[39] "customer_gender"                      
+[40] "customer_is_hsos"                     
+[41] "customer_state"                       
+[42] "customer_orders_count"                
+[43] "customer_total_spent"                 
+[44] "customer_last_order_id"               
+[45] "customer_note"                        
+[46] "customer_verified_email"              
+[47] "customer_tax_exempt"                  
+[48] "customer_tags"                        
+[49] "customer_last_order_name"             
+[50] "campaign_tag"                         
+[51] "shipping_address_city"                
+[52] "shipping_address_zip"                 
+[53] "shipping_address_country"             
+[54] "shipping_address_latitude"            
+[55] "shipping_address_longitude"           
+[56] "billing_address_city"                 
+[57] "billing_address_zip"                  
+[58] "billing_address_country"              
+[59] "billing_address_company"              
+[60] "billing_address_latitude"             
+[61] "billing_address_longitude"            
+[62] "client_details_browser_ip"            
+[63] "client_details_browser_height"        
+[64] "client_details_browser_width"         
+[65] "client_details_user_agent"            
+[66] "cancel_reason"                        
+[67] "cancelled_at"                         
+[68] "closed_at"                            </code></pre>
+</div>
+</div>
+<p>Diese Information liefert einem auch <code>glimpse</code>, wie oben gezeigt. Mit <code>colnames</code> bekommen wir die Spaltennamen als Vektor, was nützlich sein kann, um damit weiter arbeiten zu können.</p>
+</section><section id="stichproben-betrachten" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="stichproben-betrachten">
+<span class="header-section-number">2.5</span> Stichproben betrachten</h2>
+<p>Für einen ersten Eindruck der Daten reicht es oft schon, sich ein paar Zeilen anzeigen zu lassen. Das geht mit unterschiedlichen Funktionen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Zeigt standardmäßig die ersten 6 Zeilen an</span>an</span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Zeigt die ersten 20 Zeilen an</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Wenn man mehr anzeigen möchte, kann print verwendet werden</span>n</span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Das Ganze geht auch von unten</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Möchte man nicht die oberen oder unteren Zeilen anzeigen, sondern eine zufällige Auswahl, so hilft <code>sample_n</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 x 68
+     order_id name  order~1 app_id created_at          updated_at          test 
+        &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;lgl&gt;
+1     4.20e12 4100~    2829 580111 2021-10-13 07:53:57 2021-10-14 11:00:49 FALSE
+2     4.22e12 4100~    2927 580111 2021-10-21 10:52:04 2021-11-09 12:47:08 FALSE
+3     2.32e12 4100~    1750 580111 2020-05-28 12:59:21 2020-05-31 10:26:59 FALSE
+4     3.70e12 4100~    2528 580111 2021-03-25 11:12:05 2021-03-25 11:36:23 FALSE
+5     1.88e12 1681~    1226 580111 2019-11-15 05:37:46 2019-12-13 15:19:30 FALSE
+# ... with 61 more variables: current_subtotal_price &lt;dbl&gt;,
+#   current_total_price &lt;dbl&gt;, current_total_discounts &lt;dbl&gt;,
+#   current_total_duties_set &lt;dbl&gt;, total_discounts &lt;dbl&gt;,
+#   total_line_items_price &lt;dbl&gt;, total_outstanding &lt;dbl&gt;, total_price &lt;dbl&gt;,
+#   total_tax &lt;dbl&gt;, total_tip_received &lt;dbl&gt;, taxes_included &lt;lgl&gt;,
+#   discount_codes &lt;chr&gt;, financial_status &lt;chr&gt;, fulfillment_status &lt;chr&gt;,
+#   source_name &lt;chr&gt;, landing_site &lt;chr&gt;, landing_site_ref &lt;chr&gt;, ...</code></pre>
+</div>
+</div>
+<p>Um ein bestimmten prozentualen Anteil an den gesamten Zeilen zufällig zu ermitteln, gibt es <code>sample_frac</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Gibt zufällig gewählte Zeilen zurück, die 1% entsprechen</span>hen</span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">sample_frac</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 29 x 68
+     order_id name  order~1 app_id created_at          updated_at          test 
+        &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;lgl&gt;
+ 1    4.12e12 4100~    2662 5.80e5 2021-09-09 17:50:33 2021-09-14 11:40:16 FALSE
+ 2    4.26e12 4100~    3125 5.80e5 2021-11-12 15:51:12 2021-11-15 11:01:23 FALSE
+ 3    4.61e12 4100~    3410 5.80e5 2021-12-14 18:48:38 2021-12-20 13:52:28 FALSE
+ 4    4.24e12 4100~    3056 5.80e5 2021-11-02 14:47:10 2021-11-09 12:46:36 FALSE
+ 5    1.88e12 1681~    1217 5.80e5 2019-11-14 21:45:03 2019-12-13 17:14:25 FALSE
+ 6    4.19e12 4100~    2806 5.80e5 2021-10-07 06:31:08 2021-10-12 08:09:16 FALSE
+ 7    1.88e12 1681~    1197 5.80e5 2019-11-14 15:23:14 2019-12-13 15:27:00 FALSE
+ 8    4.22e12 4100~    2930 5.80e5 2021-10-21 12:07:32 2021-11-09 12:47:08 FALSE
+ 9    3.18e12 4100~    2425 5.80e5 2021-01-08 15:24:07 2021-01-14 15:26:31 FALSE
+10    4.22e12 4100~    2952 1.35e6 2021-10-22 16:30:18 2021-11-09 09:06:02 FALSE
+# ... with 19 more rows, 61 more variables: current_subtotal_price &lt;dbl&gt;,
+#   current_total_price &lt;dbl&gt;, current_total_discounts &lt;dbl&gt;,
+#   current_total_duties_set &lt;dbl&gt;, total_discounts &lt;dbl&gt;,
+#   total_line_items_price &lt;dbl&gt;, total_outstanding &lt;dbl&gt;, total_price &lt;dbl&gt;,
+#   total_tax &lt;dbl&gt;, total_tip_received &lt;dbl&gt;, taxes_included &lt;lgl&gt;,
+#   discount_codes &lt;chr&gt;, financial_status &lt;chr&gt;, fulfillment_status &lt;chr&gt;,
+#   source_name &lt;chr&gt;, landing_site &lt;chr&gt;, landing_site_ref &lt;chr&gt;, ...</code></pre>
+</div>
+</div>
+</section><section id="häufigkeiten-erfassen" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="häufigkeiten-erfassen">
+<span class="header-section-number">2.6</span> Häufigkeiten erfassen</h2>
+<p>Wir haben oben bereits <code>count</code> für das Zählen der Zeilen kennengelernt. Die Funktion eignet sich auch für das Zählen von Zeilen gruppiert nach einem Merkmal in den Daten:</p>
+<div class="cell">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">payment_details_gateway</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 x 2
+  payment_details_gateway     n
+  &lt;chr&gt;                   &lt;int&gt;
+1 manual                    194
+2 paypal                   1790
+3 shopify_payments          889
+4 &lt;NA&gt;                        1</code></pre>
+</div>
+</div>
+<p>Das geht auch sortiert nach Häufigkeit:</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">payment_details_gateway</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 x 2
+  payment_details_gateway     n
+  &lt;chr&gt;                   &lt;int&gt;
+1 paypal                   1790
+2 shopify_payments          889
+3 manual                    194
+4 &lt;NA&gt;                        1</code></pre>
+</div>
+</div>
 <p>Mit dem bereits bekannten <a href="https://github.com/sfirke/janitor">janitor</a>-Paket erhalten wir eine Funktion, um für nominal skalierte Merkmale schnell die Häufigkeiten, sowohl absolut als auch prozentual, zu ermitteln:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">orders</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">payment_details_gateway</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -358,9 +686,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 4 &lt;NA&gt;                        1 0.000348       NA     </code></pre>
 </div>
 </div>
+<p>Hier müssen wir das Sortieren manuelle mit <code>arrange</code> vornehmen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">payment_details_gateway</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="op">-</span><span class="va">n</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 x 4
+  payment_details_gateway     n  percent valid_percent
+  &lt;chr&gt;                   &lt;int&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+1 paypal                   1790 0.623           0.623 
+2 shopify_payments          889 0.309           0.309 
+3 manual                    194 0.0675          0.0675
+4 &lt;NA&gt;                        1 0.000348       NA     </code></pre>
+</div>
+</div>
 <p>Wenn wir eine zweite Variable hinzufügen, so erstellt <code>tabyl</code> eine Kreuztabelle mit den absoluten Häufigkeiten der jeweiligen Kombinationen:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">payment_details_gateway</span>, <span class="va">payment_details_credit_card_company</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 x 5
@@ -383,6 +726,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+</section><section id="übungsaufgaben" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="übungsaufgaben">Übungsaufgaben</h2>
+<p>Speichert die Lösungen für die folgenden Aufgaben in einem neuen R-Skript. Vergesst nicht, die Datei zwischendurch zu speichern.</p>
+<ol type="1">
+<li>
+<p><strong>Dimensionen ermitteln</strong></p>
+<ul>
+<li><p>Ermittelt die Anzahl Spalten und Zeilen des Datensatzes. Ihr werdet herausfinden, dass es dafür verschiedene Möglichkeiten gibt.</p></li>
+<li><p>Findet auch eine Möglichkeit, mit der ihr beide Größen auf jeweils einer Variable speichern könnt. Das kann zum Beispiel wichtig sein, wenn ihr mit den Größen im weiteren Skriptverlauf weiter arbeiten wollt.</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Nützliche Funktionen</strong></p>
+<ul>
+<li>
+<p>Recherchiert und testet die folgenden Funktionen. Notiert euch in eigenen Worten, was jede Funktion zurückgibt:</p>
+<ul>
+<li><p><code><a href="https://rdrr.io/r/utils/head.html">head()</a></code></p></li>
+<li><p><code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code></p></li>
+<li><p><code><a href="https://rdrr.io/r/base/print.html">print()</a></code></p></li>
+<li><p><code>sample_n()</code></p></li>
+<li><p><code>glimpse()</code></p></li>
+<li><p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code></p></li>
+<li><p><code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code></p></li>
+</ul>
+</li>
+<li><p>Welche Parameter könnt ihr den Funktionen jeweils übergeben und wozu dienen sie?</p></li>
+<li><p>Wozu würdet ihr die Funktionen verwenden?</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Datentypen ermitteln</strong></p>
+<ul>
+<li><p>Findet einen Weg, um den Datentyp für jede Spalte auf der Konsole auszugeben!</p></li>
+<li><p>Welche Datentypen sind vertreten?</p></li>
+<li><p>Sind eurer Meinung nach alle Spalten korrekt erkannt worden?</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Das Paket <a href="https://docs.ropensci.org/skimr/">skimr</a></strong></p>
+<ul>
+<li><p>Installiert das Paket <a href="https://docs.ropensci.org/skimr/">skimr</a> und betrachtet nun die Funktion <code>skim()</code>.</p></li>
+<li><p>Was ermittelt die Funktion, wenn wir ihr einen Datensatz übergeben?</p></li>
+<li><p>Gebt mithilfe der Funktion nur den prozentualen Anteil fehlender Werte (<code>NA</code>) für jede Spalte auf der Konsole aus!</p></li>
+</ul>
+</li>
+</ol>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

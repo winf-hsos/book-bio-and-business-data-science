@@ -2,10 +2,11 @@ project:
   type: book
   resources: 
     - "data/"
+number-sections: true
 number-depth: 2
 toc-depth: 3
 book:
-  title: "Bio & Business Data Science"
+  title: "Bio and Business Data Science"
   lang: de
   author: "Nicolas Meseth"
   sharing: [twitter, facebook, linkedin]
@@ -18,6 +19,7 @@ book:
         - read-csv-files.qmd
         - explore-new-data-sets.qmd
         - select-columns.qmd
+        - add-and-modify-columns.qmd
     
     #- part: case-climate-data.qmd
     #  chapters:
@@ -56,6 +58,9 @@ book:
 language:
     toc-title-document: "Inhalt"
     search-matching-documents-text: "Suchtreffer"
+    crossref-ch-prefix: "Kapitel"
+    crossref-sec-prefix: "Abschnitt"
+    crossref-exr-prefix: "Übungsaufgabe"
 
 bibliography: references.bib
 

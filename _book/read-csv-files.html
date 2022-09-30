@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.563">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Bio &amp; Business Data Science - 1&nbsp; CSV-Dateien einlesen</title>
+<title>Bio and Business Data Science - 1&nbsp; CSV-Dateien einlesen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Bio &amp; Business Data Science</a> 
+      <a href="./">Bio and Business Data Science</a> 
         <div class="sidebar-tools-main">
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
@@ -190,6 +190,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./select-columns.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./add-and-modify-columns.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Spalten hinzufügen und verändern</span></a>
+  </div>
+</li>
     </ul>
 </li>
         <li class="sidebar-item">
@@ -216,10 +221,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
 <li><a href="#aus-einer-lokalen-datei" id="toc-aus-einer-lokalen-datei" class="nav-link" data-scroll-target="#aus-einer-lokalen-datei">Aus einer lokalen Datei</a></li>
   <li><a href="#nur-bestimmte-spalten-laden" id="toc-nur-bestimmte-spalten-laden" class="nav-link" data-scroll-target="#nur-bestimmte-spalten-laden">Nur bestimmte Spalten laden</a></li>
-  <li><a href="#regionale-einstellungen" id="toc-regionale-einstellungen" class="nav-link" data-scroll-target="#regionale-einstellungen">Regionale Einstellungen</a></li>
+  <li><a href="#das-dezimaltrennzeichen-bestimmen" id="toc-das-dezimaltrennzeichen-bestimmen" class="nav-link" data-scroll-target="#das-dezimaltrennzeichen-bestimmen">Das Dezimaltrennzeichen bestimmen</a></li>
+  <li><a href="#datentypen-beim-laden-setzen" id="toc-datentypen-beim-laden-setzen" class="nav-link" data-scroll-target="#datentypen-beim-laden-setzen">Datentypen beim Laden setzen</a></li>
   <li><a href="#daten-von-einem-webserver-laden" id="toc-daten-von-einem-webserver-laden" class="nav-link" data-scroll-target="#daten-von-einem-webserver-laden">Daten von einem Webserver laden</a></li>
   </ul>
 </li>
+  <li><a href="#%C3%BCbungsaufgaben" id="toc-übungsaufgaben" class="nav-link" data-scroll-target="#%C3%BCbungsaufgaben">Übungsaufgaben</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -269,11 +276,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">1.2</span> CSV-Daten laden mit <code>{readr}</code>
 </h2>
 <section id="aus-einer-lokalen-datei" class="level3"><h3 class="anchored" data-anchor-id="aus-einer-lokalen-datei">Aus einer lokalen Datei</h3>
-<p>Für das Laden Datensätzen aus CSV-Dateien bietet das Tidyverse ein eigenes Paket namens <a href="https://readr.tidyverse.org">readr</a> an. Dieses wird automatisch mit dem <a href="https://tidyverse.tidyverse.org">tidyverse</a>-Paket mitgeladen. Das Paket bietet für CSV-Dateien, bei denen das Komma als Trennzeichen verwendet wird, die Funktion <code>read_csv</code> an:</p>
+<p>Für das Laden von Datensätzen aus CSV-Dateien bietet das Tidyverse ein Paket namens <a href="https://readr.tidyverse.org">readr</a> an. Dieses wird automatisch mit dem <a href="https://tidyverse.tidyverse.org">tidyverse</a>-Paket mitgeladen. Das Paket bietet für CSV-Dateien, bei denen das Komma als Trennzeichen verwendet wird, die Funktion <code>read_csv</code> an:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"./data/orders.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Auch der R-Basisumfang bietet eine ähnliche Funktion für genau diesen Anwendungsfall an. Diese heisst <code>read.csv</code>, man achte hier auf das Detail: Statt eines Unterstrichs wird bei der R-Basisfunktion ein Punkt zwischen den beiden Wörtern <code>read</code> und <code>csv</code> verwendet. Wenn ihr mit dem Tidyverse und mit Tibbles arbeitet (wie in diesem Buch durchgängig), dann achtet darauf immer die <a href="https://readr.tidyverse.org">readr</a>-Funktion <code>read_csv</code> zu verwenden, weil nur diese die Daten als Tibble zurückgibt und zudem noch ein paar nützliche Zusatzfunktionen bietet.</p>
+<div class="callout-tip callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In einigen Ländern Europas wird häufig ein Semikolon als Trennzeichen und ein Komma als Dezimaltrennzeichen verwendet (wie etwa in Deutschland). Für diesen Fall bietet <a href="https://readr.tidyverse.org">readr</a> die Funktion <code>read_csv2</code>. Um es selbst in der Hand zu haben, kann die Funktion <code>read_delim</code> verwendet werden und über den Parameter <code>delim</code> das Trennzeichen manuell eingestellt werden.</p>
+</div>
+</div>
+</div>
+<p>Auch der R-Basisumfang bietet eine ähnliche Funktion für genau diesen Anwendungsfall an. Diese heisst <code>read.csv</code>, man achte hier auf das Detail: Statt eines Unterstrichs <code>_</code> wird bei der R-Basisfunktion ein Punkt <code>.</code> zwischen den beiden Wörtern <code>read</code> und <code>csv</code> verwendet. Wenn ihr mit dem Tidyverse und mit Tibbles arbeitet (wie in diesem Buch durchgängig), dann achtet darauf, stets die <a href="https://readr.tidyverse.org">readr</a>-Funktion <code>read_csv</code> zu verwenden, weil nur diese die Daten als Tibble zurückgibt und zudem einige paar nützliche Zusatzfunktionen bietet.</p>
 </section><section id="nur-bestimmte-spalten-laden" class="level3"><h3 class="anchored" data-anchor-id="nur-bestimmte-spalten-laden">Nur bestimmte Spalten laden</h3>
 <p>Die <code>read_csv</code>-Funktion erlaubt direkt beim Laden der Daten eine Auswahl der Spalten vorzunehmen. Ich empfehle hier immer die Verwendung der <code>select</code>-Funktion, die wir im nächsten Abschnitt kennenlernen werden. Dennoch möchte ich kurz demonstrieren, wie das Filtern der Spalten beim Laden funktioniert.</p>
 <p>Der folgende Code lädt die Spalten <code>order_id</code>, <code>name</code>, sowie alle Spalten, deren Name mit “customer” beginnen:</p>
@@ -324,14 +341,105 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"./data/orders.csv"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"shipping"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Mehr zur Auswahl von Spalten mit <a href="https://dplyr.tidyverse.org">dplyr</a> erfahrt ihr im Abschnitt <em>XY</em>.</p>
-</section><section id="regionale-einstellungen" class="level3"><h3 class="anchored" data-anchor-id="regionale-einstellungen">Regionale Einstellungen</h3>
+<p>Mehr zur Auswahl von Spalten mit <a href="https://dplyr.tidyverse.org">dplyr</a> erfahrt ihr in <a href="select-columns.html"><span>Kapitel&nbsp;3</span></a>.</p>
+</section><section id="das-dezimaltrennzeichen-bestimmen" class="level3"><h3 class="anchored" data-anchor-id="das-dezimaltrennzeichen-bestimmen">Das Dezimaltrennzeichen bestimmen</h3>
+<p>Wollen wir nur das Dezimaltrennzeichen ändern, weil wir zum Beispiel Daten aus einem deutschen System exportiert haben, das ein Komma verwendet, so können wir das über den <code>locale</code>-Parameter erreichen. Im Beispiel unten verwenden wir zusätzlich das Pipe-Symbol | als Trennzeichen. Beides können wir über <code>read_delim</code> einstellen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Daten in sales.csv</span></span>
+<span><span class="co"># year,month,turnover</span></span>
+<span><span class="co"># 2022|01|2700,85</span></span>
+<span><span class="co"># 2022|02|2910,10</span></span>
+<span><span class="co"># 2022|03|1802,37</span></span>
+<span></span>
+<span><span class="va">turnover</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"sales.csv"</span>, </span>
+<span>                       delim <span class="op">=</span> <span class="st">"|"</span>, </span>
+<span>                       locale <span class="op">=</span> <span class="fu">locale</span><span class="op">(</span>decimal_mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
+<span>                       <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Das Ergebnis:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">turnover</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 x 3
+   year month turnover
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+1  2022 01       2701.
+2  2022 02       2910.
+3  2022 03       1802.</code></pre>
+</div>
+</div>
+</section><section id="datentypen-beim-laden-setzen" class="level3"><h3 class="anchored" data-anchor-id="datentypen-beim-laden-setzen">Datentypen beim Laden setzen</h3>
+<p>Beim Laden mit <code>read_csv</code> wird möglicherweise der Datentyp einiger Spalten falsch erkannt. DIe Funktion betrachtet die ersten Zeilen und ermittelt darauf basierend den Datentyp. Wird dieser falsch erkannt, so können den Datentyp für Spalten explizit angeben. Wie auch das Auswählen von Spalten können wir den Datentyp schon beim Laden mit. Alternativ können wir den Datentypen auch später mit <code>mutate</code> noch verändern.</p>
+<div class="callout-tip callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Manchmal hilft es schon, den Parameter <code>guess_max</code> auf einen größeren Wert zu setzen. Dieser bestimmt, wie viele Werte die Funktion betrachtet, um daraus den Datentyp einer Spalte abzuleiten. Standardmäßig ist dieser Wert auf 1000 begrenzt.</p>
+</div>
+</div>
+</div>
+<p>In unserem Datensatz <code>orders.csv</code> sind tatsächlich einige Datentypen falsch erkannt worden. Etwa die Spalte <code>order_id</code>, die als Datentyp <code>double</code> erkannt wird. Auch wenn die Werte allesamt als Dezimalzahlen betrachtet werden können, handelt es sich bei einer Bestellnummer nicht um eine Zahl in dem Sinne, dass man damit rechnen möchte. Es ist vielmehr eine Zeichenfolge, die per Konvention nur aus Zahlen besteht (aber nicht müsste). Der Datentyp <code>character</code> wäre somit angebrachter. Das können wir wie folgt ändern:</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"./data/orders.csv"</span>,</span>
+<span>                   col_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"order_id"</span> <span class="op">=</span> <span class="fu">col_character</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Die Spalte order_id ist jetzt vom Typ &lt;chr&gt;</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">order_id</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 1
+   order_id     
+   &lt;chr&gt;        
+ 1 1130007101519
+ 2 1130014965839
+ 3 1130026958927
+ 4 1130030563407
+ 5 1130038853711
+ 6 1130045964367
+ 7 1130050519119
+ 8 1130060283983
+ 9 1130102194255
+10 1130106880079
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+<p>Das Gleiche können wir mit beliebig vielen Spalten gleichzeitig durchführen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"./data/orders.csv"</span>,</span>
+<span>                   col_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>                     <span class="st">"order_id"</span> <span class="op">=</span> <span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                     <span class="st">"app_id"</span> <span class="op">=</span> <span class="fu">col_character</span><span class="op">(</span><span class="op">)</span></span>
+<span>                     <span class="op">)</span></span>
+<span>                   <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Die Spalte order_id ist jetzt vom Typ &lt;chr&gt;</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">order_id</span>, <span class="va">app_id</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 2
+   order_id      app_id
+   &lt;chr&gt;         &lt;chr&gt; 
+ 1 1130007101519 580111
+ 2 1130014965839 580111
+ 3 1130026958927 580111
+ 4 1130030563407 580111
+ 5 1130038853711 580111
+ 6 1130045964367 580111
+ 7 1130050519119 580111
+ 8 1130060283983 580111
+ 9 1130102194255 580111
+10 1130106880079 580111
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
 </section><section id="daten-von-einem-webserver-laden" class="level3"><h3 class="anchored" data-anchor-id="daten-von-einem-webserver-laden">Daten von einem Webserver laden</h3>
 <p>Die CSV-Datei muss nicht lokal auf dem eigenen Rechner vorliegen, sondern kann mit <code>read_csv</code> über das HTTP-Protkoll direkt von einem Webserver im Internet abgerufen werden. Dabei wird die URL anstelle des lokalen Dateinamens der Funktion übergeben. Der Code unten lädt die tagesaktuelle Version des Covid-19-Datensatzes, der auf den Servern von <a href="https://ourworldindata.org/">Our World in Data</a> gehostet wird:</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">covid</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://covid.ourworldindata.org/data/owid-covid-data.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">covid</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://covid.ourworldindata.org/data/owid-covid-data.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 219868 Columns: 67
+<pre><code>Rows: 220105 Columns: 67
 -- Column specification --------------------------------------------------------
 Delimiter: ","
 chr   (4): iso_code, continent, location, tests_units
@@ -342,9 +450,13 @@ i Use `spec()` to retrieve the full column specification for this data.
 i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
+</section></section><section id="übungsaufgaben" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="übungsaufgaben">Übungsaufgaben</h2>
+<ol type="1">
+<li>Ladet den tagesaktuellen Datensatz für die Covid-Daten, lasst aber nur die Spalten <code>date</code>, <code>location</code> und <code>new_cases_smoothed_per_million</code> im Ergebnis!</li>
+</ol>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
