@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.563">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Bio and Business Data Science - 3&nbsp; Spalten auswählen</title>
 <style>
 code{white-space: pre-wrap;}
@@ -15,8 +12,70 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -35,8 +94,7 @@ ul.task-list{list-style: none;}
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -55,47 +113,38 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Bio and Business Data Science</a> 
         <div class="sidebar-tools-main">
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
@@ -111,7 +160,7 @@ ul.task-list{list-style: none;}
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Vorwort</a>
   </div>
@@ -123,8 +172,8 @@ ul.task-list{list-style: none;}
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./read-csv-files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CSV-Dateien einlesen</span></a>
   </div>
@@ -145,24 +194,28 @@ ul.task-list{list-style: none;}
   </div>
 </li>
     </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Quellen</a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Inhalt</h2>
+   
+  <ul>
+<li><a href="#angabe-von-spaltennamen" id="toc-angabe-von-spaltennamen" class="nav-link active" data-scroll-target="#angabe-von-spaltennamen"> <span class="header-section-number">3.1</span> Angabe von Spaltennamen</a></li>
+  <li><a href="#ausschlie%C3%9Fen-von-spalten" id="toc-ausschließen-von-spalten" class="nav-link" data-scroll-target="#ausschlie%C3%9Fen-von-spalten"> <span class="header-section-number">3.2</span> Ausschließen von Spalten</a></li>
+  <li><a href="#spalten-anhand-eines-namensmuster-selektieren" id="toc-spalten-anhand-eines-namensmuster-selektieren" class="nav-link" data-scroll-target="#spalten-anhand-eines-namensmuster-selektieren"> <span class="header-section-number">3.3</span> Spalten anhand eines Namensmuster selektieren</a></li>
+  <li><a href="#anhand-des-datentyps-einer-spalte" id="toc-anhand-des-datentyps-einer-spalte" class="nav-link" data-scroll-target="#anhand-des-datentyps-einer-spalte"> <span class="header-section-number">3.4</span> Anhand des Datentyps einer Spalte</a></li>
+  <li><a href="#spalten-%C3%BCber-deren-position-ausw%C3%A4hlen" id="toc-spalten-über-deren-position-auswählen" class="nav-link" data-scroll-target="#spalten-%C3%BCber-deren-position-ausw%C3%A4hlen"> <span class="header-section-number">3.5</span> Spalten über deren Position auswählen</a></li>
+  <li><a href="#spalten-%C3%BCber-eine-menge-ausw%C3%A4hlen" id="toc-spalten-über-eine-menge-auswählen" class="nav-link" data-scroll-target="#spalten-%C3%BCber-eine-menge-ausw%C3%A4hlen"> <span class="header-section-number">3.6</span> Spalten über eine Menge auswählen</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="sec-select_columns" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></h1>
 </div>
 
@@ -175,13 +228,417 @@ ul.task-list{list-style: none;}
   </div>
   
 
-</header>
+</header><div class="cell">
+
+</div>
+<section id="angabe-von-spaltennamen" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="angabe-von-spaltennamen">
+<span class="header-section-number">3.1</span> Angabe von Spaltennamen</h2>
+<p>Die einfachste und intuitive Methode, um die Spalten eines Datensatzes einzuschränken, ist die Nennung der Spaltennamen. Dabei werden mehrere Spaltennamen mit einem Komma getrennt.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">billing_address_zip</span>, <span class="va">billing_address_city</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 2
+   billing_address_zip billing_address_city
+   &lt;chr&gt;               &lt;chr&gt;               
+ 1 49610               Quakenbrück         
+ 2 49088               Osnabrück           
+ 3 49080               Osnabrück           
+ 4 45888               Gelsenkirchen       
+ 5 49356               Diepholz            
+ 6 49477               Ibbenbüren          
+ 7 49090               Osnabrück           
+ 8 48356               Nordwalde           
+ 9 49090               Osnabrück           
+10 49090               Osnabrück           
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+</section><section id="ausschließen-von-spalten" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="ausschließen-von-spalten">
+<span class="header-section-number">3.2</span> Ausschließen von Spalten</h2>
+<p>Statt eine Positivliste zu definieren, können wir auch Spalten über ihren Namen ausschließen, indem wir ein Minuszeichen voranstellen. Das folgende Beispiel wählt alle Spalten des Datensatzes, außer die beiden genannten:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">order_id</span>, <span class="op">-</span><span class="va">order_number</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="spalten-anhand-eines-namensmuster-selektieren" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="spalten-anhand-eines-namensmuster-selektieren">
+<span class="header-section-number">3.3</span> Spalten anhand eines Namensmuster selektieren</h2>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"shipping_"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 5
+   shipping_address_city shipping_address_zip shipping_address~1 shipp~2 shipp~3
+   &lt;chr&gt;                 &lt;chr&gt;                &lt;chr&gt;                &lt;dbl&gt;   &lt;dbl&gt;
+ 1 &lt;NA&gt;                  &lt;NA&gt;                 &lt;NA&gt;                  NA     NA   
+ 2 Osnabrück             49088                Germany               52.3    8.06
+ 3 &lt;NA&gt;                  &lt;NA&gt;                 &lt;NA&gt;                  NA     NA   
+ 4 &lt;NA&gt;                  &lt;NA&gt;                 &lt;NA&gt;                  NA     NA   
+ 5 &lt;NA&gt;                  &lt;NA&gt;                 &lt;NA&gt;                  NA     NA   
+ 6 &lt;NA&gt;                  &lt;NA&gt;                 &lt;NA&gt;                  NA     NA   
+ 7 Osnabrück             49090                Germany               52.3    8.00
+ 8 Nordwalde             48356                Germany               52.1    7.51
+ 9 Osnabrück             49090                Germany               52.3    8.06
+10 &lt;NA&gt;                  &lt;NA&gt;                 &lt;NA&gt;                  NA     NA   
+# ... with 2,864 more rows, and abbreviated variable names
+#   1: shipping_address_country, 2: shipping_address_latitude,
+#   3: shipping_address_longitude</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">ends_with</span><span class="op">(</span><span class="st">"_at"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 8
+   created_at          updated_at          processed_at       
+   &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
+ 1 2019-05-24 12:59:16 2019-06-19 13:23:26 2019-05-24 12:59:15
+ 2 2019-05-24 13:09:08 2019-06-21 14:40:07 2019-05-24 13:09:07
+ 3 2019-05-24 13:22:41 2019-06-21 12:35:23 2019-05-24 13:22:40
+ 4 2019-05-24 13:27:43 2019-06-21 14:27:18 2019-05-24 13:27:42
+ 5 2019-05-24 13:36:46 2019-06-21 12:11:57 2019-05-24 13:36:45
+ 6 2019-05-24 13:44:41 2019-06-21 14:37:21 2019-05-24 13:44:41
+ 7 2019-05-24 13:49:21 2019-06-21 12:25:16 2019-05-24 13:49:20
+ 8 2019-05-24 13:59:57 2019-06-21 11:49:47 2019-05-24 13:59:57
+ 9 2019-05-24 14:43:53 2019-06-19 14:12:38 2019-05-24 14:43:53
+10 2019-05-24 14:48:16 2019-06-21 15:54:24 2019-05-24 14:48:16
+# ... with 2,864 more rows, and 5 more variables:
+#   customer_accepts_marketing_updated_at &lt;dttm&gt;, customer_created_at &lt;dttm&gt;,
+#   customer_updated_at &lt;dttm&gt;, cancelled_at &lt;dttm&gt;, closed_at &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">contains</span><span class="op">(</span><span class="st">"address"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 11
+   shipping_ad~1 shipp~2 shipp~3 shipp~4 shipp~5 billi~6 billi~7 billi~8 billi~9
+   &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 1 &lt;NA&gt;          &lt;NA&gt;    &lt;NA&gt;       NA     NA    Quaken~ 49610   Germany &lt;NA&gt;   
+ 2 Osnabrück     49088   Germany    52.3    8.06 Osnabr~ 49088   Germany &lt;NA&gt;   
+ 3 &lt;NA&gt;          &lt;NA&gt;    &lt;NA&gt;       NA     NA    Osnabr~ 49080   Germany &lt;NA&gt;   
+ 4 &lt;NA&gt;          &lt;NA&gt;    &lt;NA&gt;       NA     NA    Gelsen~ 45888   Germany &lt;NA&gt;   
+ 5 &lt;NA&gt;          &lt;NA&gt;    &lt;NA&gt;       NA     NA    Diepho~ 49356   Germany &lt;NA&gt;   
+ 6 &lt;NA&gt;          &lt;NA&gt;    &lt;NA&gt;       NA     NA    Ibbenb~ 49477   Germany &lt;NA&gt;   
+ 7 Osnabrück     49090   Germany    52.3    8.00 Osnabr~ 49090   Germany &lt;NA&gt;   
+ 8 Nordwalde     48356   Germany    52.1    7.51 Nordwa~ 48356   Germany &lt;NA&gt;   
+ 9 Osnabrück     49090   Germany    52.3    8.06 Osnabr~ 49090   Germany &lt;NA&gt;   
+10 &lt;NA&gt;          &lt;NA&gt;    &lt;NA&gt;       NA     NA    Osnabr~ 49090   Germany &lt;NA&gt;   
+# ... with 2,864 more rows, 2 more variables: billing_address_latitude &lt;dbl&gt;,
+#   billing_address_longitude &lt;dbl&gt;, and abbreviated variable names
+#   1: shipping_address_city, 2: shipping_address_zip,
+#   3: shipping_address_country, 4: shipping_address_latitude,
+#   5: shipping_address_longitude, 6: billing_address_city,
+#   7: billing_address_zip, 8: billing_address_country,
+#   9: billing_address_company</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">matches</span><span class="op">(</span><span class="st">"price"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 4
+   current_subtotal_price current_total_price total_line_items_price total_price
+                    &lt;dbl&gt;               &lt;dbl&gt;                  &lt;dbl&gt;       &lt;dbl&gt;
+ 1                   94.7                94.7                   96.7        94.7
+ 2                   32.2                32.2                   32.2        32.2
+ 3                   30.2                30.2                   32.2        30.2
+ 4                   32.2                32.2                   32.2        32.2
+ 5                   30.2                30.2                   32.2        30.2
+ 6                   30.2                30.2                   32.2        30.2
+ 7                   30.2                30.2                   32.2        30.2
+ 8                   32.2                32.2                   32.2        32.2
+ 9                   96.7                96.7                   96.7        96.7
+10                   32.2                32.2                   32.2        32.2
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+</section><section id="anhand-des-datentyps-einer-spalte" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="anhand-des-datentyps-einer-spalte">
+<span class="header-section-number">3.4</span> Anhand des Datentyps einer Spalte</h2>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.logical</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 3
+   test  taxes_included customer_sms_marketing_consent
+   &lt;lgl&gt; &lt;lgl&gt;          &lt;lgl&gt;                         
+ 1 FALSE TRUE           NA                            
+ 2 FALSE TRUE           NA                            
+ 3 FALSE TRUE           NA                            
+ 4 FALSE TRUE           NA                            
+ 5 FALSE TRUE           NA                            
+ 6 FALSE TRUE           NA                            
+ 7 FALSE TRUE           NA                            
+ 8 FALSE TRUE           NA                            
+ 9 FALSE TRUE           NA                            
+10 FALSE TRUE           NA                            
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verschiedene Optionen kombiniert</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="op">-</span><span class="fu">contains</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"discounts"</span>, <span class="st">"current_"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 21
+   order_number total_~1 total~2 total~3 total~4 total~5 locat~6 custo~7 custo~8
+          &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1         1014     96.7       0    94.7       0       0      NA 1.86e12       1
+ 2         1015     32.2       0    32.2       0       0      NA 1.86e12       1
+ 3         1016     32.2       0    30.2       0       0      NA 1.87e12       1
+ 4         1017     32.2       0    32.2       0       0      NA 1.87e12       1
+ 5         1018     32.2       0    30.2       0       0      NA 1.87e12       1
+ 6         1019     32.2       0    30.2       0       0      NA 1.87e12       1
+ 7         1020     32.2       0    30.2       0       0      NA 1.87e12       1
+ 8         1021     32.2       0    32.2       0       0      NA 1.88e12       1
+ 9         1022     96.7       0    96.7       0       0      NA 1.88e12       1
+10         1023     32.2       0    32.2       0       0      NA 1.88e12       1
+# ... with 2,864 more rows, 12 more variables: customer_is_hsos &lt;dbl&gt;,
+#   customer_orders_count &lt;dbl&gt;, customer_total_spent &lt;dbl&gt;,
+#   customer_last_order_id &lt;dbl&gt;, customer_verified_email &lt;dbl&gt;,
+#   customer_tax_exempt &lt;dbl&gt;, shipping_address_latitude &lt;dbl&gt;,
+#   shipping_address_longitude &lt;dbl&gt;, billing_address_latitude &lt;dbl&gt;,
+#   billing_address_longitude &lt;dbl&gt;, client_details_browser_height &lt;dbl&gt;,
+#   client_details_browser_width &lt;dbl&gt;, and abbreviated variable names ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verschiedene Optionen kombiniert</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>,</span>
+<span>           <span class="op">-</span><span class="fu">ends_with</span><span class="op">(</span><span class="st">"id"</span><span class="op">)</span>, </span>
+<span>           <span class="op">-</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"shipping"</span><span class="op">)</span>,</span>
+<span>           <span class="op">-</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"billing"</span><span class="op">)</span>,</span>
+<span>           <span class="op">-</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"customer"</span><span class="op">)</span></span>
+<span>           <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 16
+   name  discount_~1 finan~2 fulfi~3 sourc~4 landi~5 landi~6 note  tags  proce~7
+   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
+ 1 B1014 DCBPXGJB1J~ paid    fulfil~ web     /passw~ &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  direct 
+ 2 B1015 &lt;NA&gt;        paid    fulfil~ web     /walle~ &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+ 3 B1016 KY0D5MNEZB~ paid    fulfil~ web     /       &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+ 4 B1017 &lt;NA&gt;        paid    fulfil~ web     /walle~ &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+ 5 B1018 DCBPXGJB1J~ paid    fulfil~ web     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+ 6 B1019 DCBPXGJB1J~ paid    fulfil~ web     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+ 7 B1020 DCBPXGJB1J~ paid    fulfil~ web     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+ 8 B1021 &lt;NA&gt;        paid    fulfil~ web     /       &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+ 9 B1022 &lt;NA&gt;        paid    fulfil~ web     /walle~ &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+10 B1023 &lt;NA&gt;        paid    fulfil~ web     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;  express
+# ... with 2,864 more rows, 6 more variables: payment_details_gateway &lt;chr&gt;,
+#   payment_details_credit_card_company &lt;chr&gt;, campaign_tag &lt;chr&gt;,
+#   client_details_browser_ip &lt;chr&gt;, client_details_user_agent &lt;chr&gt;,
+#   cancel_reason &lt;chr&gt;, and abbreviated variable names 1: discount_codes,
+#   2: financial_status, 3: fulfillment_status, 4: source_name,
+#   5: landing_site, 6: landing_site_ref, 7: processing_method</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="fu">lubridate</span><span class="fu">::</span><span class="va"><a href="https://lubridate.tidyverse.org/reference/date_utils.html">is.Date</a></span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Eigene Funktion, um Datums- und Datum + Zeitspalten zu ermitteln</span></span>
+<span><span class="va">is.DateTime</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Date"</span>, <span class="st">"POSIXct"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.DateTime</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 8
+   created_at          updated_at          processed_at       
+   &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
+ 1 2019-05-24 12:59:16 2019-06-19 13:23:26 2019-05-24 12:59:15
+ 2 2019-05-24 13:09:08 2019-06-21 14:40:07 2019-05-24 13:09:07
+ 3 2019-05-24 13:22:41 2019-06-21 12:35:23 2019-05-24 13:22:40
+ 4 2019-05-24 13:27:43 2019-06-21 14:27:18 2019-05-24 13:27:42
+ 5 2019-05-24 13:36:46 2019-06-21 12:11:57 2019-05-24 13:36:45
+ 6 2019-05-24 13:44:41 2019-06-21 14:37:21 2019-05-24 13:44:41
+ 7 2019-05-24 13:49:21 2019-06-21 12:25:16 2019-05-24 13:49:20
+ 8 2019-05-24 13:59:57 2019-06-21 11:49:47 2019-05-24 13:59:57
+ 9 2019-05-24 14:43:53 2019-06-19 14:12:38 2019-05-24 14:43:53
+10 2019-05-24 14:48:16 2019-06-21 15:54:24 2019-05-24 14:48:16
+# ... with 2,864 more rows, and 5 more variables:
+#   customer_accepts_marketing_updated_at &lt;dttm&gt;, customer_created_at &lt;dttm&gt;,
+#   customer_updated_at &lt;dttm&gt;, cancelled_at &lt;dttm&gt;, closed_at &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Weitere Datentypen, die in diesem Datensatz nicht auftreten</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.factor</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.list</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="spalten-über-deren-position-auswählen" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="spalten-über-deren-position-auswählen">
+<span class="header-section-number">3.5</span> Spalten über deren Position auswählen</h2>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Die letzte Spalte im Datensatz</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">last_col</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 1
+   closed_at          
+   &lt;dttm&gt;             
+ 1 2019-06-19 13:23:26
+ 2 2019-06-21 14:40:07
+ 3 2019-06-21 12:35:22
+ 4 2019-06-21 14:27:18
+ 5 2019-06-21 12:11:57
+ 6 2019-06-21 14:37:21
+ 7 2019-06-21 12:25:16
+ 8 2019-06-21 11:49:46
+ 9 2019-06-19 14:12:38
+10 2019-06-21 15:54:24
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Die vorletzte Spalte im Datensatz</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">last_col</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 1
+   cancel_reason
+   &lt;chr&gt;        
+ 1 &lt;NA&gt;         
+ 2 &lt;NA&gt;         
+ 3 &lt;NA&gt;         
+ 4 &lt;NA&gt;         
+ 5 &lt;NA&gt;         
+ 6 &lt;NA&gt;         
+ 7 &lt;NA&gt;         
+ 8 &lt;NA&gt;         
+ 9 &lt;NA&gt;         
+10 &lt;NA&gt;         
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Die erste Spalte im Datensatz</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 1
+   order_id     
+   &lt;chr&gt;        
+ 1 1130007101519
+ 2 1130014965839
+ 3 1130026958927
+ 4 1130030563407
+ 5 1130038853711
+ 6 1130045964367
+ 7 1130050519119
+ 8 1130060283983
+ 9 1130102194255
+10 1130106880079
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 4
+   name  order_number app_id created_at         
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;  &lt;dttm&gt;             
+ 1 B1014         1014 580111 2019-05-24 12:59:16
+ 2 B1015         1015 580111 2019-05-24 13:09:08
+ 3 B1016         1016 580111 2019-05-24 13:22:41
+ 4 B1017         1017 580111 2019-05-24 13:27:43
+ 5 B1018         1018 580111 2019-05-24 13:36:46
+ 6 B1019         1019 580111 2019-05-24 13:44:41
+ 7 B1020         1020 580111 2019-05-24 13:49:21
+ 8 B1021         1021 580111 2019-05-24 13:59:57
+ 9 B1022         1022 580111 2019-05-24 14:43:53
+10 B1023         1023 580111 2019-05-24 14:48:16
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Alle Spalten bis auf die letzten 10</span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu">last_col</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 58
+   order_id   name  order~1 app_id created_at          updated_at          test 
+   &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;dttm&gt;              &lt;dttm&gt;              &lt;lgl&gt;
+ 1 113000710~ B1014    1014 580111 2019-05-24 12:59:16 2019-06-19 13:23:26 FALSE
+ 2 113001496~ B1015    1015 580111 2019-05-24 13:09:08 2019-06-21 14:40:07 FALSE
+ 3 113002695~ B1016    1016 580111 2019-05-24 13:22:41 2019-06-21 12:35:23 FALSE
+ 4 113003056~ B1017    1017 580111 2019-05-24 13:27:43 2019-06-21 14:27:18 FALSE
+ 5 113003885~ B1018    1018 580111 2019-05-24 13:36:46 2019-06-21 12:11:57 FALSE
+ 6 113004596~ B1019    1019 580111 2019-05-24 13:44:41 2019-06-21 14:37:21 FALSE
+ 7 113005051~ B1020    1020 580111 2019-05-24 13:49:21 2019-06-21 12:25:16 FALSE
+ 8 113006028~ B1021    1021 580111 2019-05-24 13:59:57 2019-06-21 11:49:47 FALSE
+ 9 113010219~ B1022    1022 580111 2019-05-24 14:43:53 2019-06-19 14:12:38 FALSE
+10 113010688~ B1023    1023 580111 2019-05-24 14:48:16 2019-06-21 15:54:24 FALSE
+# ... with 2,864 more rows, 51 more variables: current_subtotal_price &lt;dbl&gt;,
+#   current_total_price &lt;dbl&gt;, current_total_discounts &lt;dbl&gt;,
+#   current_total_duties_set &lt;dbl&gt;, total_discounts &lt;dbl&gt;,
+#   total_line_items_price &lt;dbl&gt;, total_outstanding &lt;dbl&gt;, total_price &lt;dbl&gt;,
+#   total_tax &lt;dbl&gt;, total_tip_received &lt;dbl&gt;, taxes_included &lt;lgl&gt;,
+#   discount_codes &lt;chr&gt;, financial_status &lt;chr&gt;, fulfillment_status &lt;chr&gt;,
+#   source_name &lt;chr&gt;, landing_site &lt;chr&gt;, landing_site_ref &lt;chr&gt;, ...</code></pre>
+</div>
+</div>
+</section><section id="spalten-über-eine-menge-auswählen" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="spalten-über-eine-menge-auswählen">
+<span class="header-section-number">3.6</span> Spalten über eine Menge auswählen</h2>
+<div class="cell">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Liste von Spalten via all_of: Nur gültige Spaltennamen erlaubt</span>t</span>
+<span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"created_at"</span>, <span class="st">"processed_at"</span>, <span class="st">"closed_at"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">all_of</span><span class="op">(</span><span class="va">cols</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 3
+   created_at          processed_at        closed_at          
+   &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
+ 1 2019-05-24 12:59:16 2019-05-24 12:59:15 2019-06-19 13:23:26
+ 2 2019-05-24 13:09:08 2019-05-24 13:09:07 2019-06-21 14:40:07
+ 3 2019-05-24 13:22:41 2019-05-24 13:22:40 2019-06-21 12:35:22
+ 4 2019-05-24 13:27:43 2019-05-24 13:27:42 2019-06-21 14:27:18
+ 5 2019-05-24 13:36:46 2019-05-24 13:36:45 2019-06-21 12:11:57
+ 6 2019-05-24 13:44:41 2019-05-24 13:44:41 2019-06-21 14:37:21
+ 7 2019-05-24 13:49:21 2019-05-24 13:49:20 2019-06-21 12:25:16
+ 8 2019-05-24 13:59:57 2019-05-24 13:59:57 2019-06-21 11:49:46
+ 9 2019-05-24 14:43:53 2019-05-24 14:43:53 2019-06-19 14:12:38
+10 2019-05-24 14:48:16 2019-05-24 14:48:16 2019-06-21 15:54:24
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Liste von Spalten via any_of: Nicht alle Spalten muss es auch geben.</span></span>
+<span><span class="co"># Sinnvoll, wenn gleiche Liste auf unterschiedliche Datensätze angewendet wird.</span>.</span>
+<span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"created_at"</span>, <span class="st">"processed_at"</span>, <span class="st">"closed_at"</span>, <span class="st">"shipped_at"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">orders</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">any_of</span><span class="op">(</span><span class="va">cols</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,874 x 3
+   created_at          processed_at        closed_at          
+   &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
+ 1 2019-05-24 12:59:16 2019-05-24 12:59:15 2019-06-19 13:23:26
+ 2 2019-05-24 13:09:08 2019-05-24 13:09:07 2019-06-21 14:40:07
+ 3 2019-05-24 13:22:41 2019-05-24 13:22:40 2019-06-21 12:35:22
+ 4 2019-05-24 13:27:43 2019-05-24 13:27:42 2019-06-21 14:27:18
+ 5 2019-05-24 13:36:46 2019-05-24 13:36:45 2019-06-21 12:11:57
+ 6 2019-05-24 13:44:41 2019-05-24 13:44:41 2019-06-21 14:37:21
+ 7 2019-05-24 13:49:21 2019-05-24 13:49:20 2019-06-21 12:25:16
+ 8 2019-05-24 13:59:57 2019-05-24 13:59:57 2019-06-21 11:49:46
+ 9 2019-05-24 14:43:53 2019-05-24 14:43:53 2019-06-19 14:12:38
+10 2019-05-24 14:48:16 2019-05-24 14:48:16 2019-06-21 15:54:24
+# ... with 2,864 more rows</code></pre>
+</div>
+</div>
 
 
-
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
@@ -259,9 +716,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./explore-new-data-sets.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Datensätze erkunden</span></span>
       </a>          

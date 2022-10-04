@@ -5,3 +5,7 @@ Die vorliegende Webseite stellt das Skript für meine Lehrveranstaltungen zum Th
 Es gibt eine PDF-Version, die hier heruntergeladen werden kann: [PDF-Version "Bio and Business Data Science"](Bio-and-Business-Data-Science.pdf).
 
 Für Hinweise zu Fehlern bin ich dankbar. Am besten per E-Mail unter `n.meseth@hs-osnabrueck.de` oder auf [Twitter](https://twitter.com/nicolasmeseth).
+
+Viel Spaß beim Lesen
+
+Prof. Dr. Nicolas Meseth

@@ -170,7 +170,7 @@ orders %>%
   tabyl(payment_details_gateway)
 ```
 
-Hier müssen wir das Sortieren manuelle mit `arrange` vornehmen:
+Hier müssen wir das Sortieren manuell mit `arrange` vornehmen:
 
 ```{r}
 orders %>% 

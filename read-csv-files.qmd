@@ -5,7 +5,7 @@
 library(tidyverse)
 ```
 
-Im ersten Schritt jeder Datenanalyse müssen wir unserem Computer den Datensatz zur Verfügung stellen. Wir sprechen dabei auch vom *Laden* des Datesatzes. Dabei sagen wir dem Computer, wo die Daten zu finden sind und dass er sie für den schnelleren Zugriff in seinen Arbeitsspeicher holen soll.
+Im ersten Schritt jeder Datenanalyse müssen wir unserem Computer den Datensatz zur Verfügung stellen. Wir sprechen dabei auch vom *Laden* des Datesatzes. Dabei sagen wir dem Computer, wo die Daten zu finden sind, und dass er sie für den schnelleren Zugriff in seinen Arbeitsspeicher holen soll.
 
 Daten liegen in den meisten Fällen in Form von Dateien vor. In manchen Fällen sind sie auch in einer Datenbank gespeichert. Im Fall einer Datei kann ein Datensatz in unterschiedlichen *Formaten* darin gespeichert werden. Ein gängiges Format ist das CSV-Format, das auf einfachen Textdateien basiert.
 
@@ -13,7 +13,7 @@ Daten liegen in den meisten Fällen in Form von Dateien vor. In manchen Fällen 
 
 ### CSV als weit verbreitetes Format
 
-Für die Speicherung von Daten bieten sich textuelle Formate an, weil sie auf jedem Betriebsystem mit einem einfachen Texteditor betrachtet und bearbeitet werden können. Das ermöglicht das einfache Teilen von Daten und somit die Zusammenarbeit. Auch für den Datenaustausch zwischen verschiedenen Informationssystemen wird häufig ein textbasiertes Format verwendet, um spezifisches Formate der jeweiligen Hersteller, wie etwa proprieäte Datenbanken, zu überbrücken. Deshalb bieten die meisten Informationssysteme Schnittstellen für den Export und Import von Textdateien an. Speziell das CSV-Format ist hier sehr beliebt, aus guten Gründen:
+Textdateien bieten sich für die Speicherung von Daten an, weil sie auf jedem Betriebsystem mit einem einfachen Texteditor betrachtet und bearbeitet werden können. Das ermöglicht das schnelle Teilen von Daten und somit die Zusammenarbeit. Auch für den Datenaustausch zwischen verschiedenen Informationssystemen wird häufig ein textbasiertes Format verwendet, um spezifisches Formate der jeweiligen Hersteller, wie etwa proprieäte Datenbanken, zu überbrücken. Deshalb bieten die meisten Informationssysteme Schnittstellen für den Export und Import von Textdateien an. Speziell das CSV-Format ist hier sehr beliebt, aus guten Gründen:
 
 -   Die Verwendung von einfachen Textdateien erlaubt die Speicherung und Verarbeitung auf unterschiedlichen Umgebungen wie Windows, macOS oder Linux.
 -   Das Format ist einfach zu verstehen und auch für Menschen lesbar.
@@ -25,9 +25,7 @@ Auch das E-Commerce-System Shopify, aus dem die vorligenden Verkaufsdaten stamme
 
 CSV steht für *Comma Separated Values* und beschreibt ein Format, um *strukturierte Daten* in einer Textdatei abzuspeichern. Ihr erkennt eine Textdatei im CSV-Format an der Endung `.csv`.
 
-Das CSV-Format basiert auf einfachen Textkodierungen, häufig im UTF-8 oder ASCII-Kodierungssystem (letzeres immer seltener wegen der geringen Anzahl verfügbarer Zeichen), die mit fast jedem Werkzeug und Editor gelesen und bearbeitet werden können. Zusätzlich bildet das CSV-Format eine tabellarische Struktur ab, bei dem die Daten in Zeilen und Spalten getrennt werden. Alle darauf folgenden Zeilen stellen Beobachtungen oder Datensätze dar, deren Variablenwerte mit dem gleichen Trennzeichen abgegrenzt werden.
-
-Das CSV-Format speichert strukturierte Daten in einer tabellarischen Form, ähnlich wie in Spreadsheets. Die erste Zeile einer CSV-Datei ist üblicherweise der sogenannte Header (Kopfzeile) und beinhaltet die Spaltennamen mit Kommata oder Semikolon (Trennzeichen) voneinander getrennt. Jede weitere Zeile stellt eine Beobachtung (Englisch: *observation* oder *case*) oder auch Datensatz (Englisch: *record*) dar. Jeder Datensatz enthält für die im Header definierten Attribute (oder Spalten) einen Wert, die durch das gleiche Trennzeichen voneinander getrennt sind. Es muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtung nicht vorhanden sein, so wird einfach nach dem Komma nichts eingetragen und es folgen zwei Kommata nacheinander. In R werden fehlende Werte mit `NA` gekennzeichnet.
+Das CSV-Format basiert auf einfachen Textkodierungen, häufig im UTF-8 oder ASCII-Kodierungssystem (letzeres immer seltener wegen der geringen Anzahl verfügbarer Zeichen), die mit fast jedem Werkzeug und Editor gelesen und bearbeitet werden können.  Das CSV-Format speichert strukturierte Daten in einer tabellarischen Form, ähnlich wie in Spreadsheets. Die erste Zeile einer CSV-Datei ist üblicherweise der sogenannte Header (Kopfzeile) und beinhaltet die Spaltennamen mit Komma oder Semikolon (Trennzeichen) voneinander getrennt. Jede weitere Zeile stellt eine Beobachtung (Englisch: *observation* oder *case*) oder auch Datensatz (Englisch: *record*) dar. Jeder Datensatz enthält für die im Header definierten Attribute (oder Spalten) die beobachteten Werte, die durch das gleiche Trennzeichen voneinander getrennt sind. Es muss nicht jeder Spaltenwert existieren. Sollte ein Wert für eine Beobachtung nicht vorhanden sein, so wird nach dem Komma nichts eingetragen und es folgen zwei Kommata nacheinander. In R werden fehlende Werte beim Einlesen erkannt und mit `NA` gekennzeichnet.
 
 Die Verwendung des Komma als Trennzeichen in CSV-Dateien ist keineswegs verbindlich, auch wenn es Bestandteil des Namens ist. Generell kann jedes Symbol verwendet werden. Häufige Alternativen sind das Semikolon, Leerzeichen oder ein Tabstop. Letzteres wird oft mit der eigenen Endung `.tsv` für *Tab Separated Values* gespeichert.
 
@@ -45,7 +43,7 @@ Der Auschnitt unten zeigt die ersten vier Zeilen der `orders.csv`. Die erste Zei
 
 ### Aus einer lokalen Datei
 
-Für das Laden von Datensätzen aus CSV-Dateien bietet das Tidyverse ein Paket namens `{readr}` an. Dieses wird automatisch mit dem `{tidyverse}`-Paket mitgeladen. Das Paket bietet für CSV-Dateien, bei denen das Komma als Trennzeichen verwendet wird, die Funktion `read_csv` an:
+Für das Laden von Datensätzen aus CSV-Dateien bietet das Tidyverse ein Paket namens `{readr}` an. Dieses wird automatisch mit dem `{tidyverse}`-Paket mitgeladen. Das Paket bietet für CSV-Dateien, bei denen das Komma als Trennzeichen verwendet wird, die Funktion `read_csv()` an:
 
 ```{r}
 #| output: false
@@ -56,11 +54,11 @@ orders <- read_csv("./data/orders.csv")
 In einigen Ländern Europas wird häufig ein Semikolon als Trennzeichen und ein Komma als Dezimaltrennzeichen verwendet (wie etwa in Deutschland). Für diesen Fall bietet `{readr}` die Funktion `read_csv2`. Um es selbst in der Hand zu haben, kann die Funktion `read_delim` verwendet werden und über den Parameter `delim` das Trennzeichen manuell eingestellt werden.
 :::
 
-Auch der R-Basisumfang bietet eine ähnliche Funktion für genau diesen Anwendungsfall an. Diese heisst `read.csv`, man achte hier auf das Detail: Statt eines Unterstrichs `_` wird bei der R-Basisfunktion ein Punkt `.` zwischen den beiden Wörtern `read` und `csv` verwendet. Wenn ihr mit dem Tidyverse und mit Tibbles arbeitet (wie in diesem Buch durchgängig), dann achtet darauf, stets die `{readr}`-Funktion `read_csv` zu verwenden, weil nur diese die Daten als Tibble zurückgibt und zudem einige paar nützliche Zusatzfunktionen bietet.
+Auch der R-Basisumfang bietet eine ähnliche Funktion für genau diesen Anwendungsfall an. Diese heisst `read.csv()`, man achte hier auf das Detail: Statt eines Unterstrichs `_` wird bei der R-Basisfunktion ein Punkt `.` zwischen den beiden Wörtern `read` und `csv` verwendet. Wenn ihr mit dem Tidyverse und mit Tibbles arbeitet (wie in diesem Buch durchgängig), dann achtet darauf, stets die `{readr}`-Funktion `read_csv()` zu verwenden, weil nur diese die Daten als Tibble zurückgibt und zudem einige paar nützliche Zusatzfunktionen bietet.
 
 ### Nur bestimmte Spalten laden
 
-Die `read_csv`-Funktion erlaubt direkt beim Laden der Daten eine Auswahl der Spalten vorzunehmen. Ich empfehle hier immer die Verwendung der `select`-Funktion, die wir im nächsten Abschnitt kennenlernen werden. Dennoch möchte ich kurz demonstrieren, wie das Filtern der Spalten beim Laden funktioniert.
+Die `read_csv()`-Funktion erlaubt direkt beim Laden der Daten eine Auswahl der Spalten vorzunehmen. Ich empfehle hier immer die Verwendung der `select`-Funktion, die wir im nächsten Abschnitt kennenlernen werden. Dennoch möchte ich kurz demonstrieren, wie das Filtern der Spalten direkt beim Laden funktioniert.
 
 Der folgende Code lädt die Spalten `order_id`, `name`, sowie alle Spalten, deren Name mit "customer" beginnen:
 
@@ -132,7 +130,7 @@ turnover
 
 ### Datentypen beim Laden setzen
 
-Beim Laden mit `read_csv` wird möglicherweise der Datentyp einiger Spalten falsch erkannt. DIe Funktion betrachtet die ersten Zeilen und ermittelt darauf basierend den Datentyp. Wird dieser falsch erkannt, so können den Datentyp für Spalten explizit angeben. Wie auch das Auswählen von Spalten können wir den Datentyp schon beim Laden mit. Alternativ können wir den Datentypen auch später mit `mutate` noch verändern.
+Beim Laden mit `read_csv` wird möglicherweise der Datentyp einiger Spalten falsch erkannt. DIe Funktion betrachtet die ersten Zeilen und ermittelt darauf basierend den Datentyp. Wird dieser falsch erkannt, so können wir den Datentyp für Spalten explizit angeben. Wie auch das Auswählen von Spalten können wir den Datentyp schon beim Laden mitgeben. Alternativ können wir den Datentyp auch später mit `mutate` noch verändern.
 
 ::: {.callout-tip appearance="simple"}
 Manchmal hilft es schon, den Parameter `guess_max` auf einen größeren Wert zu setzen. Dieser bestimmt, wie viele Werte die Funktion betrachtet, um daraus den Datentyp einer Spalte abzuleiten. Standardmäßig ist dieser Wert auf 1000 begrenzt.
@@ -149,19 +147,21 @@ orders %>%
   select(order_id)
 ```
 
-Das Gleiche können wir mit beliebig vielen Spalten gleichzeitig durchführen:
+Das Gleiche können wir mit beliebig vielen Spalten gleichzeitig durchführen. Denn auch die beiden Spalten mit Postleitzahlen wurden fälschlicherweise als `double` erkannt:
 
 ```{r}
 orders <- read_csv("./data/orders.csv",
                    col_types = list(
                      "order_id" = col_character(),
-                     "app_id" = col_character()
+                     "app_id" = col_character(),
+                     "billing_address_zip"= col_character(),
+                     "shipping_address_zip"= col_character()
                      )
                    )
 
 # Die Spalte order_id ist jetzt vom Typ <chr>
 orders %>% 
-  select(order_id, app_id)
+  select(order_id, app_id, billing_address_zip, shipping_address_zip)
 
 ```
 
@@ -187,3 +187,5 @@ covid <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv",
 
 covid
 ```
+
+2. Korrigiert alle falsch als `<dbl>` erkannten ID-Spalten im Campusbier-Verkaufsdatensatz direkt beim Laden der Daten und wandelt sich in `<chr>` um.

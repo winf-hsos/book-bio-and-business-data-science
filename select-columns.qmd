@@ -1,1 +1,146 @@
 # Spalten auswählen {#sec-select_columns}
+
+```{r}
+#| output: false
+#| echo: false
+orders <- read_csv("./data/orders.csv",
+                   col_types = list(
+                     "order_id" = col_character(),
+                     "app_id" = col_character(),
+                     "billing_address_zip"= col_character(),
+                     "shipping_address_zip"= col_character()
+                     )
+                   )
+```
+
+## Angabe von Spaltennamen
+
+Die einfachste und intuitive Methode, um die Spalten eines Datensatzes einzuschränken, ist die Nennung der Spaltennamen. Dabei werden mehrere Spaltennamen mit einem Komma getrennt.
+
+```{r}
+orders %>% 
+  select(billing_address_zip, billing_address_city)
+```
+## Ausschließen von Spalten
+
+Statt eine Positivliste zu definieren, können wir auch Spalten über ihren Namen ausschließen, indem wir ein Minuszeichen voranstellen. Das folgende Beispiel wählt alle Spalten des Datensatzes, außer die beiden genannten:
+
+```{r}
+#| output: false
+orders %>% 
+  select(-order_id, -order_number)
+```
+## Spalten anhand eines Namensmuster selektieren
+
+```{r}
+orders %>% 
+  select(starts_with("shipping_"))
+```
+```{r}
+orders %>% 
+  select(ends_with("_at"))
+```
+```{r}
+orders %>% 
+  select(contains("address"))
+```
+
+```{r}
+orders %>% 
+  select(matches("price"))
+```
+
+## Anhand des Datentyps einer Spalte
+
+```{r}
+orders %>% 
+    select(where(is.logical))
+```
+
+```{r}
+# Verschiedene Optionen kombiniert
+orders %>% 
+    select(where(is.numeric), -contains(c("discounts", "current_")))
+```
+
+```{r}
+# Verschiedene Optionen kombiniert
+orders %>% 
+    select(where(is.character),
+           -ends_with("id"), 
+           -starts_with("shipping"),
+           -starts_with("billing"),
+           -starts_with("customer")
+           )
+```
+```{r}
+orders %>% 
+  select(where(lubridate::is.Date))
+```
+```{r}
+# Eigene Funktion, um Datums- und Datum + Zeitspalten zu ermitteln
+is.DateTime <- function(x) {
+  inherits(x, c("Date", "POSIXct"))
+}
+
+orders %>% 
+  select(where(is.DateTime))
+```
+
+```{r}
+#| eval: false
+# Weitere Datentypen, die in diesem Datensatz nicht auftreten
+orders %>% 
+  select(where(is.factor))
+
+orders %>% 
+  select(where(is.list))
+```
+
+## Spalten über deren Position auswählen
+
+```{r}
+# Die letzte Spalte im Datensatz
+orders %>% 
+  select(last_col())
+```
+```{r}
+# Die vorletzte Spalte im Datensatz
+orders %>% 
+  select(last_col(2))
+```
+
+```{r}
+# Die erste Spalte im Datensatz
+orders %>% 
+  select(1)
+```
+
+```{r}
+orders %>% 
+  select(2:5)
+```
+
+```{r}
+# Alle Spalten bis auf die letzten 10
+orders %>% 
+    select(1:last_col(10))
+```
+## Spalten über eine Menge auswählen
+
+```{r}
+# Liste von Spalten via all_of: Nur gültige Spaltennamen erlaubt
+cols <- c("created_at", "processed_at", "closed_at")
+
+orders %>% 
+  select(all_of(cols))
+```
+
+```{r}
+# Liste von Spalten via any_of: Nicht alle Spalten muss es auch geben.
+# Sinnvoll, wenn gleiche Liste auf unterschiedliche Datensätze angewendet wird.
+cols <- c("created_at", "processed_at", "closed_at", "shipped_at")
+
+orders %>% 
+  select(any_of(cols))
+```
